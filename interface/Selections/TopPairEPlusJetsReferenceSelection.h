@@ -49,6 +49,7 @@ public:
 	virtual bool isGoodJet(const JetPointer jet) const;
 	virtual bool isBJet(const JetPointer jet) const;
 	virtual bool isGoodElectron(const ElectronPointer electron) const;
+	virtual bool isGoodPhoton(const PhotonPointer photon) const;
 	virtual bool isGoodMuon(const MuonPointer electron) const;
 
 	//definitions of loose objects

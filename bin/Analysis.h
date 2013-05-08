@@ -45,6 +45,7 @@
 #include "../interface/Analysers/VertexAnalyser.h"
 #include "../interface/Analysers/DiffVariablesAnalyser.h"
 #include "../interface/Analysers/BinningAnalyser.h"
+#include "../interface/Analysers/PhotonAnalyser.h"
 
 //typedef boost::array<unsigned long, BAT::TTbarEPlusJetsSelection::NUMBER_OF_SELECTION_STEPS> ePlusJetscutarray;
 //typedef boost::array<unsigned long, BAT::TTbarMuPlusJetsSelection::NUMBER_OF_SELECTION_STEPS> muPlusJetscutarray;
@@ -87,6 +88,7 @@ private:
     boost::scoped_ptr<BAT::VertexAnalyser> vertexAnalyser;
     boost::scoped_ptr<BAT::DiffVariablesAnalyser> diffVariablesAnalyser;
     boost::scoped_ptr<BAT::BinningAnalyser> binningAnalyser;
+    boost::scoped_ptr<BAT::PhotonAnalyser> photonAnalyser;
 
 public:
 //    static float luminosity;

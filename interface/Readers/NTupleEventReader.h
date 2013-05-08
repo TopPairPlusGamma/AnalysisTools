@@ -16,6 +16,7 @@
 #include "JetReader.h"
 #include "GenJetReader.h"
 #include "MuonReader.h"
+#include "PhotonReader.h"
 #include "VariableReader.h"
 #include "VertexReader.h"
 #include "METReader.h"
@@ -74,6 +75,7 @@ private:
 	boost::scoped_ptr<JetReader> jetReader;
 	boost::scoped_ptr<GenJetReader> genJetReader;
 	boost::scoped_ptr<MuonReader> muonReader;
+	boost::scoped_ptr<PhotonReader> photonReader;
 //	boost::scoped_ptr<GenMETReader> genMetReader;
 	std::vector<boost::shared_ptr<METReader> > metReaders;
 	std::vector<boost::shared_ptr<METCorrReader> > metCorrReaders;

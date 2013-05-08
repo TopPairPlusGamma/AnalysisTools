@@ -104,6 +104,11 @@ datasetInfo['ZZtoAnything'] = {"cross-section": 8.25561, "NumberOfProcessedEvent
 #Ttbar + Z/W from http://cms.cern.ch/iCMS/jsp/openfile.jsp?tp=draft&files=AN2011_288_v14.pdf
 datasetInfo['TTbarZIncl'] = {"cross-section": 0.14, "NumberOfProcessedEvents":196277}
 datasetInfo['TTbarInclWIncl'] = {"cross-section": 0.16, "NumberOfProcessedEvents":349038}
+
+datasetInfo['TTJets_SemiLept'] = {"cross-section": 101.339, "NumberOfProcessedEvents":25411088}
+datasetInfo['TTJets_FullLept'] = {"cross-section": 20.267, "NumberOfProcessedEvents":12109486}
+datasetInfo['TTJets_Hadronic'] = {"cross-section": 103.591, "NumberOfProcessedEvents":31214451}
+
 #heavy flavour sample
 datasetInfo['VqqJets'] = {"cross-section": 35.3, "NumberOfProcessedEvents":720613}
 

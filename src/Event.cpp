@@ -23,6 +23,7 @@ Event::Event() : //
 		vertices(), //
 		goodVertices(), //
 		tracks(), //
+		allPhotons(), //
 		allElectrons(), //
 		allJets(), //
 		genJets(), //
@@ -97,10 +98,17 @@ void Event::setGenParticles(MCParticleCollection genParticles) {
 	this->genParticles = genParticles;
 }
 
+void Event::setPhotons(PhotonCollection photons) {
+        allPhotons.clear();
+        allPhotons = photons;
+}
+
+
 void Event::setElectrons(ElectronCollection electrons) {
 	allElectrons.clear();
 	allElectrons = electrons;
 }
+
 
 void Event::setJets(JetCollection jets) {
 	allJets.clear();
@@ -143,6 +151,25 @@ const ElectronPointer Event::MostIsolatedElectron(const ElectronCollection& elec
 	return electrons.at(bestIsolatedLepton);
 }
 
+//Photon need to be adjusted along with algorithm
+//const PhotonPointer Event::MostIsolatedPhoton(const PhotonCollection& photons, bool usePFIso) const {
+ //       float bestIsolation = 999999999;
+  //      unsigned int bestIsolatedLepton = 990;
+   //     for (unsigned int index = 0; index < photons.size(); ++index) {
+ //               float currentIsolation = 999999999;
+  //              if (usePFIso)
+   //                     currentIsolation = photons.at(index)->pfRelativeIsolation();
+//                else
+ //                       currentIsolation = photons.at(index)->relativeIsolation();
+  //               if (currentIsolation < bestIsolation) { 
+//                        bestIsolation = currentIsolation;
+ //                       bestIsolatedLepton = index;
+  //               }
+   //      }
+    //     return photons.at(bestIsolatedLepton);
+//}
+
+
 const MuonPointer Event::MostIsolatedMuon(const MuonCollection& muons, bool usePFIso) const {
 	float bestIsolation = 999999999;
 	unsigned int bestIsolatedLepton = 990;
@@ -160,6 +187,7 @@ const MuonPointer Event::MostIsolatedMuon(const MuonCollection& muons, bool useP
 	}
 	return muons.at(bestIsolatedLepton);
 }
+
 
 const ElectronPointer Event::MostIsolatedElectron(const ElectronCollection& electrons) const {
 	return MostIsolatedElectron(electrons, false);
@@ -181,6 +209,7 @@ void Event::setMuons(MuonCollection muons) {
 	allMuons.clear();
 	allMuons = muons;
 }
+
 
 void Event::setHLTs(const boost::shared_ptr<std::vector<int> > triggers) {
 	HLTs = triggers;
@@ -237,6 +266,10 @@ const TrackCollection& Event::Tracks() const {
 	return tracks;
 }
 
+const PhotonCollection& Event::Photons() const {
+        return allPhotons;
+}
+
 const ElectronCollection& Event::Electrons() const {
 	return allElectrons;
 }
@@ -252,6 +285,7 @@ const JetCollection& Event::GenJets() const {
 const MuonCollection& Event::Muons() const {
 	return allMuons;
 }
+
 
 const MCParticleCollection& Event::GenParticles() const {
 	return genParticles;
@@ -529,13 +563,5 @@ double Event::MT(const ParticlePointer particle, const METPointer met) {
 	else
 		return -1;
 }
-
-double Event::WPT(const ParticlePointer particle, const METPointer met) {
-	ParticlePointer W_boson;
-	W_boson = ParticlePointer(new Particle(*met + *particle));
-
-	return W_boson->pt();
-}
-
 
 }

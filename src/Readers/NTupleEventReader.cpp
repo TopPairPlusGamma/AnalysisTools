@@ -35,6 +35,7 @@ NTupleEventReader::NTupleEventReader() :
 		jetReader(new JetReader(input, Globals::jetAlgorithm)), //
 		genJetReader(new GenJetReader(input)), //
 		muonReader(new MuonReader(input, Globals::muonAlgorithm)), //
+		photonReader(new PhotonReader(input, Globals::photonAlgorithm)), //
 //		genMetReader(new GenMETReader(input)), //
 		metReaders(), //
 		metCorrReaders(), //
@@ -120,6 +121,8 @@ const EventPtr NTupleEventReader::getNextEvent() {
 	//fill leptons BEFORE jets for jet cleaning
 	currentEvent->setElectrons(electronReader->getElectrons());
 	currentEvent->setMuons(muonReader->getMuons());
+	currentEvent->setPhotons(photonReader->getPhotons());
+
 
 	if (!currentEvent->isRealData()) {
 		currentEvent->setGenParticles(genParticleReader->getGenParticles());
@@ -235,6 +238,7 @@ void NTupleEventReader::initiateReadersIfNotSet() {
 		jetReader->initialise();
 		genJetReader->initialise();
 		muonReader->initialise();
+		photonReader->initialise();
 		runNumberReader->initialise();
 		eventNumberReader->initialise();
 		lumiBlockReader->initialise();

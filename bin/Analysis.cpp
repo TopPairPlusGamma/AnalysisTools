@@ -103,6 +103,7 @@ void Analysis::analyse() {
 		ttbar_plus_X_analyser_->analyse(currentEvent);
 		diffVariablesAnalyser->analyse(currentEvent);
 		binningAnalyser->analyse(currentEvent);
+		photonAnalyser->analyse(currentEvent);
 	}
 }
 
@@ -254,6 +255,7 @@ void Analysis::createHistograms() {
 //	cout << "Number of histograms added by neutrinoRecoAnalyser: " << numberOfHistograms - lastNumberOfHistograms << endl;
 //	lastNumberOfHistograms = numberOfHistograms;
 
+
 	ttbar_plus_X_analyser_->createHistograms();
 	numberOfHistograms = histMan->size();
 	cout << "Number of histograms added by ttbar_plus_X_analyser: " << numberOfHistograms - lastNumberOfHistograms
@@ -274,6 +276,13 @@ void Analysis::createHistograms() {
 	numberOfHistograms = histMan->size();
 	cout << "Number of histograms added by binningAnalyser: " << numberOfHistograms - lastNumberOfHistograms << endl;
 	lastNumberOfHistograms = numberOfHistograms;
+
+	photonAnalyser->createHistograms();
+        numberOfHistograms = histMan->size();
+        cout << "Number of histograms added by PhotonAnalyser: " << numberOfHistograms - lastNumberOfHistograms << endl;
+        lastNumberOfHistograms = numberOfHistograms;
+
+
 
 	cout << "Total number of histograms: " << histMan->size() << endl;
 }
@@ -317,7 +326,8 @@ Analysis::Analysis(std::string datasetInfoFile) : //
 		ttbar_plus_X_analyser_(new TTbar_plus_X_analyser(histMan)), //
 		vertexAnalyser(new VertexAnalyser(histMan)),
 		diffVariablesAnalyser(new DiffVariablesAnalyser(histMan)),
-		binningAnalyser(new BinningAnalyser(histMan)) {
+		binningAnalyser(new BinningAnalyser(histMan)),//
+		photonAnalyser(new PhotonAnalyser(histMan)){
 //	for (unsigned int cut = 0; cut < TTbarEPlusJetsSelection::NUMBER_OF_SELECTION_STEPS; ++cut) {
 //		ePlusJetsCutflow[cut] = 0;
 //		ePlusJetsSingleCuts[cut] = 0;

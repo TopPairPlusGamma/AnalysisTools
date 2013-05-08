@@ -12,6 +12,7 @@
 #include "RecoObjects/Electron.h"
 #include "RecoObjects/Muon.h"
 #include "RecoObjects/MET.h"
+#include "RecoObjects/Photon.h"
 #include "TF1.h"
 #include "TH1D.h"
 #include <string>
@@ -35,6 +36,9 @@ struct Globals {
 	static std::string TQAFPath;
 	static bool useHitFit;
 	static bool produceFitterASCIIoutput;
+	
+	//photons
+	static PhotonAlgorithm::value photonAlgorithm;
 
 	//electrons
 	static ElectronAlgorithm::value electronAlgorithm;
@@ -49,7 +53,6 @@ struct Globals {
 	static int JESsystematic;
 	static int BJetSystematic;
 	static int LightJetSystematic;
-	static int JetSmearingSystematic;
 
 
 	//MET

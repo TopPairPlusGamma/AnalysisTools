@@ -1,4 +1,4 @@
-toolsFolder = './'
+toolsFolder = 'BristolAnalysis/Tools/'
 import os
 if os.environ.has_key('toolsFolder'):
     toolsFolder = os.environ['toolsFolder']
@@ -7,14 +7,14 @@ if os.environ.has_key('toolsFolder'):
 #this value will be part of the output file name: DataType_CenterOfMassEnergyTeV_lumipb-1_....
 centerOfMassEnergy = 8    
 #number of events to be processed
-maxEvents = 10000
+maxEvents = 10000 # -1 to run over all
 #integrated luminosity the MC simulation will be scaled to
-lumi = 5800#pb-1
+lumi = 5050#pb-1
 
 
 if centerOfMassEnergy == 8:
     #File for pile-up re-weighting
-    nTuple_version = 10
+    nTuple_version = 9
     PUFile = toolsFolder + "data/PileUp_2012_69300_truth_finebin.root"
     #+5%
 #    PUFile = toolsFolder + "data/PileUp_2012_72765_truth_finebin.root"
@@ -29,7 +29,12 @@ else:
     #-5%
 #    PUFile = toolsFolder + "data/PileUp_2011_truth_finebin_64600microbarn.root"
 
-
+dir = "/storage/TopQuarkGroup/mc/8TeV/LeptonPlus3JetsSkim"
+SemiLept = "/TTJets_SemiLeptMGDecays_8TeV-madgraph/nTuple_v9a_Summer12_DR53X-PU_S10_START53_V7A_ext-v1_LeptonPlus3Jets/*.root"
+FullLept = "/TTJets_FullLeptMGDecays_8TeV-madgraph/nTuple_v9a_Summer12_DR53X-PU_S10_START53_V7A-v2_LeptonPlus3Jets/*.root"
+Hadronic = "/TTJets_HadronicMGDecays_8TeV-madgraph/nTuple_v9a_Summer12_DR53X-PU_S10_START53_V7A_ext-v1_LeptonPlus3Jets/*.root"
+Massive = "/TTJets_MassiveBinDECAY_TuneZ2star_8TeV-madgraph-tauola/nTuple_v9a_Summer12-PU_S10_START53_V7C-v1_LeptonPlus3Jets_PDFweights/*.root"
+WPlusJets = "/WJetsToLNu_TuneZ2Star_8TeV-madgraph-tarball/GLOBALTAGV7A-v2/nTuple_v9a_Summer12_DR53X-PU_S10_START53_V7A-v2_LeptonPlus3Jets/*.root"
 
 #Jet Energy Resolutions files (L7 corrections)                                                                                                                                                                                     
 bJetResoFile = toolsFolder + "data/bJetReso.root"
@@ -39,9 +44,7 @@ lightJetResoFile = toolsFolder + "data/lightJetReso.root"
 useHitFit = False
 produceFitterASCIIoutput = False
 inputFiles = [
- #'data/TTJet_nTuple_53x_mc_noskim.root'
- 'data/dataSkim_nTuple_53X_data.root'         
-#'/storage/TopQuarkGroup/mc/8TeV/LeptonPlus3JetsSkim/TTJets_MassiveBinDECAY_TuneZ2star_8TeV-madgraph-tauola/nTuple_v9a_Summer12-PU_S10_START53_V7C-v1_LeptonPlus3Jets/*.root'
+dir + SemiLept 
               ]
 
 #relative Path from calling BAT to the TopQuarkAnalysis folder

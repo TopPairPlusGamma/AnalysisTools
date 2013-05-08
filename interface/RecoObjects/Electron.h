@@ -131,7 +131,7 @@ public:
 private:
     ElectronAlgorithm::value usedAlgorithm_;
     bool robustLooseId, robustTightId;
-    double superCluser_Eta;
+    double superCluster_Eta;
     double innerLayerMissingHits_;
     //used for electron ID
     double sigma_IEtaIEta, dPhi_In, dEta_In, hadOverEm;

@@ -107,6 +107,9 @@ void setConfiguration(ConfigFile config) {
 
 
 	//@Deprecated: move to selections
+
+	//Photons
+	Globals::photonAlgorithm = PhotonAlgorithm::Default;
 	//jets
 	Globals::jetAlgorithm = JetAlgorithm::PF2PAT;
 	//electrons

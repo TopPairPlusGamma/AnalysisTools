@@ -22,14 +22,7 @@ TopPairEPlusJetsReferenceSelection::~TopPairEPlusJetsReferenceSelection() {
 }
 
 bool TopPairEPlusJetsReferenceSelection::isGoodJet(const JetPointer jet) const {
-
-	/**
-	 * This function tests the jet ID and eta (and pt) range for jet
-	 * The cut of 20 GeV is actually obsolete since we only store jets above that threshold.
-	 * However, the jet id is only valid for jets above it.
-	 */
-
-	bool passesPtAndEta = jet->pt() > 20 && fabs(jet->eta()) < 2.5;
+	bool passesPtAndEta = jet->pt() > 30 && fabs(jet->eta()) < 2.5;
 	bool passesJetID(false);
 	JetAlgorithm::value algo = jet->getUsedAlgorithm();
 	if (algo == JetAlgorithm::CA08PF || algo == JetAlgorithm::PF2PAT) { //PFJet
@@ -101,6 +94,7 @@ bool TopPairEPlusJetsReferenceSelection::passesEventCleaning(const EventPtr even
 	passesAllFilters = passesAllFilters && event->passesHBHENoiseFilter();
 	passesAllFilters = passesAllFilters && event->passesCSCTightBeamHaloFilter();
 	passesAllFilters = passesAllFilters && event->passesHCALLaserFilter();
+	//	passesAllFilters = passesAllFilters && event->passesECALDeadCellFilter();
 	passesAllFilters = passesAllFilters && event->passesTrackingFailureFilter();
 	if (Globals::NTupleVersion >= 9)
 		passesAllFilters = passesAllFilters && event->passesECALDeadCellTPFilter();
@@ -135,6 +129,16 @@ bool TopPairEPlusJetsReferenceSelection::passesTriggerSelection(const EventPtr e
 	} else {
 		if (Globals::energyInTeV == 8) {
 			//Summer12 MC
+			//do not use HLTs in Summer12 MC as they don't use JEC
+			//https://hypernews.cern.ch/HyperNews/CMS/get/top-trigger/66.html
+			//			return true;
+			//let's put it back - discussion inconclusive but it is better to have a scale factor than efficiency corrections
+//			bool fired_START52_V5 = event->HLT(HLTriggers::HLT_Ele25_CaloIdVT_CaloIsoT_TrkIdT_TrkIsoT_TriCentralPFJet30);
+//			bool fired_START52_V9 = event->HLT(HLTriggers::HLT_Ele25_CaloIdVT_CaloIsoT_TrkIdT_TrkIsoT_TriCentralPFJet30)
+//					|| event->HLT(HLTriggers::HLT_Ele25_CaloIdVT_CaloIsoT_TrkIdT_TrkIsoT_TriCentralPFNoPUJet30);
+//			bool fired_START53_V7A = event->HLT(HLTriggers::HLT_Ele25_CaloIdVT_CaloIsoT_TrkIdT_TrkIsoT_TriCentralPFNoPUJet50_40_30)
+//					|| event->HLT(HLTriggers::HLT_Ele25_CaloIdVT_CaloIsoVL_TrkIdVL_TrkIsoT_TriCentralPFNoPUJet50_40_30);
+
 			return event->HLT(HLTriggers::HLT_Ele27_WP80);
 
 		} else {
@@ -152,19 +156,43 @@ bool TopPairEPlusJetsReferenceSelection::hasExactlyOneIsolatedLepton(const Event
 		if (isGoodElectron(electron) && isIsolated(electron))
 			++nIsolatedGoodElectrons;
 	}
-
 	return nIsolatedGoodElectrons == 1;
+
+//	return event->GoodPFIsolatedElectrons().size() == 1;
 }
 
 bool TopPairEPlusJetsReferenceSelection::isGoodElectron(const ElectronPointer electron) const {
 	bool passesEtAndEta = electron->et() > 30 && fabs(electron->eta()) < 2.5 && !electron->isInCrack();
 	bool passesD0 = fabs(electron->d0()) < 0.02; //cm
+//	bool passesDistanceToPV = fabs(electron->ZDistanceToPrimaryVertex()) < 1;
 			//since H/E is used at trigger level, use the same cut here:
 	bool passesHOverE = electron->HadOverEm() < 0.05; // same for EE and EB
 	bool passesID(electron->passesElectronID(ElectronID::MVAIDTrigger));
 	return passesEtAndEta && passesD0 &&
+//			passesDistanceToPV &&
 			passesHOverE && passesID;
 }
+
+bool TopPairEPlusJetsReferenceSelection::isGoodPhoton(const PhotonPointer photon) const {
+
+	bool passesEtAndEta = photon->et() > 20 && fabs(photon->eta()) < 2.5 && !photon->isInCrack(); //fabs(photon->eta()) < 1.44 && 1.56 < fabs(photon->eta()) < 2.5;
+	bool passesTrackVeto = photon->TrackVeto() == false;
+	bool passesHOverE = photon->HadOverEm() < 0.05; // same for EE and EB
+	bool passesShowerShape = if(photon->isInBarrelRegion() == true) { photon->sigmaIEtaIEta() < 0.011 }; || 
+				 if(photon->isInEndCapRegion() == true) { photon->sigmaIEtaIEta() < 0.03  };
+	bool passesTrackIso = if(photon->isInBarrelRegion() == true) { photon->TrackIso() < 2.0 /*+ 0.001 * (photon->et()) + 0.0167 * rho25(EB)*/ }; || 
+			      if(photon->isInEndCapRegion() == true) { photon->TrackIso() < 2.0 /*+ 0.001 * (photon->et()) + 0.032 * rho25(EE)*/  };
+	bool passes EcalIso = if(photon->isInBarrelRegion() == true) { photon->EcalIso() < 4.2 /*+ 0.006 * (photon->et()) + 0.0183 * rho25(EB)*/  }; || 
+			      if(photon->isInEndCapRegion() == true) { photon->EcalIso() < 4.2 /*+ 0.006 * (photon->et()) + 0.090 * rho25(EE)*/   };
+	bool passes HcalIso = if(photon->isInBarrelRegion() == true) { photon->HcalIso() < 2.2 /*+ 0.0025 * (photon->et()) + 0.062 * rho25(EB)*/  }; || 
+			      if(photon->isInEndCapRegion() == true) { photon->HcalIso() < 2.2 /*+ 0.0025 * (photon->et()) + 0.180 * rho25(EE) */ };
+
+
+	
+	
+	return passesEtAndEta && passesTrackVeto && passesHOverE && passesShowerShape && passesTrackIso && passesEcalIso && passes HcalIso;
+}
+
 
 bool TopPairEPlusJetsReferenceSelection::isIsolated(const LeptonPointer lepton) const {
 	const ElectronPointer electron(boost::static_pointer_cast<Electron>(lepton));
@@ -189,11 +217,10 @@ bool TopPairEPlusJetsReferenceSelection::passesLooseLeptonVeto(const EventPtr ev
 bool TopPairEPlusJetsReferenceSelection::isLooseMuon(const MuonPointer muon) const {
 	bool passesPt = muon->pt() > 10;
 	bool passesEta = fabs(muon->eta()) < 2.5;
-	bool isPFMuon = muon->isPFMuon();
 	bool isGlobalOrTracker = muon->isGlobal() || muon->isTracker();
 	bool isLooselyIsolated = muon->pfRelativeIsolation(0.4) < 0.2;
 
-	return isPFMuon && passesPt && passesEta && isGlobalOrTracker && isLooselyIsolated;
+	return passesPt && passesEta && isGlobalOrTracker && isLooselyIsolated;
 }
 
 bool TopPairEPlusJetsReferenceSelection::passesDileptonVeto(const EventPtr event) const {
@@ -212,9 +239,9 @@ bool TopPairEPlusJetsReferenceSelection::passesDileptonVeto(const EventPtr event
 
 bool TopPairEPlusJetsReferenceSelection::isLooseElectron(const ElectronPointer electron) const {
 
-	bool passesEtAndEta = electron->et() > 20. && fabs(electron->eta()) < 2.5;
+	bool passesEtAndEta = electron->et() > 30. && fabs(electron->eta()) < 2.5 && !electron->isInCrack();
 	bool passesID(electron->passesElectronID(ElectronID::MVAIDTrigger));
-	bool passesIso = electron->pfRelativeIsolationRhoCorrected() < 0.15;
+	bool passesIso = electron->pfRelativeIsolationRhoCorrected() < 0.2;
 
 	return passesEtAndEta && passesID && passesIso;
 }
@@ -279,7 +306,7 @@ const JetCollection TopPairEPlusJetsReferenceSelection::cleanedJets(const EventP
 
 	for (unsigned int index = 0; index < jets.size(); ++index) {
 		const JetPointer jet(jets.at(index));
-		if (!jet->isWithinDeltaR(0.3, lepton) && isGoodJet(jet))
+		if (!jet->isWithinDeltaR(0.3, lepton))
 			cleanedJets.push_back(jet);
 	}
 

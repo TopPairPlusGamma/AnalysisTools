@@ -114,6 +114,9 @@ enum value {
 	ZJets_scaleup,
 	TTJetsPlusZ,
 	TTbarPlusW,
+	TTJets_SemiLept,
+	TTJets_FullLept,
+	TTJets_Hadronic,
 	NUMBER_OF_DATA_TYPES
 };
 
@@ -219,7 +222,10 @@ const boost::array<std::string, DataType::NUMBER_OF_DATA_TYPES> names = { {
 		"ZJets-scaledown",//
 		"ZJets-scaleup",//
 		"TTbarZIncl", //
-		"TTbarInclWIncl" //
+		"TTbarInclWIncl", //
+		"TTJets_SemiLept",//
+		"TTJets_FullLept",//
+		"TTJets_Hadronic",//
 		} };
 }
 
