@@ -87,7 +87,7 @@ void PhotonAnalyser::createHistograms() {
 	histMan_->addH1D_BJetBinned("All_Photon_Eta", "Photon #eta; #eta(#gamma); Events/(0.02)", 300, -3, 3);
 	histMan_->addH1D_BJetBinned("All_Photon_AbsEta", "Photon |#eta|; |#eta(#gamma)|; Events/(0.01)", 300, 0, 3);
 	histMan_->addH1D_BJetBinned("All_Photon_Phi", "Photon #phi; #phi(#gamma); Events/(0.02)", 400, -4, 4);
-	histMan_->addH1D_BJetBinned("All_Photon_sigma_ietaieta", "Photon Sigma IEtaIEta; #sigmaI#etaI#eta; Events", 400, 0, 40);
+	histMan_->addH1D_BJetBinned("All_Photon_sigma_ietaieta", "Photon Sigma IEtaIEta; #sigmaI#etaI#eta; Events", 100, 0, 0.1);
 	histMan_->addH1D_BJetBinned("All_Photon_HadOverEM", "Photon HadronicOverEM; HadOverEM; Events/(0.01)", 500, 0, 5);
 	histMan_->addH1D_BJetBinned("All_Photon_ET", "Photon E_{T}; E_{T}(#gamma); Events/(1 GeV)", 500, 0, 1000);
 	histMan_->addH1D_BJetBinned("All_Photon_EcalIso", "Photon Ecal Isolation; EcalIso; Events", 500, 0, 500);
@@ -106,7 +106,7 @@ void PhotonAnalyser::createHistograms() {
 	histMan_->addH1D_BJetBinned("photon_AbsEta", "Photon |#eta|; |#eta(#gamma)|; Events/(0.01)", 300, 0, 3);
 	histMan_->addH1D_BJetBinned("photon_EcalIso", "Photon ECal Isolation", 500, 0, 5);
 	histMan_->addH1D_BJetBinned("photon_HcalIso", "Photon HCal Isolation", 500, 0, 5);
-	histMan_->addH1D_BJetBinned("photon_sigma_ietaieta", "Photon Sigma IEtaIEta; #sigmaI#etaI#eta; Events", 400, 0, 40);
+	histMan_->addH1D_BJetBinned("photon_sigma_ietaieta", "Photon Sigma IEtaIEta; #sigmaI#etaI#eta; Events", 100, 0, 0.1);
 	histMan_->addH1D_BJetBinned("photon_HadOverEM", "Photon HadronicOverEM; HadOverEM; Events/(0.01)", 500, 0, 5);
 	histMan_->addH1D_BJetBinned("photon_ET", "Photon E_{T}; E_{T}(#gamma); Events/(1 GeV)", 500, 0, 1000);
 	histMan_->addH1D_BJetBinned("photon_EcalIso", "Photon Ecal Isolation; EcalIso; Events", 500, 0, 500);

@@ -12,6 +12,8 @@
 #include <sstream>
 #include <iomanip>
 
+using namespace std;
+
 namespace BAT {
 
 const double initialBigValue = 123456789;
@@ -165,6 +167,13 @@ bool Photon::isInCrack() const {
 
 bool Photon::isInEndCapRegion() const {
 	return fabs(superClusterEta()) > 1.5660;
+}
+
+string Photon::toString() const {
+	stringstream out;
+	out << Particle::toString();
+	out << "Photon information" << "\n";
+	return out.str();
 }
 
 }
