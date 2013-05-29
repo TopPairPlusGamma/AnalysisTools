@@ -26,6 +26,7 @@ private:
 	VariableReader<MultiDoublePointer> pzReader;
 	VariableReader<MultiDoublePointer> ecalIsolationReader;
 	VariableReader<MultiDoublePointer> hcalIsolationReader;
+	VariableReader<MultiDoublePointer> hcalIsolation2012Reader;
 	VariableReader<MultiDoublePointer> trackerIsolationReader;
 	VariableReader<MultiDoublePointer> superClusterEtaReader;
 	VariableReader<MultiDoublePointer> sigmaIEtaIEtaReader;
@@ -36,6 +37,11 @@ private:
 	VariableReader<MultiDoublePointer> Ecal5x5ClusterReader;
 	VariableReader<MultiDoublePointer> HadOverEmReader;
 	VariableReader<MultiDoublePointer> trackVetoReader;
+	VariableReader<MultiDoublePointer> ConversionSafeElectronVetoReader;
+	VariableReader<MultiDoublePointer> SingleTowerHoEReader;
+	VariableReader<MultiDoublePointer> PFChargedHadronIsoReader;
+	VariableReader<MultiDoublePointer> PFNeutralHadronIsoReader;
+	VariableReader<MultiDoublePointer> PFPhotonIsoReader;
 	
 	PhotonAlgorithm::value algorithm;
 	

@@ -23,6 +23,7 @@ Photon::Photon() :
 		usedAlgorithm_(PhotonAlgorithm::Default),
 		EcalIso(initialBigValue),
 		HcalIso(initialBigValue),
+		HcalIso2012(initialBigValue),
 		TrackIso(initialBigValue),
 		superCluster_Eta(initialBigValue), 
 		sigma_IEtaIEta(initialBigValue),
@@ -32,7 +33,15 @@ Photon::Photon() :
 		Ecal_3x3_Cluster(initialBigValue),
 		Ecal_5x5_Cluster(initialBigValue),
 		hadOverEm(initialBigValue),
-		trackVeto(initialBigValue){
+		trackVeto(initialBigValue),
+		Conversion_Safe_Electron_Veto(initialBigValue),
+		singleTowerHoE(initialBigValue),
+		pfChargedHadronIso(initialBigValue),
+		pfNeutralHadronIso(initialBigValue),
+		pfPhotonIso(initialBigValue),
+		rhocorrectedpfChargedIso(initialBigValue),
+		rhocorrectedpfNeutralIso(initialBigValue),
+		rhocorrectedpfPhotonIso(initialBigValue){
 
 }
 
@@ -41,6 +50,7 @@ Photon::Photon(double energy, double px, double py, double pz) :
 		usedAlgorithm_(PhotonAlgorithm::Default),
 		EcalIso(initialBigValue),
 		HcalIso(initialBigValue),
+		HcalIso2012(initialBigValue),
 		TrackIso(initialBigValue),
 		superCluster_Eta(initialBigValue), 
 		sigma_IEtaIEta(initialBigValue),
@@ -50,7 +60,15 @@ Photon::Photon(double energy, double px, double py, double pz) :
 		Ecal_3x3_Cluster(initialBigValue),
 		Ecal_5x5_Cluster(initialBigValue),
 		hadOverEm(initialBigValue),
-		trackVeto(initialBigValue){
+		trackVeto(initialBigValue),
+		Conversion_Safe_Electron_Veto(initialBigValue),
+		singleTowerHoE(initialBigValue),
+		pfChargedHadronIso(initialBigValue),
+		pfNeutralHadronIso(initialBigValue),
+		pfPhotonIso(initialBigValue),
+		rhocorrectedpfChargedIso(initialBigValue),
+		rhocorrectedpfNeutralIso(initialBigValue),
+		rhocorrectedpfPhotonIso(initialBigValue){
 		
 }
 
@@ -67,6 +85,10 @@ void Photon::setEcalIsolation(double EIso){
 
 void Photon::setHcalIsolation(double HIso){
 	HcalIso = HIso;
+}
+
+void Photon::setHcalIsolation2012(double HIso2012){
+	HcalIso2012 = HIso2012;
 }
 
 void Photon::setTrackerIsolation(double TrckIso){
@@ -109,12 +131,48 @@ void Photon::setTrackVeto(double TrkVeto) {
 	trackVeto = TrkVeto;
 }
 
+void Photon::setConversionSafeElectronVeto(double ConvSEVeto) {
+	Conversion_Safe_Electron_Veto = ConvSEVeto;
+}
+
+void Photon::setSingleTowerHoE(double HtowoE) {
+	singleTowerHoE = HtowoE;
+}
+
+void Photon::setPFChargedHadronIso(double PfChargedIso03) {
+	pfChargedHadronIso = PfChargedIso03;
+}
+
+void Photon::setPFNeutralHadronIso(double PfNeutralIso03) {
+	pfNeutralHadronIso = PfNeutralIso03;
+}
+
+void Photon::setPFPhotonIso(double PfPhotonIso03) {
+	pfPhotonIso = PfPhotonIso03;
+}
+
+void Photon::setRhoCorrectedPFChargedHadronIso(double RhoCorrPfChargedIso03) {
+	rhocorrectedpfChargedIso = RhoCorrPfChargedIso03;
+}
+
+void Photon::setRhoCorrectedPFNeutralHadronIso(double RhoCorrPfNeutralIso03) {
+	rhocorrectedpfNeutralIso = RhoCorrPfNeutralIso03;
+}
+
+void Photon::setRhoCorrectedPFPhotonIso(double RhoCorrPfPhotonIso03) {
+	rhocorrectedpfPhotonIso = RhoCorrPfPhotonIso03;
+}
+
 double Photon::ecalIsolation() const {
 	return EcalIso;
 }
 
 double Photon::hcalIsolation() const {
 	return HcalIso;
+}
+
+double Photon::hcalIsolation2012() const {
+	return HcalIso2012;
 }
 
 double Photon::trackerIsolation() const {
@@ -157,6 +215,26 @@ double Photon::TrackVeto() const {
 	return trackVeto;
 }
 
+double Photon::ConversionSafeElectronVeto() const {
+	return Conversion_Safe_Electron_Veto;
+}
+
+double Photon::SingleTowerHoE() const {
+	return singleTowerHoE;
+}
+
+double Photon::PFChargedHadronIso() const {
+	return pfChargedHadronIso;
+}
+
+double Photon::PFNeutralHadronIso() const {
+	return pfNeutralHadronIso;
+}
+
+double Photon::PFPhotonIso() const {
+	return pfPhotonIso;
+}
+
 bool Photon::isInBarrelRegion() const {
 	return fabs(superClusterEta()) < 1.4442;
 }
@@ -174,6 +252,72 @@ string Photon::toString() const {
 	out << Particle::toString();
 	out << "Photon information" << "\n";
 	return out.str();
+}
+
+double Photon::RhoCorrectedPFChargedHadronIso(double rho) const {
+	double effectiveArea = 0;
+	double eta = fabs(this->eta());
+	if (eta < 1.)
+		effectiveArea = 0.12;
+	if (eta > 1. && eta < 1.479)
+		effectiveArea = 0.01;
+	if (eta > 1.479 && eta < 2.0)
+		effectiveArea = 0.014;
+	if (eta > 2.0 && eta < 2.2)
+		effectiveArea = 0.012;
+	if (eta > 2.2 && eta < 2.3)
+		effectiveArea = 0.016;
+	if (eta > 2.3 && eta < 2.4)
+		effectiveArea = 0.020;
+	if (eta > 2.4)
+		effectiveArea = 0.012;
+
+	double rhocorrectedpfChargedIso =	max(PFChargedHadronIso() - rho * effectiveArea, 0.);
+	return rhocorrectedpfChargedIso;
+}
+
+double Photon::RhoCorrectedPFNeutralHadronIso(double rho) const {
+	double effectiveArea = 0;
+	double eta = fabs(this->eta());
+	if (eta < 1.)
+		effectiveArea = 0.030;
+	if (eta > 1. && eta < 1.479)
+		effectiveArea = 0.057;
+	if (eta > 1.479 && eta < 2.0)
+		effectiveArea = 0.039;
+	if (eta > 2.0 && eta < 2.2)
+		effectiveArea = 0.015;
+	if (eta > 2.2 && eta < 2.3)
+		effectiveArea = 0.024;
+	if (eta > 2.3 && eta < 2.4)
+		effectiveArea = 0.039;
+	if (eta > 2.4)
+		effectiveArea = 0.072;
+
+	double rhocorrectedpfNeutralIso =	max(PFNeutralHadronIso() - rho * effectiveArea, 0.);
+	return rhocorrectedpfNeutralIso;
+}
+
+double Photon::RhoCorrectedPFPhotonIso(double rho) const {
+	double effectiveArea = 0;
+	double eta = fabs(this->eta());
+	if (eta < 1.)
+		effectiveArea = 0.148;
+	if (eta > 1. && eta < 1.479)
+		effectiveArea = 0.13;
+	if (eta > 1.479 && eta < 2.0)
+		effectiveArea = 0.112;
+	if (eta > 2.0 && eta < 2.2)
+		effectiveArea = 0.216;
+	if (eta > 2.2 && eta < 2.3)
+		effectiveArea = 0.262;
+	if (eta > 2.3 && eta < 2.4)
+		effectiveArea = 0.26;
+	if (eta > 2.4)
+		effectiveArea = 0.266;
+
+	double rhocorrectedpfPhotonIso =	max(PFPhotonIso() - rho * effectiveArea, 0.);
+	return rhocorrectedpfPhotonIso;
 }
 
 }

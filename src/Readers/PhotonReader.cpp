@@ -20,6 +20,7 @@ PhotonReader::PhotonReader() :
 		pzReader(), //
 		ecalIsolationReader(), //
 		hcalIsolationReader(), //
+		hcalIsolation2012Reader(),
 		trackerIsolationReader(), //
 		superClusterEtaReader(), //
 		sigmaIEtaIEtaReader(), //
@@ -30,6 +31,11 @@ PhotonReader::PhotonReader() :
 		Ecal5x5ClusterReader(), //
 		HadOverEmReader(), //
 		trackVetoReader(), //
+		ConversionSafeElectronVetoReader(),
+		SingleTowerHoEReader(),
+		PFChargedHadronIsoReader(),
+		PFNeutralHadronIsoReader(),
+		PFPhotonIsoReader(),
 		algorithm(PhotonAlgorithm::Default), //
 		photons() {
 }
@@ -41,6 +47,7 @@ PhotonReader::PhotonReader(TChainPointer input, PhotonAlgorithm::value algo) :
  	        pzReader(input, PhotonAlgorithm::prefixes.at(algo) + ".Pz"), //
 		ecalIsolationReader(input, PhotonAlgorithm::prefixes.at(algo) + ".EcalIso"), //
 		hcalIsolationReader(input, PhotonAlgorithm::prefixes.at(algo) + ".HcalIso"), //
+		hcalIsolation2012Reader(input, PhotonAlgorithm::prefixes.at(algo) + ".HcalIso2012"),
 		trackerIsolationReader(input, PhotonAlgorithm::prefixes.at(algo) + ".TrkIso"), //
 		superClusterEtaReader(input, PhotonAlgorithm::prefixes.at(algo) + ".SCeta"), //
 		sigmaIEtaIEtaReader(input, PhotonAlgorithm::prefixes.at(algo) + ".SigmaIEtaIEta"), //
@@ -51,6 +58,11 @@ PhotonReader::PhotonReader(TChainPointer input, PhotonAlgorithm::value algo) :
 		Ecal5x5ClusterReader(input, PhotonAlgorithm::prefixes.at(algo) + ".E5x5"), //
 		HadOverEmReader(input, PhotonAlgorithm::prefixes.at(algo) + ".HoE"),
 		trackVetoReader(input, PhotonAlgorithm::prefixes.at(algo) + ".TrkVeto"),
+		ConversionSafeElectronVetoReader(input, PhotonAlgorithm::prefixes.at(algo) + ".ConvSafeEle"),
+		SingleTowerHoEReader(input, PhotonAlgorithm::prefixes.at(algo) + ".HtowoE"),
+		PFChargedHadronIsoReader(input, PhotonAlgorithm::prefixes.at(algo) + ".PfChargedIso03"),
+		PFNeutralHadronIsoReader(input, PhotonAlgorithm::prefixes.at(algo) + ".PfNeutralIso03"),
+		PFPhotonIsoReader(input, PhotonAlgorithm::prefixes.at(algo) + ".PfPhotonIso03"),
 		algorithm(algo), photons() {
 }
 
@@ -62,6 +74,7 @@ void PhotonReader::initialise() {
 		pzReader.initialise();
 		ecalIsolationReader.initialise();
 		hcalIsolationReader.initialise();
+		hcalIsolation2012Reader.initialise();
 		trackerIsolationReader.initialise();
 		superClusterEtaReader.initialise();
 		sigmaIEtaIEtaReader.initialise();
@@ -72,6 +85,11 @@ void PhotonReader::initialise() {
 		Ecal5x5ClusterReader.initialise();
 		HadOverEmReader.initialise();
 		trackVetoReader.initialise();
+		ConversionSafeElectronVetoReader.initialise();
+		SingleTowerHoEReader.initialise();
+		PFChargedHadronIsoReader.initialise();
+		PFNeutralHadronIsoReader.initialise();
+		PFPhotonIsoReader.initialise();
 }		
 
 const PhotonCollection& PhotonReader::getPhotons() {
@@ -93,6 +111,7 @@ void PhotonReader::readPhotons() {
 		photon->setUsedAlgorithm(algorithm);
 		photon->setEcalIsolation(ecalIsolationReader.getVariableAt(index));
 		photon->setHcalIsolation(hcalIsolationReader.getVariableAt(index));
+		photon->setHcalIsolation2012(hcalIsolation2012Reader.getVariableAt(index));
 		photon->setTrackerIsolation(trackerIsolationReader.getVariableAt(index));
 		photon->setSuperClusterEta(superClusterEtaReader.getVariableAt(index));
 		photon->setSigmaIEtaIEta(sigmaIEtaIEtaReader.getVariableAt(index));
@@ -103,6 +122,11 @@ void PhotonReader::readPhotons() {
 		photon->setEcal5x5Cluster(Ecal5x5ClusterReader.getVariableAt(index));
 		photon->setHadOverEm(HadOverEmReader.getVariableAt(index));
 		photon->setTrackVeto(trackVetoReader.getVariableAt(index));
+		photon->setConversionSafeElectronVeto(ConversionSafeElectronVetoReader.getVariableAt(index));
+		photon->setSingleTowerHoE(SingleTowerHoEReader.getVariableAt(index));
+		photon->setPFChargedHadronIso(PFChargedHadronIsoReader.getVariableAt(index));
+		photon->setPFNeutralHadronIso(PFNeutralHadronIsoReader.getVariableAt(index));
+		photon->setPFPhotonIso(PFPhotonIsoReader.getVariableAt(index));
 		photons.push_back(photon);
 		}
 }

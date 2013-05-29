@@ -8,6 +8,7 @@
 #define PHOTONANALYSER_H_
 #include "BasicAnalyser.h"
 #include <boost/shared_ptr.hpp>
+#include "../Selections/BasicSelection.h"
 
 namespace BAT {
 
@@ -25,8 +26,11 @@ public:
 	void analysePhoton(const PhotonPointer photon, double weight);
 	void createHistograms();
 	void useTTbarPlusMETSetup(bool use);
+	
 private:
+	SelectionPointer topMuMuRefSelection_;
 	bool ttbarPlusMETAnalysisSetup_;
+	
 };
 typedef boost::scoped_ptr<PhotonAnalyser> PhotonAnalyserLocalPtr;
 typedef boost::shared_ptr<PhotonAnalyser> PhotonAnalyserPtr;

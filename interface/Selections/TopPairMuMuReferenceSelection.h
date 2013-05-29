@@ -2,7 +2,7 @@
   * TopPairReferenceSelection.h
   *
   *  Created on: 30 May 2013
-  *      Author: phil
+  *      Author: P.Symonds
   */
 
 #ifndef TOPPAIRMUMUREFERENCESELECTION_H_
@@ -47,6 +47,7 @@ public:
 	virtual bool isBJet(const JetPointer jet) const;
 	virtual bool isGoodMuon(const MuonPointer muon) const;
 	virtual bool isGoodElectron(const ElectronPointer electron) const;
+	virtual bool isGoodPhoton(const PhotonPointer photon, const EventPtr event) const;
 	//definitions of loose objects
 	virtual bool isLooseElectron(const ElectronPointer electron) const;
 	virtual bool isLooseMuon(const MuonPointer electron) const;

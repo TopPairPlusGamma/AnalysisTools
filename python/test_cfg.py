@@ -7,7 +7,7 @@ if os.environ.has_key('toolsFolder'):
 #this value will be part of the output file name: DataType_CenterOfMassEnergyTeV_lumipb-1_....
 centerOfMassEnergy = 8    
 #number of events to be processed
-maxEvents = 10000 # -1 to run over all
+maxEvents = -1 # -1 to run over all
 #integrated luminosity the MC simulation will be scaled to
 lumi = 5050#pb-1
 
@@ -29,7 +29,9 @@ else:
     #-5%
 #    PUFile = toolsFolder + "data/PileUp_2011_truth_finebin_64600microbarn.root"
 
-dir = "/storage/TopQuarkGroup/mc/8TeV/LeptonPlus3JetsSkim"
+testntuple = "/data1/TTGammaAnalysis/TestNTuple/Test_nTuple_53X_mc.root"
+piondir = "root://dc2-grid-64.brunel.ac.uk//dpm/brunel.ac.uk/home/cms//store/user/phy6phs/TTJets_MassiveBinDECAY_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7C-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final/*.root"
+dir = "~/ttgamma/CMSSW_5_3_9/src/data"
 SemiLept = "/TTJets_SemiLeptMGDecays_8TeV-madgraph/nTuple_v9a_Summer12_DR53X-PU_S10_START53_V7A_ext-v1_LeptonPlus3Jets/*.root"
 FullLept = "/TTJets_FullLeptMGDecays_8TeV-madgraph/nTuple_v9a_Summer12_DR53X-PU_S10_START53_V7A-v2_LeptonPlus3Jets/*.root"
 Hadronic = "/TTJets_HadronicMGDecays_8TeV-madgraph/nTuple_v9a_Summer12_DR53X-PU_S10_START53_V7A_ext-v1_LeptonPlus3Jets/*.root"
@@ -44,7 +46,9 @@ lightJetResoFile = toolsFolder + "data/lightJetReso.root"
 useHitFit = False
 produceFitterASCIIoutput = False
 inputFiles = [
-dir + SemiLept 
+#testntuple 
+#dir + SemiLept 
+ piondir
               ]
 
 #relative Path from calling BAT to the TopQuarkAnalysis folder

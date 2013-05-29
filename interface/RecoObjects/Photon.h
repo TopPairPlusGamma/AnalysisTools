@@ -21,7 +21,7 @@ enum value {
 };
 
 const boost::array<std::string, PhotonAlgorithm::NUMBER_OF_PHOTONALGORITHMS> prefixes = { { 
-        "patPhotons" } }; //recoPhotons
+        "recoPhotons" } }; //recoPhotons
 
 const boost::array<std::string, PhotonAlgorithm::NUMBER_OF_PHOTONALGORITHMS> names = { { 
         "Photon"} };
@@ -36,6 +36,7 @@ public:
 	void setUsedAlgorithm(PhotonAlgorithm::value algorithm);
 	double ecalIsolation() const;
         double hcalIsolation() const;
+	double hcalIsolation2012() const;
         double trackerIsolation() const;
 	double superClusterEta() const;
     	double sigmaIEtaIEta() const;
@@ -46,12 +47,20 @@ public:
         double Ecal5x5Cluster() const;
 	double HadOverEm() const;
 	double TrackVeto() const;
-
+	double ConversionSafeElectronVeto() const;
+	double SingleTowerHoE() const;
+	double PFChargedHadronIso() const;
+	double PFNeutralHadronIso() const;
+	double PFPhotonIso() const;
+	double RhoCorrectedPFChargedHadronIso(double rho) const;
+	double RhoCorrectedPFNeutralHadronIso(double rho) const;
+	double RhoCorrectedPFPhotonIso(double rho) const;
 	
 	
 	//void setUsedAlgorithm(PhotonAlgorithm::value algo);
 	void setEcalIsolation(double EIso);
 	void setHcalIsolation(double HIso);
+	void setHcalIsolation2012(double HIso2012);
 	void setTrackerIsolation(double TrckIso);
 	void setSuperClusterEta(double eta);
 	void setSigmaIEtaIEta(double sigma);
@@ -62,6 +71,15 @@ public:
 	void setEcal5x5Cluster(double E5x5);
 	void setHadOverEm(double HoverE);
 	void setTrackVeto(double TrkVeto);
+	void setConversionSafeElectronVeto(double ConvSEVeto);
+	void setSingleTowerHoE(double HtowoE);
+	void setPFChargedHadronIso(double PfChargedIso03);
+	void setPFNeutralHadronIso(double PfNeutralIso03);
+	void setPFPhotonIso(double PfPhotonIso03);
+	void setRhoCorrectedPFChargedHadronIso(double RhoCorrPfChargedIso03);
+	void setRhoCorrectedPFNeutralHadronIso(double RhoCorrPfNeutralIso03);
+	void setRhoCorrectedPFPhotonIso(double RhoCorrPfPhotonIso03);
+	
 	
 	virtual bool isInBarrelRegion() const;
     	bool isInCrack() const;
@@ -72,6 +90,7 @@ private:
         PhotonAlgorithm::value usedAlgorithm_;
 	double EcalIso;
 	double HcalIso;
+	double HcalIso2012;
 	double TrackIso;
 	double superCluster_Eta;
 	double sigma_IEtaIEta;
@@ -82,6 +101,14 @@ private:
 	double Ecal_5x5_Cluster;
 	double hadOverEm;
 	double trackVeto;
+	double Conversion_Safe_Electron_Veto;
+	double singleTowerHoE;
+	double pfChargedHadronIso;
+	double pfNeutralHadronIso;
+	double pfPhotonIso;
+	double rhocorrectedpfChargedIso;
+	double rhocorrectedpfNeutralIso;
+	double rhocorrectedpfPhotonIso;
 
 };
 
