@@ -23,7 +23,7 @@ public:
 	/**
 	 * Analyses a single photon
 	 */
-	void analysePhoton(const PhotonPointer photon, double weight);
+	void analysePhoton(const EventPtr);
 	void createHistograms();
 	void useTTbarPlusMETSetup(bool use);
 	

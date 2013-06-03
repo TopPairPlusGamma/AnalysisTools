@@ -173,26 +173,6 @@ bool TopPairEPlusJetsReferenceSelection::isGoodElectron(const ElectronPointer el
 			passesHOverE && passesID;
 }
 
-//bool TopPairEPlusJetsReferenceSelection::isGoodPhoton(const PhotonPointer photon) const {
-
-//	bool passesEtAndEta = photon->et() > 20 && fabs(photon->eta()) < 2.5 && !photon->isInCrack(); //fabs(photon->eta()) < 1.44 && 1.56 < fabs(photon->eta()) < 2.5;
-//	bool passesTrackVeto = photon->TrackVeto() == false;
-//	bool passesHOverE = photon->HadOverEm() < 0.05; // same for EE and EB
-//	bool passesShowerShape = if(photon->isInBarrelRegion()) { photon->sigmaIEtaIEta() < 0.011 }; || 
-//				 if(photon->isInEndCapRegion()) { photon->sigmaIEtaIEta() < 0.03  };
-//	bool passesTrackIso = if(photon->isInBarrelRegion()) { photon->TrackIso() < 2.0 /*+ 0.001 * (photon->et()) + 0.0167 * rho25(EB)*/ }; || 
-//			      if(photon->isInEndCapRegion()) { photon->TrackIso() < 2.0 /*+ 0.001 * (photon->et()) + 0.032 * rho25(EE)*/  };
-//	bool passes EcalIso = if(photon->isInBarrelRegion()) { photon->EcalIso() < 4.2 /*+ 0.006 * (photon->et()) + 0.0183 * rho25(EB)*/  }; || 
-//			      if(photon->isInEndCapRegion()) { photon->EcalIso() < 4.2 /*+ 0.006 * (photon->et()) + 0.090 * rho25(EE)*/   };
-//	bool passes HcalIso = if(photon->isInBarrelRegion()) { photon->HcalIso() < 2.2 /*+ 0.0025 * (photon->et()) + 0.062 * rho25(EB)*/  }; || 
-//			      if(photon->isInEndCapRegion()) { photon->HcalIso() < 2.2 /*+ 0.0025 * (photon->et()) + 0.180 * rho25(EE) */ };
-
-
-	
-	
-//	return passesEtAndEta && passesTrackVeto && passesHOverE && passesShowerShape && passesTrackIso && passesEcalIso && passes HcalIso;
-//}
-
 
 bool TopPairEPlusJetsReferenceSelection::isIsolated(const LeptonPointer lepton) const {
 	const ElectronPointer electron(boost::static_pointer_cast<Electron>(lepton));
