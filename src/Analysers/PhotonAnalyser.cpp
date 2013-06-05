@@ -7,9 +7,18 @@
 #include "../../interface/Analysers/PhotonAnalyser.h"
 #include "../../interface/GlobalVariables.h"
 #include "../../interface/Selections/TopPairMuMuReferenceSelection.h"
+#include "../../interface/Selections/TopPairEEReferenceSelection.h"
+#include "../../interface/Selections/TopPairEMuReferenceSelection.h"
+
 namespace BAT {
 
 void PhotonAnalyser::analyse(const EventPtr event){
+	analyseMuMu(event);
+//	analyseEE(event);
+//	analyseEMu(event);
+}
+
+void PhotonAnalyser::analyseMuMu(const EventPtr event){
 	
 	if (topMuMuRefSelection_->passesFullSelectionExceptLastTwoSteps(event)) {
 	histMan_->setCurrentHistogramFolder(histogramFolder_);
@@ -72,7 +81,133 @@ void PhotonAnalyser::analyse(const EventPtr event){
     }
 }
 
-void PhotonAnalyser::analysePhoton(const EventPtr event) {
+void PhotonAnalyser::analyseEE(const EventPtr event){
+	
+	if (topEERefSelection_->passesFullSelectionExceptLastTwoSteps(event)) {
+	histMan_->setCurrentHistogramFolder(histogramFolder_);
+	weight_ = event->weight() * prescale_ * scale_;
+	const PhotonCollection photons = event->Photons();
+	const JetCollection jets = event->Jets();
+
+	histMan_->H1D_BJetBinned("Number_Of_Photons")->Fill(photons.size(), weight_);
+
+	for (unsigned int index = 0; index < photons.size(); ++index) {
+		const PhotonPointer photon(photons.at(index));
+		histMan_->H1D_BJetBinned("Photon_Pt")->Fill(photon->pt(), weight_);
+		histMan_->H1D_BJetBinned("Photon_Eta")->Fill(photon->eta(), weight_);
+		histMan_->H1D_BJetBinned("Photon_AbsEta")->Fill(fabs(photon->eta()), weight_);
+		histMan_->H1D_BJetBinned("Photon_Phi")->Fill(photon->phi(), weight_);
+		histMan_->H1D_BJetBinned("Photon_ET")->Fill(photon->et(), weight_);
+		
+		if (photon->isInEndCapRegion()){
+			histMan_->H1D_BJetBinned("Photon_sigma_ietaieta_endcap")->Fill(photon->sigmaIEtaIEta(), weight_);
+			histMan_->H1D_BJetBinned("Photon_PFChargedHadronIso_endcap")->Fill(photon->PFChargedHadronIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_PFNeutralHadronIso_endcap")->Fill(photon->PFNeutralHadronIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_PFPhotonIso_endcap")->Fill(photon->PFPhotonIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_RhoCorrectedPFChargedHadronIso_endcap")->Fill(photon->PFChargedHadronIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_RhoCorrectedPFNeutralHadronIso_endcap")->Fill(photon->PFNeutralHadronIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_RhoCorrectedPFPhotonIso_endcap")->Fill(photon->PFPhotonIso(), weight_);
+		} else if (photon->isInBarrelRegion()) {
+			histMan_->H1D_BJetBinned("Photon_sigma_ietaieta_barrel")->Fill(photon->sigmaIEtaIEta(), weight_);
+			histMan_->H1D_BJetBinned("Photon_PFChargedHadronIso_barrel")->Fill(photon->PFChargedHadronIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_PFNeutralHadronIso_barrel")->Fill(photon->PFNeutralHadronIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_PFPhotonIso_barrel")->Fill(photon->PFPhotonIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_RhoCorrectedPFChargedHadronIso_barrel")->Fill(photon->PFChargedHadronIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_RhoCorrectedPFNeutralHadronIso_barrel")->Fill(photon->PFNeutralHadronIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_RhoCorrectedPFPhotonIso_barrel")->Fill(photon->PFPhotonIso(), weight_);
+		}
+			
+		histMan_->H1D_BJetBinned("Photon_HadOverEM")->Fill(photon->HadOverEm(), weight_);
+		histMan_->H1D_BJetBinned("Photon_EcalIso")->Fill(photon->ecalIsolation(), weight_);
+		histMan_->H1D_BJetBinned("Photon_HcalIso")->Fill(photon->hcalIsolation(), weight_);
+		histMan_->H1D_BJetBinned("Photon_HcalIso2012")->Fill(photon->hcalIsolation2012(), weight_);
+		histMan_->H1D_BJetBinned("Photon_TrckIso")->Fill(photon->trackerIsolation(), weight_);
+		histMan_->H1D_BJetBinned("Photon_SCeta")->Fill(photon->superClusterEta(), weight_);
+		histMan_->H1D_BJetBinned("Photon_SCphi")->Fill(photon->superClusterPhi(), weight_);
+		histMan_->H1D_BJetBinned("Photon_SCenergy")->Fill(photon->superClusterEnergy(), weight_);
+		histMan_->H1D_BJetBinned("Photon_SCSeedEnergy")->Fill(photon->superClusterSeedEnergy(), weight_);
+		histMan_->H1D_BJetBinned("Photon_E3x3")->Fill(photon->Ecal3x3Cluster(), weight_);
+		histMan_->H1D_BJetBinned("Photon_E5x5")->Fill(photon->Ecal5x5Cluster(), weight_);
+		histMan_->H1D_BJetBinned("Photon_TrkVeto")->Fill(photon->TrackVeto(), weight_);
+		histMan_->H1D_BJetBinned("Photon_ConvSEVeto")->Fill(photon->ConversionSafeElectronVeto(), weight_);
+		histMan_->H1D_BJetBinned("Photon_HtowoE")->Fill(photon->SingleTowerHoE(), weight_);
+		histMan_->H1D_BJetBinned("Photon_PFChargedHadronIso")->Fill(photon->PFChargedHadronIso(), weight_);
+		histMan_->H1D_BJetBinned("Photon_PFNeutralHadronIso")->Fill(photon->PFNeutralHadronIso(), weight_);
+		histMan_->H1D_BJetBinned("Photon_PFPhotonIso")->Fill(photon->PFPhotonIso(), weight_);
+		
+		for (unsigned int index = 0; index < jets.size(); ++index) { 
+			const JetPointer jet(jets.at(index));
+			histMan_->H1D_BJetBinned("Photon_deltaR")->Fill(photon->deltaR(jet), weight_);
+		}
+	}
+
+    }
+}
+
+void PhotonAnalyser::analyseEMu(const EventPtr event){
+	
+	if (topEMuRefSelection_->passesFullSelectionExceptLastTwoSteps(event)) {
+	histMan_->setCurrentHistogramFolder(histogramFolder_);
+	weight_ = event->weight() * prescale_ * scale_;
+	const PhotonCollection photons = event->Photons();
+	const JetCollection jets = event->Jets();
+
+	histMan_->H1D_BJetBinned("Number_Of_Photons")->Fill(photons.size(), weight_);
+
+	for (unsigned int index = 0; index < photons.size(); ++index) {
+		const PhotonPointer photon(photons.at(index));
+		histMan_->H1D_BJetBinned("Photon_Pt")->Fill(photon->pt(), weight_);
+		histMan_->H1D_BJetBinned("Photon_Eta")->Fill(photon->eta(), weight_);
+		histMan_->H1D_BJetBinned("Photon_AbsEta")->Fill(fabs(photon->eta()), weight_);
+		histMan_->H1D_BJetBinned("Photon_Phi")->Fill(photon->phi(), weight_);
+		histMan_->H1D_BJetBinned("Photon_ET")->Fill(photon->et(), weight_);
+		
+		if (photon->isInEndCapRegion()){
+			histMan_->H1D_BJetBinned("Photon_sigma_ietaieta_endcap")->Fill(photon->sigmaIEtaIEta(), weight_);
+			histMan_->H1D_BJetBinned("Photon_PFChargedHadronIso_endcap")->Fill(photon->PFChargedHadronIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_PFNeutralHadronIso_endcap")->Fill(photon->PFNeutralHadronIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_PFPhotonIso_endcap")->Fill(photon->PFPhotonIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_RhoCorrectedPFChargedHadronIso_endcap")->Fill(photon->PFChargedHadronIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_RhoCorrectedPFNeutralHadronIso_endcap")->Fill(photon->PFNeutralHadronIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_RhoCorrectedPFPhotonIso_endcap")->Fill(photon->PFPhotonIso(), weight_);
+		} else if (photon->isInBarrelRegion()) {
+			histMan_->H1D_BJetBinned("Photon_sigma_ietaieta_barrel")->Fill(photon->sigmaIEtaIEta(), weight_);
+			histMan_->H1D_BJetBinned("Photon_PFChargedHadronIso_barrel")->Fill(photon->PFChargedHadronIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_PFNeutralHadronIso_barrel")->Fill(photon->PFNeutralHadronIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_PFPhotonIso_barrel")->Fill(photon->PFPhotonIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_RhoCorrectedPFChargedHadronIso_barrel")->Fill(photon->PFChargedHadronIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_RhoCorrectedPFNeutralHadronIso_barrel")->Fill(photon->PFNeutralHadronIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_RhoCorrectedPFPhotonIso_barrel")->Fill(photon->PFPhotonIso(), weight_);
+		}
+			
+		histMan_->H1D_BJetBinned("Photon_HadOverEM")->Fill(photon->HadOverEm(), weight_);
+		histMan_->H1D_BJetBinned("Photon_EcalIso")->Fill(photon->ecalIsolation(), weight_);
+		histMan_->H1D_BJetBinned("Photon_HcalIso")->Fill(photon->hcalIsolation(), weight_);
+		histMan_->H1D_BJetBinned("Photon_HcalIso2012")->Fill(photon->hcalIsolation2012(), weight_);
+		histMan_->H1D_BJetBinned("Photon_TrckIso")->Fill(photon->trackerIsolation(), weight_);
+		histMan_->H1D_BJetBinned("Photon_SCeta")->Fill(photon->superClusterEta(), weight_);
+		histMan_->H1D_BJetBinned("Photon_SCphi")->Fill(photon->superClusterPhi(), weight_);
+		histMan_->H1D_BJetBinned("Photon_SCenergy")->Fill(photon->superClusterEnergy(), weight_);
+		histMan_->H1D_BJetBinned("Photon_SCSeedEnergy")->Fill(photon->superClusterSeedEnergy(), weight_);
+		histMan_->H1D_BJetBinned("Photon_E3x3")->Fill(photon->Ecal3x3Cluster(), weight_);
+		histMan_->H1D_BJetBinned("Photon_E5x5")->Fill(photon->Ecal5x5Cluster(), weight_);
+		histMan_->H1D_BJetBinned("Photon_TrkVeto")->Fill(photon->TrackVeto(), weight_);
+		histMan_->H1D_BJetBinned("Photon_ConvSEVeto")->Fill(photon->ConversionSafeElectronVeto(), weight_);
+		histMan_->H1D_BJetBinned("Photon_HtowoE")->Fill(photon->SingleTowerHoE(), weight_);
+		histMan_->H1D_BJetBinned("Photon_PFChargedHadronIso")->Fill(photon->PFChargedHadronIso(), weight_);
+		histMan_->H1D_BJetBinned("Photon_PFNeutralHadronIso")->Fill(photon->PFNeutralHadronIso(), weight_);
+		histMan_->H1D_BJetBinned("Photon_PFPhotonIso")->Fill(photon->PFPhotonIso(), weight_);
+		
+		for (unsigned int index = 0; index < jets.size(); ++index) { 
+			const JetPointer jet(jets.at(index));
+			histMan_->H1D_BJetBinned("Photon_deltaR")->Fill(photon->deltaR(jet), weight_);
+		}
+	}
+
+    }
+}
+
+/* void PhotonAnalyser::analysePhoton(const EventPtr event) {
 	if (topMuMuRefSelection_->passesFullSelectionExceptLastTwoSteps(event)) {
 	histMan_->setCurrentHistogramFolder(histogramFolder_);
 	weight_ = event->weight() * prescale_ * scale_;
@@ -131,11 +266,13 @@ void PhotonAnalyser::analysePhoton(const EventPtr event) {
 		}
 	}
     }
-}
+} */
 
 PhotonAnalyser::PhotonAnalyser(HistogramManagerPtr histMan, std::string histogramFolder) :
                 BasicAnalyser(histMan, histogramFolder), //
                 topMuMuRefSelection_(new TopPairMuMuReferenceSelection()),
+		topEERefSelection_(new TopPairEEReferenceSelection()),
+		topEMuRefSelection_(new TopPairEMuReferenceSelection()),
 		ttbarPlusMETAnalysisSetup_(false) {
 
 }
@@ -195,3 +332,4 @@ void PhotonAnalyser::useTTbarPlusMETSetup(bool use) {
 }
 
 }
+
