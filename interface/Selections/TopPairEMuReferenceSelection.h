@@ -12,10 +12,10 @@
 
 namespace BAT {
 
-namespace TTbarEEReferenceSelection {
+namespace TTbarEMuReferenceSelection {
 enum Step {
 	EventCleaningAndTrigger,
-	DiElectronSelection,
+	DiLeptonSelection,
 	ZmassVeto,
 	AtLeastOneGoodJets,
 	AtLeastTwoGoodJets,
@@ -27,7 +27,7 @@ enum Step {
 
 const std::string StringSteps[NUMBER_OF_SELECTION_STEPS] = { //
 		"Event cleaning and High Level Trigger", //
-				"di electron selection", //
+				"di lepton selection", //
 				"z mass veto", //
 				">= 1 jets",
 				">= 2 jets",
@@ -40,12 +40,12 @@ const std::string StringSteps[NUMBER_OF_SELECTION_STEPS] = { //
 class TopPairEMuReferenceSelection: public BAT::BasicSelection {
 public:
 	TopPairEMuReferenceSelection(unsigned int numberOfSelectionSteps =
-			TTbarEEReferenceSelection::NUMBER_OF_SELECTION_STEPS);
+			TTbarEMuReferenceSelection::NUMBER_OF_SELECTION_STEPS);
 	virtual ~TopPairEMuReferenceSelection();
 
 	virtual bool isGoodJet(const JetPointer jet) const;
 	virtual bool isBJet(const JetPointer jet) const;
-//	virtual bool isGoodMuon(const MuonPointer muon) const;
+	virtual bool isGoodMuon(const MuonPointer muon) const;
 	virtual bool isGoodElectron(const ElectronPointer electron) const;
 	virtual bool isGoodPhoton(const PhotonPointer photon, const EventPtr event) const;
 	
@@ -54,22 +54,23 @@ public:
 	virtual bool isLooseMuon(const MuonPointer electron) const;
 	
 	//isolation definitions
-	virtual bool isIsolated(const LeptonPointer lepton) const;
-
+	virtual bool isIsolatedElectron(const LeptonPointer lepton) const;
+	virtual bool isIsolatedMuon(const LeptonPointer lepton) const;
+	
 	virtual bool passesSelectionStep(const EventPtr event, unsigned int selectionStep) const;
 
 	virtual bool passesEventCleaning(const EventPtr event) const;
 	virtual bool passesTriggerSelection(const EventPtr event) const;
-	virtual bool passesDiElectronSelection(const EventPtr event) const;
+	virtual bool passesDiLeptonSelection(const EventPtr event) const;
 	virtual bool passesZmassVeto(const EventPtr event) const;
 	virtual bool hasAtLeastNGoodJets(const EventPtr event, int Njets) const;
 	virtual bool hasAtLeastOneGoodBJet(const EventPtr event) const;
 	virtual bool hasAtLeastTwoGoodBJets(const EventPtr event) const;
 	virtual bool passesMetCut(const EventPtr event) const;
 
-	virtual const LeptonPointer signalLepton(const EventPtr event) const;
-	virtual const ElectronCollection goodLeptons(const EventPtr event) const;
-	virtual const ElectronCollection signalLeptons(const EventPtr event) const;
+	virtual const ElectronCollection signalElectrons(const EventPtr event) const;
+	virtual const MuonCollection signalMuons(const EventPtr event) const;
+	virtual const LeptonCollection signalLeptons(const EventPtr event) const;
 	virtual const PhotonCollection signalPhotons(const EventPtr event) const;
 	virtual const JetCollection cleanedJets(const EventPtr event) const;
 	virtual const JetCollection cleanedBJets(const EventPtr event) const;
