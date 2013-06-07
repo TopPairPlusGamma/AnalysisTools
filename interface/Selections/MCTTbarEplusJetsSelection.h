@@ -18,7 +18,7 @@ public:
 	virtual ~MCTTbarEplusJetsSelection();
 	
 	virtual bool isGoodPhoton(const PhotonPointer photon, const EventPtr event) const;
-	virtual const PhotonCollection signalPhoton(const EventPtr event) const;
+	virtual const PhotonCollection signalPhotons(const EventPtr event) const;
 };
 
 } /* namespace BAT */

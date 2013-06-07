@@ -71,7 +71,7 @@ public:
 	virtual bool hasAtLeastOneGoodBJet(const EventPtr event) const;
 	virtual bool hasAtLeastTwoGoodBJets(const EventPtr event) const;
 
-	virtual const PhotonCollection signalPhoton(const EventPtr event) const;
+	virtual const PhotonCollection signalPhotons(const EventPtr event) const;
 	virtual const LeptonPointer signalLepton(const EventPtr event) const;
 	virtual const JetCollection cleanedJets(const EventPtr event) const;
 	virtual const JetCollection cleanedBJets(const EventPtr event) const;

@@ -19,7 +19,7 @@ void PhotonAnalyser::analyse(const EventPtr event){
 }
 
 void PhotonAnalyser::analyseMuMu(const EventPtr event){
-	
+
 	if (topMuMuRefSelection_->passesFullSelectionExceptLastTwoSteps(event)) {
 	histMan_->setCurrentHistogramFolder(histogramFolder_);
 	weight_ = event->weight() * prescale_ * scale_;

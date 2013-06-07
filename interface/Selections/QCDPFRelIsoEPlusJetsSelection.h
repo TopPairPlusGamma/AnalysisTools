@@ -18,9 +18,7 @@ class QCDPFRelIsoEPlusJetsSelection: virtual public BAT::TopPairEPlusJetsReferen
 public:
 	QCDPFRelIsoEPlusJetsSelection(unsigned int numberOfSelectionSteps =
 			TTbarEPlusJetsReferenceSelection::NUMBER_OF_SELECTION_STEPS);
-	virtual ~QCDPFRelIsoEPlusJetsSelection();
-	
-	virtual bool isGoodPhoton(const PhotonPointer photon, const EventPtr event) const;	
+	virtual ~QCDPFRelIsoEPlusJetsSelection();	
 
 	virtual bool passesTriggerSelection(const EventPtr event) const;
 	virtual bool hasExactlyOneIsolatedLepton(const EventPtr event) const;
@@ -29,7 +27,6 @@ public:
 
 	virtual unsigned int prescale(const EventPtr event) const;
 	
-	virtual const PhotonCollection signalPhoton(const EventPtr event) const;
 	virtual const LeptonPointer signalLepton(const EventPtr event) const;
 };
 
