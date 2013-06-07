@@ -100,7 +100,7 @@ void Analysis::analyse() {
 		//		hltriggerQCDAnalyserExclusive_->analyse(currentEvent);
 		eventcountAnalyser->analyse(currentEvent);
 //		mttbarAnalyser->analyse(currentEvent);
-//		ttbar_plus_X_analyser_->analyse(currentEvent);
+		ttbar_plus_X_analyser_->analyse(currentEvent);
 //		diffVariablesAnalyser->analyse(currentEvent);
 //		binningAnalyser->analyse(currentEvent);
 		photonAnalyser->analyse(currentEvent);

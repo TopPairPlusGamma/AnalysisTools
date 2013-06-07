@@ -17,7 +17,7 @@
 //DiLepton
 #include "../Selections/TopPairMuMuReferenceSelection.h"
 #include "../Selections/TopPairEEReferenceSelection.h"
-#include "../Selections/TopPairEMuReferenceSelection.h"
+//#include "../Selections/TopPairEMuReferenceSelection.h"
 //QCD selections
 #include "../Selections/QCDNonIsolatedElectronSelection.h"
 #include "../Selections/QCDNonIsolatedMuonSelection.h"
@@ -54,8 +54,8 @@ public:
 	void topMuMuReferenceSelectionUnweighted(const EventPtr event);
 	void topEEReferenceSelection(const EventPtr event);
 	void topEEReferenceSelectionUnweighted(const EventPtr event);
-	void topEMuReferenceSelection(const EventPtr event);
-	void topEMuReferenceSelectionUnweighted(const EventPtr event);
+//	void topEMuReferenceSelection(const EventPtr event);
+//	void topEMuReferenceSelectionUnweighted(const EventPtr event);
 	
 	void qcdSelections(const EventPtr event);
 	void qcdMuPlusJetsSelections(const EventPtr event);
@@ -72,7 +72,7 @@ private:
 	//dilepton
 	SelectionPointer topMuMuRefSelection_;
 	SelectionPointer topEERefSelection_;
-	SelectionPointer topEMuRefSelection_;
+//	SelectionPointer topEMuRefSelection_;
 	
 	//QCD selections with respect to reference selection
 	SelectionPointer qcdNonIsoElectronSelection_, qcdNonIsoElectronNonIsoTriggerSelection_, qcdNonIsoMuonSelection_;

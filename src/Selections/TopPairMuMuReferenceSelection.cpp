@@ -286,7 +286,7 @@ const MuonCollection TopPairMuMuReferenceSelection::signalLeptons(const EventPtr
 	return signalMuons;
 
 }
-
+/* 
 const PhotonCollection TopPairMuMuReferenceSelection::signalPhotons(const EventPtr event) const {
 
 	const PhotonCollection allPhotons(event->Photons());
@@ -300,7 +300,7 @@ const PhotonCollection TopPairMuMuReferenceSelection::signalPhotons(const EventP
 
 	return goodIsolatedPhotons;
 
-}
+} */
 
 const JetCollection TopPairMuMuReferenceSelection::cleanedJets(const EventPtr event) const {
 	const JetCollection jets(event->Jets());

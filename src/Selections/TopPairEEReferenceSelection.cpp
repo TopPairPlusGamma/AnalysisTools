@@ -4,7 +4,7 @@
  *  Created on: 30 May 2013
  *      Author: N.Berry
  */
-
+	
 #include "../../interface/Selections/TopPairEEReferenceSelection.h"
 #include "../../interface/HighLevelTriggers.h"
 
@@ -111,6 +111,13 @@ bool TopPairEEReferenceSelection::isBJet(const JetPointer jet) const {
 	return jet->isBJet(BtagAlgorithm::CombinedSecondaryVertex, BtagAlgorithm::MEDIUM);
 }
 
+bool TopPairEEReferenceSelection::isGoodMuon(const MuonPointer muon) const {
+	bool passesEtAndEta = muon->pt() > 20 && fabs(muon->eta()) < 2.4;
+	bool passesID = (muon->isGlobal() || muon->isTracker()) && muon->isPFMuon();
+    bool passesIsolation  = isIsolated(muon);
+
+	return passesEtAndEta && passesID && passesIsolation;
+}
 
 bool TopPairEEReferenceSelection::passesSelectionStep(const EventPtr event, unsigned int selectionStep) const {
 	TTbarEEReferenceSelection::Step step = TTbarEEReferenceSelection::Step(selectionStep);
@@ -279,7 +286,7 @@ const ElectronCollection TopPairEEReferenceSelection::signalLeptons(const EventP
 
 }
 
-const PhotonCollection TopPairEEReferenceSelection::signalPhotons(const EventPtr event) const {
+/* const PhotonCollection TopPairEEReferenceSelection::signalPhotons(const EventPtr event) const {
 
 	const PhotonCollection allPhotons(event->Photons());
 	PhotonCollection goodIsolatedPhotons;
@@ -293,7 +300,7 @@ const PhotonCollection TopPairEEReferenceSelection::signalPhotons(const EventPtr
 	return goodIsolatedPhotons;
 
 }
-
+ */
 const JetCollection TopPairEEReferenceSelection::cleanedJets(const EventPtr event) const {
 	const JetCollection jets(event->Jets());
 	JetCollection cleanedJets;

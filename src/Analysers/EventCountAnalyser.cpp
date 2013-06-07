@@ -25,8 +25,8 @@ void EventCountAnalyser::analyse(const EventPtr event) {
 	topEEReferenceSelection(event);
 	topEEReferenceSelectionUnweighted(event);
 	
-	topEMuReferenceSelection(event);
-	topEMuReferenceSelectionUnweighted(event);
+//	topEMuReferenceSelection(event);
+//	topEMuReferenceSelectionUnweighted(event);
 
 //	topMuPlusJetsReferenceSelection2011(event);
 //	topEplusJetsPlusMETSelection(event);
@@ -810,7 +810,7 @@ void EventCountAnalyser::createHistograms() {
 				TTbarEEReferenceSelection::NUMBER_OF_SELECTION_STEPS + 1, -1.5,
 				TTbarEEReferenceSelection::NUMBER_OF_SELECTION_STEPS - 0.5);
 	}
-	const boost::array<string, 1> refSelections_dilepton = { {"TTbarEMu"} };
+/* 	const boost::array<string, 1> refSelections_dilepton = { {"TTbarEMu"} };
 	for (unsigned int index = 0; index < refSelections_dilepton.size(); ++index) {
 		string selection = refSelections_dilepton.at(index) + "RefSelection";
 		histMan_->addH1D(selection, selection, TTbarEMuReferenceSelection::NUMBER_OF_SELECTION_STEPS + 1, -1.5,
@@ -823,7 +823,7 @@ void EventCountAnalyser::createHistograms() {
 		histMan_->addH1D(selection + "Unweighted_singleCuts", selection + " (single cuts",
 				TTbarEMuReferenceSelection::NUMBER_OF_SELECTION_STEPS + 1, -1.5,
 				TTbarEMuReferenceSelection::NUMBER_OF_SELECTION_STEPS - 0.5);
-	}
+	} */
 }
 
 void EventCountAnalyser::setHistogramLabels() {
@@ -857,7 +857,7 @@ EventCountAnalyser::EventCountAnalyser(HistogramManagerPtr histMan, std::string 
 		//dilepton selections
 		topMuMuRefSelection_(new TopPairMuMuReferenceSelection()), //
 		topEERefSelection_(new TopPairEEReferenceSelection()), //
-		topEMuRefSelection_(new TopPairEMuReferenceSelection()), //
+//		topEMuRefSelection_(new TopPairEMuReferenceSelection()), //
 		
 		//QCD selections with respect to reference selection
 		qcdNonIsoElectronSelection_(new QCDNonIsolatedElectronSelection()), //
