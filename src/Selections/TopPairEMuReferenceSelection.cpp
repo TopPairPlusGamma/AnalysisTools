@@ -388,7 +388,7 @@ const MuonCollection TopPairEMuReferenceSelection::goodMuons(const EventPtr even
 
 } */
 
-/* const PhotonCollection TopPairEMuReferenceSelection::signalPhotons(const EventPtr event) const {
+const PhotonCollection TopPairEMuReferenceSelection::signalPhotons(const EventPtr event) const {
 
 	const PhotonCollection allPhotons(event->Photons());
 	PhotonCollection goodIsolatedPhotons;
@@ -401,7 +401,7 @@ const MuonCollection TopPairEMuReferenceSelection::goodMuons(const EventPtr even
 
 	return goodIsolatedPhotons;
 
-} */
+} 
 
 const JetCollection TopPairEMuReferenceSelection::cleanedJets(const EventPtr event) const {
 	const JetCollection jets(event->Jets());

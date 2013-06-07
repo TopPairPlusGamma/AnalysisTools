@@ -19,6 +19,8 @@ public:
 	QCDPFRelIsoEPlusJetsSelection(unsigned int numberOfSelectionSteps =
 			TTbarEPlusJetsReferenceSelection::NUMBER_OF_SELECTION_STEPS);
 	virtual ~QCDPFRelIsoEPlusJetsSelection();
+	
+	virtual bool isGoodPhoton(const PhotonPointer photon, const EventPtr event) const;	
 
 	virtual bool passesTriggerSelection(const EventPtr event) const;
 	virtual bool hasExactlyOneIsolatedLepton(const EventPtr event) const;
@@ -26,7 +28,8 @@ public:
 	virtual const ElectronPointer MostIsolatedElectron(const ElectronCollection&) const;
 
 	virtual unsigned int prescale(const EventPtr event) const;
-
+	
+	virtual const PhotonCollection signalPhoton(const EventPtr event) const;
 	virtual const LeptonPointer signalLepton(const EventPtr event) const;
 };
 

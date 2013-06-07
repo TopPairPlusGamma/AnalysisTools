@@ -16,6 +16,9 @@ class MCTTbarEplusJetsSelection: public BAT::BasicSelection {
 public:
 	MCTTbarEplusJetsSelection(unsigned int numberOfSelectionSteps = 1);
 	virtual ~MCTTbarEplusJetsSelection();
+	
+	virtual bool isGoodPhoton(const PhotonPointer photon, const EventPtr event) const;
+	virtual const PhotonCollection signalPhoton(const EventPtr event) const;
 };
 
 } /* namespace BAT */

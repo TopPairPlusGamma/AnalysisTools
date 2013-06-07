@@ -72,7 +72,7 @@ public:
 	virtual const ElectronCollection signalElectrons(const EventPtr event) const;
 	virtual const MuonCollection signalMuons(const EventPtr event) const;
 //	virtual void signalLeptons(const EventPtr event);
-//	virtual const PhotonCollection signalPhotons(const EventPtr event) const;
+	virtual const PhotonCollection signalPhotons(const EventPtr event) const;
 	virtual const JetCollection cleanedJets(const EventPtr event) const;
 	virtual const JetCollection cleanedBJets(const EventPtr event) const;
 };

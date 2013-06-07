@@ -22,10 +22,13 @@ public:
 
 	virtual bool passesTriggerSelection(const EventPtr event) const;
 	virtual bool hasExactlyOneIsolatedLepton(const EventPtr event) const;
+	
+	virtual bool isGoodPhoton(const PhotonPointer photon, const EventPtr event) const;
 	virtual const MuonPointer MostIsolatedMuon(const MuonCollection&) const;
 
 	virtual unsigned int prescale(const EventPtr event) const;
-
+	
+	virtual const PhotonCollection signalPhotons(const EventPtr event) const;
 	virtual const LeptonPointer signalLepton(const EventPtr event) const;
 };
 

@@ -18,7 +18,9 @@ public:
 			TTbarEPlusJetsReferenceSelection::NUMBER_OF_SELECTION_STEPS);
 	virtual ~QCDAntiIDEPlusJetsSelection();
 	virtual bool isGoodElectron(const ElectronPointer electron) const;
+	virtual bool isGoodPhoton(const PhotonPointer photon, const EventPtr event) const;	
 	virtual bool isIsolated(const LeptonPointer lepton) const;
+	virtual const PhotonCollection signalPhotons(const EventPtr event) const;	
 	virtual void useMVAID(bool use);
 
 protected:

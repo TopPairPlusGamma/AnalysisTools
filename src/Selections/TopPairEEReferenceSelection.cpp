@@ -286,7 +286,7 @@ const ElectronCollection TopPairEEReferenceSelection::signalLeptons(const EventP
 
 }
 
-/* const PhotonCollection TopPairEEReferenceSelection::signalPhotons(const EventPtr event) const {
+const PhotonCollection TopPairEEReferenceSelection::signalPhotons(const EventPtr event) const {
 
 	const PhotonCollection allPhotons(event->Photons());
 	PhotonCollection goodIsolatedPhotons;
@@ -300,7 +300,7 @@ const ElectronCollection TopPairEEReferenceSelection::signalLeptons(const EventP
 	return goodIsolatedPhotons;
 
 }
- */
+ 
 const JetCollection TopPairEEReferenceSelection::cleanedJets(const EventPtr event) const {
 	const JetCollection jets(event->Jets());
 	JetCollection cleanedJets;

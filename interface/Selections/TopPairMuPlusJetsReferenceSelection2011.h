@@ -48,6 +48,7 @@ public:
 	virtual bool isBJet(const JetPointer jet) const;
 	virtual bool isGoodElectron(const ElectronPointer electron) const;
 	virtual bool isGoodMuon(const MuonPointer electron) const;
+	virtual bool isGoodPhoton(const PhotonPointer photon, const EventPtr event) const;	
 
 	//definitions of loose objects
 	virtual bool isLooseElectron(const ElectronPointer electron) const;
@@ -66,7 +67,8 @@ public:
 	virtual bool hasAtLeastFourGoodJets(const EventPtr event) const;
 	virtual bool hasAtLeastOneGoodBJet(const EventPtr event) const;
 	virtual bool hasAtLeastTwoGoodBJets(const EventPtr event) const;
-
+	
+	virtual const PhotonCollection signalPhotons(const EventPtr event) const;
 	virtual const LeptonPointer signalLepton(const EventPtr event) const;
 	virtual const JetCollection cleanedJets(const EventPtr event) const;
 	virtual const JetCollection cleanedBJets(const EventPtr event) const;

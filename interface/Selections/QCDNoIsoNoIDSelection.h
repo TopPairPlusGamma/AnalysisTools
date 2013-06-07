@@ -21,6 +21,7 @@ public:
 	virtual ~QCDNoIsoNoIDSelection();
 
 	virtual bool isGoodElectron(const ElectronPointer electron) const;
+	virtual bool isGoodPhoton(const PhotonPointer photon, const EventPtr event) const;
 	virtual bool hasExactlyOneIsolatedLepton(const EventPtr event) const;
 	virtual const LeptonPointer signalLepton(const EventPtr event) const;
 	virtual bool isIsolated(const LeptonPointer lepton) const;
@@ -30,6 +31,7 @@ public:
 	virtual unsigned int prescale(const EventPtr event) const;
 	virtual const JetCollection cleanedJets(const EventPtr event) const;
 	virtual const JetCollection cleanedBJets(const EventPtr event) const;
+	virtual const PhotonCollection signalPhoton(const EventPtr event) const;
 };
 
 typedef boost::shared_ptr<QCDNoIsoNoIDSelection> QCDNoIsoNoIDSelectionPointer;

@@ -255,4 +255,6 @@ DiffVariablesAnalyser::DiffVariablesAnalyser(HistogramManagerPtr histMan, std::s
 DiffVariablesAnalyser::~DiffVariablesAnalyser() {
 }
 
+
+
 } /* namespace BAT */

@@ -8,13 +8,13 @@
 #include "../../interface/GlobalVariables.h"
 #include "../../interface/Selections/TopPairMuMuReferenceSelection.h"
 #include "../../interface/Selections/TopPairEEReferenceSelection.h"
-#include "../../interface/Selections/TopPairEMuReferenceSelection.h"
+//#include "../../interface/Selections/TopPairEMuReferenceSelection.h"
 
 namespace BAT {
 
 void PhotonAnalyser::analyse(const EventPtr event){
 	analyseMuMu(event);
-//	analyseEE(event);
+	analyseEE(event);
 //	analyseEMu(event);
 }
 
@@ -144,7 +144,7 @@ void PhotonAnalyser::analyseEE(const EventPtr event){
     }
 }
 
-void PhotonAnalyser::analyseEMu(const EventPtr event){
+/* void PhotonAnalyser::analyseEMu(const EventPtr event){
 	
 	if (topEMuRefSelection_->passesFullSelectionExceptLastTwoSteps(event)) {
 	histMan_->setCurrentHistogramFolder(histogramFolder_);
@@ -205,7 +205,7 @@ void PhotonAnalyser::analyseEMu(const EventPtr event){
 	}
 
     }
-}
+} */
 
 /* void PhotonAnalyser::analysePhoton(const EventPtr event) {
 	if (topMuMuRefSelection_->passesFullSelectionExceptLastTwoSteps(event)) {
@@ -272,7 +272,7 @@ PhotonAnalyser::PhotonAnalyser(HistogramManagerPtr histMan, std::string histogra
                 BasicAnalyser(histMan, histogramFolder), //
                 topMuMuRefSelection_(new TopPairMuMuReferenceSelection()),
 		topEERefSelection_(new TopPairEEReferenceSelection()),
-		topEMuRefSelection_(new TopPairEMuReferenceSelection()),
+//		topEMuRefSelection_(new TopPairEMuReferenceSelection()),
 		ttbarPlusMETAnalysisSetup_(false) {
 
 }
