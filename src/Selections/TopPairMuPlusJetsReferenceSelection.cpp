@@ -123,10 +123,6 @@ bool TopPairMuPlusJetsReferenceSelection::passesEventCleaning(const EventPtr eve
 
 bool TopPairMuPlusJetsReferenceSelection::passesTriggerSelection(const EventPtr event) const {
 
-	if(event->HLT(HLTriggers::HLT_IsoMu24_eta2p1))
-		cout << "single MU!" << endl;
-	if(event->HLT(HLTriggers::HLT_Mu17_Mu8))
-		cout << "double MU!" << endl;
 
 	unsigned int runNumber(event->runnumber());
 	if (event->isRealData()) {
