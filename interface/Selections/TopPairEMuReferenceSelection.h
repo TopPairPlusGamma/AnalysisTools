@@ -22,6 +22,8 @@ enum Step {
 	MetCut,
 	AtLeastOneBtag,
 	AtLeastTwoBtags,
+	AtLeastOnePhoton,
+	JustOneGoodPhoton,
 	NUMBER_OF_SELECTION_STEPS
 };
 
@@ -33,7 +35,9 @@ const std::string StringSteps[NUMBER_OF_SELECTION_STEPS] = { //
 				">= 2 jets",
 				"met cut",
 				">=1 CSV b-tag", //
-				">=2 CSV b-tag" //
+				">=2 CSV b-tag",
+				">=1 Photon",
+				"==1 Photon"
 		};
 }
 
@@ -67,6 +71,8 @@ public:
 	virtual bool hasAtLeastOneGoodBJet(const EventPtr event) const;
 	virtual bool hasAtLeastTwoGoodBJets(const EventPtr event) const;
 	virtual bool passesMetCut(const EventPtr event) const;
+	virtual bool hasAtLeastOneGoodPhoton(const EventPtr event) const;
+	virtual bool hasJustOneGoodPhoton(const EventPtr event) const;
 
 	virtual const LeptonPointer signalLepton(const EventPtr event) const;
 	virtual const ElectronCollection signalElectrons(const EventPtr event) const;

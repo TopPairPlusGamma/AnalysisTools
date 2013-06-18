@@ -145,6 +145,10 @@ bool TopPairEMuReferenceSelection::passesSelectionStep(const EventPtr event, uns
 		return hasAtLeastOneGoodBJet(event);
 	case TTbarEMuReferenceSelection::AtLeastTwoBtags:
 		return hasAtLeastTwoGoodBJets(event);
+	case TTbarEMuReferenceSelection::AtLeastOnePhoton:
+		return hasAtLeastOneGoodPhoton(event);
+	case TTbarEMuReferenceSelection::JustOneGoodPhoton:
+		return hasJustOneGoodPhoton(event);
 	default:
 		break;
 	}
@@ -307,6 +311,13 @@ bool TopPairEMuReferenceSelection::hasAtLeastTwoGoodBJets(const EventPtr event) 
 	return cleanedBJets(event).size() > 1;
 }
 
+bool TopPairEMuReferenceSelection::hasAtLeastOneGoodPhoton(const EventPtr event) const {
+	return signalPhotons(event).size() > 0;
+}
+
+bool TopPairEMuReferenceSelection::hasJustOneGoodPhoton(const EventPtr event) const {
+	return signalPhotons(event).size() == 1;
+}
 const LeptonPointer TopPairEMuReferenceSelection::signalLepton(const EventPtr event) const {
 
 	const ElectronCollection allElectrons(event->Electrons());

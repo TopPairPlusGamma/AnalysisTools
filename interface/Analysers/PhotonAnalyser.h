@@ -21,7 +21,9 @@ public:
 	 */
 	void analyse(const EventPtr);
 	void analyseMuMu(const EventPtr);
+	void analyseMuMu_signalphotons(const EventPtr);
 	void analyseEE(const EventPtr);
+	void analyseEE_signalphotons(const EventPtr);
 //	void analyseEMu(const EventPtr);
 	/**
 	 * Analyses a single photon

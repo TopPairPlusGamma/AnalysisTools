@@ -138,6 +138,10 @@ bool TopPairEEReferenceSelection::passesSelectionStep(const EventPtr event, unsi
 		return hasAtLeastOneGoodBJet(event);
 	case TTbarEEReferenceSelection::AtLeastTwoBtags:
 		return hasAtLeastTwoGoodBJets(event);
+	case TTbarEEReferenceSelection::AtLeastOnePhoton:
+		return hasAtLeastOneGoodPhoton(event);
+	case TTbarEEReferenceSelection::JustOneGoodPhoton:
+		return hasJustOneGoodPhoton(event);
 	default:
 		break;
 	}
@@ -237,6 +241,14 @@ bool TopPairEEReferenceSelection::hasAtLeastOneGoodBJet(const EventPtr event) co
 
 bool TopPairEEReferenceSelection::hasAtLeastTwoGoodBJets(const EventPtr event) const {
 	return cleanedBJets(event).size() > 1;
+}
+
+bool TopPairEEReferenceSelection::hasAtLeastOneGoodPhoton(const EventPtr event) const {
+	return signalPhotons(event).size() > 0;
+}
+
+bool TopPairEEReferenceSelection::hasJustOneGoodPhoton(const EventPtr event) const {
+	return signalPhotons(event).size() == 1;
 }
 
 const ElectronCollection TopPairEEReferenceSelection::goodLeptons(const EventPtr event) const {

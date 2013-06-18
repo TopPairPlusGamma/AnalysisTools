@@ -1,3 +1,4 @@
+
 /*
  * TopPairMuMuReferenceSelection.cpp
  *
@@ -139,6 +140,10 @@ bool TopPairMuMuReferenceSelection::passesSelectionStep(const EventPtr event, un
 		return hasAtLeastOneGoodBJet(event);
 	case TTbarMuMuReferenceSelection::AtLeastTwoBtags:
 		return hasAtLeastTwoGoodBJets(event);
+	case TTbarMuMuReferenceSelection::AtLeastOnePhoton:
+		return hasAtLeastOneGoodPhoton(event);
+	case TTbarMuMuReferenceSelection::JustOneGoodPhoton:
+		return hasJustOneGoodPhoton(event);
 	default:
 		break;
 	}
@@ -238,6 +243,14 @@ bool TopPairMuMuReferenceSelection::hasAtLeastOneGoodBJet(const EventPtr event) 
 
 bool TopPairMuMuReferenceSelection::hasAtLeastTwoGoodBJets(const EventPtr event) const {
 	return cleanedBJets(event).size() > 1;
+}
+	
+bool TopPairMuMuReferenceSelection::hasAtLeastOneGoodPhoton(const EventPtr event) const {
+	return signalPhotons(event).size() > 0;
+}
+
+bool TopPairMuMuReferenceSelection::hasJustOneGoodPhoton(const EventPtr event) const {
+	return signalPhotons(event).size() == 1;
 }
 
 const MuonCollection TopPairMuMuReferenceSelection::goodLeptons(const EventPtr event) const {
