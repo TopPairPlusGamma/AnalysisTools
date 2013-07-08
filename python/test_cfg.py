@@ -7,9 +7,9 @@ if os.environ.has_key('toolsFolder'):
 #this value will be part of the output file name: DataType_CenterOfMassEnergyTeV_lumipb-1_....
 centerOfMassEnergy = 8    
 #number of events to be processed
-maxEvents = -1 # -1 to run over all
+maxEvents = 10000 # -1 to run over all
 #integrated luminosity the MC simulation will be scaled to
-lumi = 5050#pb-1
+lumi = 19584#pb-1
 
 
 if centerOfMassEnergy == 8:
@@ -48,8 +48,9 @@ produceFitterASCIIoutput = False
 inputFiles = [
 #testntuple 
 #dir + SemiLept 
- piondir
-              ]
+# piondir
+'root://dc2-grid-64.brunel.ac.uk//dpm/brunel.ac.uk/home/cms//store/user/phy6phs/DoubleMu_EcalRecover_11Dec2012-v1_AOD_nTuple_v10_GoldenJSON_diLeptonPlus2Jets_final/*.root' 
+             ]
 
 #relative Path from calling BAT to the TopQuarkAnalysis folder
 TQAFPath = ""

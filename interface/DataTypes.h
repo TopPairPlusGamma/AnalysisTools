@@ -17,6 +17,7 @@ enum value {
 	MuHad,
 	SingleElectron,
 	SingleMu,
+	DoubleMu,
 	TTJets,
 	Wjets,
 	W1Jet,
@@ -117,6 +118,8 @@ enum value {
 	TTJets_SemiLept,
 	TTJets_FullLept,
 	TTJets_Hadronic,
+	DYJetsToLL_M_10To50,
+	DYJetsToLL_M_50,
 	NUMBER_OF_DATA_TYPES
 };
 
@@ -126,6 +129,7 @@ const boost::array<std::string, DataType::NUMBER_OF_DATA_TYPES> names = { {
 		"MuHad", //
 		"SingleElectron",//
 		"SingleMu",//
+		"DoubleMu", // 
 		"TTJet", //
 		"WJetsToLNu", //
 		"W1Jet", //
@@ -226,6 +230,8 @@ const boost::array<std::string, DataType::NUMBER_OF_DATA_TYPES> names = { {
 		"TTJets_SemiLept",//
 		"TTJets_FullLept",//
 		"TTJets_Hadronic",//
+		"DYJetsToLL_M-10To50",//
+		"DYJetsToLL_M-50"//
 		} };
 }
 
