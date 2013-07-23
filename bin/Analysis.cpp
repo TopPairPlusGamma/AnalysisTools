@@ -104,6 +104,8 @@ void Analysis::analyse() {
 //		diffVariablesAnalyser->analyse(currentEvent);
 //		binningAnalyser->analyse(currentEvent);
 		photonAnalyser->analyse(currentEvent);
+		muonAnalyser2->analyse(currentEvent);
+		metAnalyser2->analyse(currentEvent);
 	}
 }
 
@@ -282,6 +284,15 @@ void Analysis::createHistograms() {
         cout << "Number of histograms added by PhotonAnalyser: " << numberOfHistograms - lastNumberOfHistograms << endl;
         lastNumberOfHistograms = numberOfHistograms;
 
+	muonAnalyser2->createHistograms();
+        numberOfHistograms = histMan->size();
+        cout << "Number of histograms added by MuonAnalyser2: " << numberOfHistograms - lastNumberOfHistograms << endl;
+        lastNumberOfHistograms = numberOfHistograms;
+
+	metAnalyser2->createHistograms();
+        numberOfHistograms = histMan->size();
+        cout << "Number of histograms added by METAnalyser2: " << numberOfHistograms - lastNumberOfHistograms << endl;
+        lastNumberOfHistograms = numberOfHistograms;
 
 
 	cout << "Total number of histograms: " << histMan->size() << endl;
@@ -320,14 +331,16 @@ Analysis::Analysis(std::string datasetInfoFile) : //
 		mcAnalyser(new MCAnalyser(histMan)), //
 		metAnalyser(new METAnalyser(histMan)), //
 		mttbarAnalyser(new MTtbarAnalyser(histMan)), //
-		muonAnalyser(new MuonAnalyser(histMan)), //
+	//	muonAnalyser(new MuonAnalyser(histMan)), //
 		mvAnalyser(new MVAnalyser(histMan)), //
 		neutrinoRecoAnalyser(new NeutrinoReconstructionAnalyser(histMan)), //
 		ttbar_plus_X_analyser_(new TTbar_plus_X_analyser(histMan)), //
 		vertexAnalyser(new VertexAnalyser(histMan)),
 		diffVariablesAnalyser(new DiffVariablesAnalyser(histMan)),
 		binningAnalyser(new BinningAnalyser(histMan)),//
-		photonAnalyser(new PhotonAnalyser(histMan)){
+		photonAnalyser(new PhotonAnalyser(histMan)),
+		muonAnalyser2(new MuonAnalyser2(histMan)),
+		metAnalyser2(new METAnalyser2(histMan)){
 //	for (unsigned int cut = 0; cut < TTbarEPlusJetsSelection::NUMBER_OF_SELECTION_STEPS; ++cut) {
 //		ePlusJetsCutflow[cut] = 0;
 //		ePlusJetsSingleCuts[cut] = 0;

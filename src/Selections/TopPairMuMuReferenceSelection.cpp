@@ -138,8 +138,8 @@ bool TopPairMuMuReferenceSelection::passesSelectionStep(const EventPtr event, un
 		return passesMetCut(event);
 	case TTbarMuMuReferenceSelection::AtLeastOneBtag:
 		return hasAtLeastOneGoodBJet(event);
-	case TTbarMuMuReferenceSelection::AtLeastTwoBtags:
-		return hasAtLeastTwoGoodBJets(event);
+//	case TTbarMuMuReferenceSelection::AtLeastTwoBtags:
+//		return hasAtLeastTwoGoodBJets(event);
 	case TTbarMuMuReferenceSelection::AtLeastOnePhoton:
 		return hasAtLeastOneGoodPhoton(event);
 	case TTbarMuMuReferenceSelection::JustOneGoodPhoton:
@@ -181,7 +181,7 @@ bool TopPairMuMuReferenceSelection::isIsolated(const LeptonPointer lepton) const
 }
 
 bool TopPairMuMuReferenceSelection::passesDiMuonSelection(const EventPtr event) const {
-	const MuonCollection muons(signalLeptons(event));
+	const MuonCollection muons(signalDiMuons(event));
 
 	double mass = 0;
 
@@ -199,7 +199,7 @@ bool TopPairMuMuReferenceSelection::passesDiMuonSelection(const EventPtr event) 
 }
 
 bool TopPairMuMuReferenceSelection::passesZmassVeto(const EventPtr event) const {
-	const MuonCollection muons(signalLeptons(event));
+	const MuonCollection muons(signalDiMuons(event));
 
 	double mass = 0;
 
@@ -241,9 +241,9 @@ bool TopPairMuMuReferenceSelection::hasAtLeastOneGoodBJet(const EventPtr event) 
 	return cleanedBJets(event).size() > 0;
 }
 
-bool TopPairMuMuReferenceSelection::hasAtLeastTwoGoodBJets(const EventPtr event) const {
-	return cleanedBJets(event).size() > 1;
-}
+// bool TopPairMuMuReferenceSelection::hasAtLeastTwoGoodBJets(const EventPtr event) const {
+// 	return cleanedBJets(event).size() > 1;
+// }
 	
 bool TopPairMuMuReferenceSelection::hasAtLeastOneGoodPhoton(const EventPtr event) const {
 	return signalPhotons(event).size() > 0;
@@ -268,10 +268,10 @@ const MuonCollection TopPairMuMuReferenceSelection::goodLeptons(const EventPtr e
 
 }
 
-const MuonCollection TopPairMuMuReferenceSelection::signalLeptons(const EventPtr event) const {
+const MuonCollection TopPairMuMuReferenceSelection::signalDiMuons(const EventPtr event) const {
 
 	const MuonCollection muons(goodLeptons(event));
-	MuonCollection signalMuons;
+	MuonCollection signalDiMuons;
 
 	double ptMax = 0;
 	int storeIndexA = -1;
@@ -289,14 +289,14 @@ const MuonCollection TopPairMuMuReferenceSelection::signalLeptons(const EventPtr
 				}
 
 		if(storeIndexA != storeIndexB){
-			signalMuons.push_back(muons.at(storeIndexA));
-			signalMuons.push_back(muons.at(storeIndexB));
+			signalDiMuons.push_back(muons.at(storeIndexA));
+			signalDiMuons.push_back(muons.at(storeIndexB));
 		}
 
 		}
 	}
 
-	return signalMuons;
+	return signalDiMuons;
 
 }
 

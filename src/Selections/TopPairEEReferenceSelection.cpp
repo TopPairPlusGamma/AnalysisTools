@@ -179,7 +179,7 @@ bool TopPairEEReferenceSelection::isIsolated(const LeptonPointer lepton) const {
 
 
 bool TopPairEEReferenceSelection::passesDiElectronSelection(const EventPtr event) const {
-	const ElectronCollection electrons(signalLeptons(event));
+	const ElectronCollection electrons(signalDiElectrons(event));
 
 	double mass = 0;
 
@@ -197,7 +197,7 @@ bool TopPairEEReferenceSelection::passesDiElectronSelection(const EventPtr event
 }
 
 bool TopPairEEReferenceSelection::passesZmassVeto(const EventPtr event) const {
-	const ElectronCollection electrons(signalLeptons(event));
+	const ElectronCollection electrons(signalDiElectrons(event));
 
 	double mass = 0;
 
@@ -266,10 +266,10 @@ const ElectronCollection TopPairEEReferenceSelection::goodLeptons(const EventPtr
 
 }
 
-const ElectronCollection TopPairEEReferenceSelection::signalLeptons(const EventPtr event) const {
+const ElectronCollection TopPairEEReferenceSelection::signalDiElectrons(const EventPtr event) const {
 
 	const ElectronCollection electrons(goodLeptons(event));
-	ElectronCollection signalElectrons;
+	ElectronCollection signalDiElectrons;
 
 	double ptMax = 0;
 	int storeIndexA = -1;
@@ -287,14 +287,14 @@ const ElectronCollection TopPairEEReferenceSelection::signalLeptons(const EventP
 				}
 
 		if(storeIndexA != storeIndexB){
-			signalElectrons.push_back(electrons.at(storeIndexA));
-			signalElectrons.push_back(electrons.at(storeIndexB));
+			signalDiElectrons.push_back(electrons.at(storeIndexA));
+			signalDiElectrons.push_back(electrons.at(storeIndexB));
 		}
 
 		}
 	}
 
-	return signalElectrons;
+	return signalDiElectrons;
 
 }
 

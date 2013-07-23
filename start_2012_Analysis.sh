@@ -9,6 +9,7 @@ export exe=${exe}
 export TQAFPath=${TQAFPath}
 
 #Central samples
+sample="TTGamma" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTGamma_central.log &
 sample="TTJet" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJet_central.log &
 sample="WJetsToLNu" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WJetsToLNu_central.log &
 sample="T_tW-channel" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_tW-channel_central.log &

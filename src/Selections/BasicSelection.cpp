@@ -6,6 +6,7 @@
  */
 
 #include "../../interface/Selections/BasicSelection.h"
+#include "../../interface/Selections/BasicSelection2.h"
 
 namespace BAT {
 

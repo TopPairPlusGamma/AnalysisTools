@@ -1,12 +1,12 @@
 /*
- * BasicSelection.h
+ * BasicSelection2.h
  *
- *  Created on: 25 Feb 2012
- *      Author: kreczko
+ *  Created on: 16 July 2013
+ *      Author: N.Berry
  */
 
-#ifndef BASICSELECTION_H_
-#define BASICSELECTION_H_
+#ifndef BASICSELECTION2_H_
+#define BASICSELECTION2_H_
 
 #include "../Event.h"
 #include "../RecoObjects/Jet.h"
@@ -21,13 +21,13 @@
 
 namespace BAT {
 
-class BasicSelection;
-typedef boost::shared_ptr<BasicSelection> SelectionPointer;
+class BasicSelection2;
+typedef boost::shared_ptr<BasicSelection2> SelectionPointer2;
 
-class BasicSelection {
+class BasicSelection2 {
 public:
-	BasicSelection(unsigned int numberOfSelectionSteps);
-	virtual ~BasicSelection();
+	BasicSelection2(unsigned int numberOfSelectionSteps);
+	virtual ~BasicSelection2();
 	
 	//definitions of good objects
 	virtual bool isGoodJet(const JetPointer jet) const = 0;
@@ -50,10 +50,10 @@ public:
 
 
 	virtual const PhotonCollection signalPhotons(const EventPtr event) const = 0;
-// 	virtual const MuonCollection signalDiMuons(const EventPtr event) const = 0;
-//	virtual const ElectronCollection signalDiElectrons(const EventPtr event) const = 0;	
-// 	virtual const MuonCollection signalMuons(const EventPtr event) const = 0;
-// 	virtual const ElectronCollection signalElectrons(const EventPtr event) const = 0;
+ 	virtual const MuonCollection signalDiMuons(const EventPtr event) const = 0;
+	virtual const ElectronCollection signalDiElectrons(const EventPtr event) const = 0;	
+ 	virtual const MuonCollection signalMuons(const EventPtr event) const = 0;
+ 	virtual const ElectronCollection signalElectrons(const EventPtr event) const = 0;
 	virtual const LeptonPointer signalLepton(const EventPtr event) const = 0;
 	virtual const JetCollection cleanedJets(const EventPtr event) const = 0;
 	virtual const JetCollection cleanedBJets(const EventPtr event) const = 0;
@@ -67,4 +67,4 @@ protected:
 };
 
 } /* namespace BAT */
-#endif /* BASICSELECTION_H_ */
+#endif /* BASICSELECTION2_H_ */

@@ -22,12 +22,14 @@ void PhotonAnalyser::analyse(const EventPtr event){
 
 void PhotonAnalyser::analyseMuMu(const EventPtr event){
 
-	if (topMuMuRefSelection_->passesSelectionUpToStep(event, TTbarMuMuReferenceSelection::MetCut)) {
+//	const PhotonCollection signalPhotons = topMuMuRefSelection_->signalPhotons(event);
+
+	if (topMuMuRefSelection_->passesSelectionUpToStep(event, TTbarMuMuReferenceSelection::JustOneGoodPhoton)) {
 	histMan_->setCurrentHistogramFolder(histogramFolder_ + "/MuMu/AllPhotons");
 	weight_ = event->weight() * prescale_ * scale_;
-	const PhotonCollection photons = event->Photons();
 	const JetCollection jets = event->Jets();
 	const ElectronCollection electrons = event->Electrons();
+	const PhotonCollection photons = event->Photons();
 
 	histMan_->H1D_BJetBinned("Number_Of_Photons")->Fill(photons.size(), weight_);
 
@@ -93,7 +95,7 @@ void PhotonAnalyser::analyseMuMu_signalphotons(const EventPtr event){
 
 	const PhotonCollection signalPhotons = topMuMuRefSelection_->signalPhotons(event);
 	
-	if (topMuMuRefSelection_->passesFullSelection(event)) {
+	if (topMuMuRefSelection_->passesSelectionUpToStep(event, TTbarMuMuReferenceSelection::JustOneGoodPhoton)) {
 	histMan_->setCurrentHistogramFolder(histogramFolder_ + "/MuMu/SignalPhotons");
 	weight_ = event->weight() * prescale_ * scale_;
 	const JetCollection jets = event->Jets();
@@ -438,7 +440,7 @@ void PhotonAnalyser::createHistograms() {
 	histMan_->setCurrentHistogramFolder(histogramFolder_ + "/MuMu/AllPhotons");
 	
 	histMan_->addH1D_BJetBinned("Number_Of_Photons", "Number of photons;N(#gamma);Events ", 6, -0.5, 5.5);
-	histMan_->addH1D_BJetBinned("Photon_Pt", "Photon p_{T};p_{T}(#gamma)/GeV;Events/2GeV ", 500, 0, 600);
+	histMan_->addH1D_BJetBinned("Photon_Pt", "Photon p_{T};p_{T}(#gamma)/GeV;Events/2GeV ", 500, 0, 400);
 	histMan_->addH1D_BJetBinned("Photon_Eta", "Photon #eta; #eta(#gamma); Events/(0.02)", 300, -3, 3);
 	histMan_->addH1D_BJetBinned("Photon_AbsEta", "Photon |#eta|; |#eta(#gamma)|; Events/(0.01)", 300, 0, 3);
 	histMan_->addH1D_BJetBinned("Photon_Phi", "Photon #phi; #phi(#gamma); Events/(0.02)", 400, -4, 4);
@@ -481,7 +483,7 @@ void PhotonAnalyser::createHistograms() {
 	histMan_->setCurrentHistogramFolder(histogramFolder_ + "/MuMu/SignalPhotons");
 	
 	histMan_->addH1D_BJetBinned("Number_Of_Photons", "Number of photons;N(#gamma);Events ", 6, -0.5, 5.5);
-	histMan_->addH1D_BJetBinned("Photon_Pt", "Photon p_{T};p_{T}(#gamma)/GeV;Events/2GeV ", 500, 0, 600);
+	histMan_->addH1D_BJetBinned("Photon_Pt", "Photon p_{T};p_{T}(#gamma)/GeV;Events/2GeV ", 500, 0, 400);
 	histMan_->addH1D_BJetBinned("Photon_Eta", "Photon #eta; #eta(#gamma); Events/(0.02)", 300, -3, 3);
 	histMan_->addH1D_BJetBinned("Photon_AbsEta", "Photon |#eta|; |#eta(#gamma)|; Events/(0.01)", 300, 0, 3);
 	histMan_->addH1D_BJetBinned("Photon_Phi", "Photon #phi; #phi(#gamma); Events/(0.02)", 400, -4, 4);
@@ -524,7 +526,7 @@ void PhotonAnalyser::createHistograms() {
 	histMan_->setCurrentHistogramFolder(histogramFolder_ + "/EE/AllPhotons");
 	
 	histMan_->addH1D_BJetBinned("Number_Of_Photons", "Number of photons;N(#gamma);Events ", 6, -0.5, 5.5);
-	histMan_->addH1D_BJetBinned("Photon_Pt", "Photon p_{T};p_{T}(#gamma)/GeV;Events/2GeV ", 500, 0, 600);
+	histMan_->addH1D_BJetBinned("Photon_Pt", "Photon p_{T};p_{T}(#gamma)/GeV;Events/2GeV ", 500, 0, 400);
 	histMan_->addH1D_BJetBinned("Photon_Eta", "Photon #eta; #eta(#gamma); Events/(0.02)", 300, -3, 3);
 	histMan_->addH1D_BJetBinned("Photon_AbsEta", "Photon |#eta|; |#eta(#gamma)|; Events/(0.01)", 300, 0, 3);
 	histMan_->addH1D_BJetBinned("Photon_Phi", "Photon #phi; #phi(#gamma); Events/(0.02)", 400, -4, 4);
@@ -567,7 +569,7 @@ void PhotonAnalyser::createHistograms() {
 	histMan_->setCurrentHistogramFolder(histogramFolder_ + "/EE/SignalPhotons");
 	
 	histMan_->addH1D_BJetBinned("Number_Of_Photons", "Number of photons;N(#gamma);Events ", 6, -0.5, 5.5);
-	histMan_->addH1D_BJetBinned("Photon_Pt", "Photon p_{T};p_{T}(#gamma)/GeV;Events/2GeV ", 500, 0, 600);
+	histMan_->addH1D_BJetBinned("Photon_Pt", "Photon p_{T};p_{T}(#gamma)/GeV;Events/2GeV ", 500, 0, 400);
 	histMan_->addH1D_BJetBinned("Photon_Eta", "Photon #eta; #eta(#gamma); Events/(0.02)", 300, -3, 3);
 	histMan_->addH1D_BJetBinned("Photon_AbsEta", "Photon |#eta|; |#eta(#gamma)|; Events/(0.01)", 300, 0, 3);
 	histMan_->addH1D_BJetBinned("Photon_Phi", "Photon #phi; #phi(#gamma); Events/(0.02)", 400, -4, 4);

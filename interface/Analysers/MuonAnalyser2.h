@@ -1,14 +1,13 @@
 /*
- * MuonAnalyser.h
- *  Created on: 1 Nov 2011
- *  Last modified on: 10 Aug 2012
- *      Author: kreczko
+ * MuonAnalyser2.h
+ *
+ *  Created on: 9 July 2013
+ *      Author: N.Berry
  */
 
 #ifndef MUONANALYSER2_H_
 #define MUONANALYSER2_H_
 #include "BasicAnalyser.h"
-#include "../../interface/Selections/TopPairMuMuReferenceSelection.h"
 #include "../Selections/BasicSelection.h"
 #include <boost/shared_ptr.hpp>
 
@@ -24,7 +23,7 @@ public:
 	 */
 	void analyse(const EventPtr);
 	void analyseAllMuons(const EventPtr);
-//	void analyseSignalMuons(const EventPtr);
+	void analyseSignalMuons(const EventPtr);
 	/**
 	 * Analyses a single muon
 	 */

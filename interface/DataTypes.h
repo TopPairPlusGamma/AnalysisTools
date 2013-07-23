@@ -18,6 +18,7 @@ enum value {
 	SingleElectron,
 	SingleMu,
 	DoubleMu,
+	TTGamma,
 	TTJets,
 	Wjets,
 	W1Jet,
@@ -130,6 +131,7 @@ const boost::array<std::string, DataType::NUMBER_OF_DATA_TYPES> names = { {
 		"SingleElectron",//
 		"SingleMu",//
 		"DoubleMu", // 
+		"TTGamma", //
 		"TTJet", //
 		"WJetsToLNu", //
 		"W1Jet", //
