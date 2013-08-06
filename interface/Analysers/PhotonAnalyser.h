@@ -24,7 +24,8 @@ public:
 	void analyseMuMu_signalphotons(const EventPtr);
 	void analyseEE(const EventPtr);
 	void analyseEE_signalphotons(const EventPtr);
-//	void analyseEMu(const EventPtr);
+	void analyseEMu(const EventPtr);
+	void analyseEMu_signalphotons(const EventPtr);
 	/**
 	 * Analyses a single photon
 	 */
@@ -35,7 +36,7 @@ public:
 private:
 	SelectionPointer topMuMuRefSelection_;
 	SelectionPointer topEERefSelection_;
-//	SelectionPointer topEMuRefSelection_;
+	SelectionPointer topEMuRefSelection_;
 	bool ttbarPlusMETAnalysisSetup_;
 	
 };

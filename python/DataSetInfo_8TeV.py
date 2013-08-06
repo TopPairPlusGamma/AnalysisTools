@@ -95,6 +95,8 @@ datasetInfo['SingleMu'] = {"cross-section": 0, "NumberOfProcessedEvents":0}
 
 #di lepton stuff
 datasetInfo['DoubleMu'] = {"cross-section": 0, "NumberOfProcessedEvents":0}
+datasetInfo['DoubleElectron'] = {"cross-section": 0, "NumberOfProcessedEvents":0}
+datasetInfo['MuEG'] = {"cross-section": 0, "NumberOfProcessedEvents":0}
 
 #Old QCD samples (kept to avoid dictionary errors)
 datasetInfo['GJets_HT-40To100'] = {"cross-section": 23620., "NumberOfProcessedEvents":12659371}

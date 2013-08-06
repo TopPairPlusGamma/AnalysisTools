@@ -143,8 +143,8 @@ bool TopPairEMuReferenceSelection::passesSelectionStep(const EventPtr event, uns
 		return passesMetCut(event);
 	case TTbarEMuReferenceSelection::AtLeastOneBtag:
 		return hasAtLeastOneGoodBJet(event);
-	case TTbarEMuReferenceSelection::AtLeastTwoBtags:
-		return hasAtLeastTwoGoodBJets(event);
+//	case TTbarEMuReferenceSelection::AtLeastTwoBtags:
+//		return hasAtLeastTwoGoodBJets(event);
 	case TTbarEMuReferenceSelection::AtLeastOnePhoton:
 		return hasAtLeastOneGoodPhoton(event);
 	case TTbarEMuReferenceSelection::JustOneGoodPhoton:
@@ -307,9 +307,9 @@ bool TopPairEMuReferenceSelection::hasAtLeastOneGoodBJet(const EventPtr event) c
 	return cleanedBJets(event).size() > 0;
 }
 
-bool TopPairEMuReferenceSelection::hasAtLeastTwoGoodBJets(const EventPtr event) const {
-	return cleanedBJets(event).size() > 1;
-}
+// bool TopPairEMuReferenceSelection::hasAtLeastTwoGoodBJets(const EventPtr event) const {
+// 	return cleanedBJets(event).size() > 1;
+// }
 
 bool TopPairEMuReferenceSelection::hasAtLeastOneGoodPhoton(const EventPtr event) const {
 	return signalPhotons(event).size() > 0;

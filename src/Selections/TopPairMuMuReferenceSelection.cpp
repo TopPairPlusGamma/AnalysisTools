@@ -75,9 +75,13 @@ const LeptonPointer TopPairMuMuReferenceSelection::signalLepton(const EventPtr e
 
 bool TopPairMuMuReferenceSelection::isGoodPhoton(const PhotonPointer photon, const EventPtr event) const {
 
+	const MuonCollection muons(event->Muons());
+	const JetCollection jets(event->Jets());
+
 	bool passesEtAndEta = photon->et() > 20 && fabs(photon->eta()) < 2.5 && !photon->isInCrack();
 	bool passesTrackVeto = photon->TrackVeto() == false;
 	bool passesHOverE = photon->SingleTowerHoE() < 0.05; // same for EE and EB
+	
 	bool passesShowerShape = false;
 	bool passesTrackIso = false;
 	bool passesEcalIso = false;
@@ -104,8 +108,22 @@ bool TopPairMuMuReferenceSelection::isGoodPhoton(const PhotonPointer photon, con
 		passesPFPhotonIso = photon->PFPhotonIso() < 1.0 + 0.005 * photon->pt(); 
 	} 
 	
+	// bool passesDeltaRgammaMuons = false;
+// 	
+// 	for (unsigned int index = 0; index < muons.size(); ++index) { 
+// 			const MuonPointer muon(muons.at(index)); 
+// 			passesDeltaRgammaMuons = photon->deltaR(muon) < 0.7;
+// 	}
+// 	
+// 	bool passesDeltaRgammaJets = false;
+// 	
+// 	for (unsigned int index = 0; index < jets.size(); ++index) { 
+// 			const JetPointer jet(jets.at(index));
+// 			passesDeltaRgammaJets = photon->deltaR(jet) < 0.7;
+// 	}
+	
 	return passesEtAndEta && passesTrackVeto && passesHOverE && passesShowerShape && passesTrackIso && passesEcalIso && passesHcalIso &&
-	passesPFChargedIso && passesPFNeutralIso && passesPFPhotonIso;
+	passesPFChargedIso && passesPFNeutralIso && passesPFPhotonIso; // && passesDeltaRgammaMuons && passesDeltaRgammaJets;
 }
 
 bool TopPairMuMuReferenceSelection::isBJet(const JetPointer jet) const {
