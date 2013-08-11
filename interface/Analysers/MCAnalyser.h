@@ -8,7 +8,7 @@
 #ifndef MCANALYSER_H_
 #define MCANALYSER_H_
 #include <boost/shared_ptr.hpp>
-#include "../Selections/TopPairEPlusJetsReferenceSelection.h"
+#include "../Selections/TopPairEEReferenceSelection.h"
 #include "../../interface/HistHelpers/HistogramManager.h"
 #include "BasicAnalyser.h"
 #include "../../interface/TtbarHypothesis.h"
@@ -29,7 +29,7 @@ public:
 
 private:
     TtbarHypothesis mcEvent;
-    TopPairEPlusJetsReferenceSelectionPointer topEplusJetsRefSelection_;
+    TopPairEEReferenceSelectionPointer topEERefSelection_;
 };
 
 }

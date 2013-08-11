@@ -7,6 +7,7 @@
 
 #ifndef EVENT_H_
 #define EVENT_H_
+#include "RecoObjects/Photon.h"
 #include "RecoObjects/Electron.h"
 #include "RecoObjects/Jet.h"
 #include "RecoObjects/Muon.h"
@@ -37,6 +38,7 @@ protected:
 	VertexCollection vertices;
 	VertexCollection goodVertices;
 	TrackCollection tracks;
+	PhotonCollection allPhotons;
 	ElectronCollection allElectrons;
 
 	JetCollection allJets;
@@ -83,6 +85,7 @@ public:
 	void setVertices(VertexCollection vertices);
 	void setTracks(TrackCollection tracks);
 	void setGenParticles(MCParticleCollection genParticles);
+	void setPhotons(PhotonCollection photons);
 	void setElectrons(ElectronCollection electrons);
 	void setJets(JetCollection jets);
 	void setGenJets(JetCollection genJets);
@@ -122,6 +125,7 @@ public:
 	const VertexCollection& GoodVertices() const;
 	const TrackCollection& Tracks() const;
 	const MCParticleCollection& GenParticles() const;
+	const PhotonCollection& Photons() const;
 	const ElectronCollection& Electrons() const;
 	const ElectronCollection& QCDElectrons() const;
 	const JetCollection& Jets() const;
@@ -181,7 +185,6 @@ public:
 	static double HT(const JetCollection jets);
 	static double ST(const JetCollection, const ParticlePointer, const METPointer);
 	static double MT(const ParticlePointer, const METPointer);
-	static double WPT(const ParticlePointer, const METPointer);
 
 };
 

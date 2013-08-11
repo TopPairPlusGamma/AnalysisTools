@@ -31,142 +31,148 @@ const boost::array<std::string, METCorrections::NUMBER_OF_METCORRECTIONS> prefix
 
 namespace METAlgorithm {
 enum value {
-	patMETsPFlow, GenMET, patType1CorrectedPFMet, patType1p2CorrectedPFMet,
+//	patMETsPFlow,
+//	recoMetPFlow,
+	GenMET,
+//	patType1p2CorrectedPFMet,
+	patType1CorrectedPFMet,
 	//MET systematics
-	patType1p2CorrectedPFMetElectronEnUp,
-	patType1p2CorrectedPFMetElectronEnDown,
-	patType1p2CorrectedPFMetMuonEnUp,
-	patType1p2CorrectedPFMetMuonEnDown,
-	patType1p2CorrectedPFMetTauEnUp,
-	patType1p2CorrectedPFMetTauEnDown,
-	patType1p2CorrectedPFMetJetResUp,
-	patType1p2CorrectedPFMetJetResDown,
-	patType1p2CorrectedPFMetJetEnUp,
-	patType1p2CorrectedPFMetJetEnDown,
-	patType1p2CorrectedPFMetUnclusteredEnUp,
-	patType1p2CorrectedPFMetUnclusteredEnDown,
-	//only available with nTuple version 8 or higher
-	patPFMetElectronEnUp,
-	patPFMetElectronEnDown,
-	patPFMetMuonEnUp,
-	patPFMetMuonEnDown,
-	patPFMetTauEnUp,
-	patPFMetTauEnDown,
-	patPFMetJetResUp,
-	patPFMetJetResDown,
-	patPFMetJetEnUp,
-	patPFMetJetEnDown,
-	patPFMetUnclusteredEnUp,
-	patPFMetUnclusteredEnDown,
-	patType1CorrectedPFMetElectronEnUp,
-	patType1CorrectedPFMetElectronEnDown,
-	patType1CorrectedPFMetMuonEnUp,
-	patType1CorrectedPFMetMuonEnDown,
-	patType1CorrectedPFMetTauEnUp,
-	patType1CorrectedPFMetTauEnDown,
-	patType1CorrectedPFMetJetResUp,
-	patType1CorrectedPFMetJetResDown,
-	patType1CorrectedPFMetJetEnUp,
-	patType1CorrectedPFMetJetEnDown,
-	patType1CorrectedPFMetUnclusteredEnUp,
-	patType1CorrectedPFMetUnclusteredEnDown,
-	//only available with nTuple version 9 or higher
-	recoMetPFlow,
+//	patType1p2CorrectedPFMetElectronEnUp,
+//	patType1p2CorrectedPFMetElectronEnDown,
+//	patType1p2CorrectedPFMetMuonEnUp,
+//	patType1p2CorrectedPFMetMuonEnDown,
+//	patType1p2CorrectedPFMetTauEnUp,
+//	patType1p2CorrectedPFMetTauEnDown,
+//	patType1p2CorrectedPFMetJetResUp,
+//	patType1p2CorrectedPFMetJetResDown,
+//	patType1p2CorrectedPFMetJetEnUp,
+//	patType1p2CorrectedPFMetJetEnDown,
+//	patType1p2CorrectedPFMetUnclusteredEnUp,
+//	patType1p2CorrectedPFMetUnclusteredEnDown,
+//	//only available with nTuple version 8 or higher
+//	patPFMetElectronEnUp,
+//	patPFMetElectronEnDown,
+//	patPFMetMuonEnUp,
+//	patPFMetMuonEnDown,
+//	patPFMetTauEnUp,
+//	patPFMetTauEnDown,
+//	patPFMetJetResUp,
+//	patPFMetJetResDown,
+//	patPFMetJetEnUp,
+//	patPFMetJetEnDown,
+//	patPFMetUnclusteredEnUp,
+//	patPFMetUnclusteredEnDown,
+//	patType1CorrectedPFMetElectronEnUp,
+//	patType1CorrectedPFMetElectronEnDown,
+//	patType1CorrectedPFMetMuonEnUp,
+//	patType1CorrectedPFMetMuonEnDown,
+//	patType1CorrectedPFMetTauEnUp,
+//	patType1CorrectedPFMetTauEnDown,
+//	patType1CorrectedPFMetJetResUp,
+//	patType1CorrectedPFMetJetResDown,
+//	patType1CorrectedPFMetJetEnUp,
+//	patType1CorrectedPFMetJetEnDown,
+//	patType1CorrectedPFMetUnclusteredEnUp,
+//	patType1CorrectedPFMetUnclusteredEnDown,
+//	//only available with nTuple version 9 or higher
+
 	NUMBER_OF_METALGORITHMS
 };
 
 const boost::array<std::string, METAlgorithm::NUMBER_OF_METALGORITHMS> prefixes = { {
 //MET names as stored in the nTuples
-		"patMETsPFlow", //
+//		"patMETsPFlow", //
+//		"recoMetPFlow", //
 		"GenMET", //
+//		"patType1p2CorrectedPFMet", //
 		"patType1CorrectedPFMet", //
-		"patType1p2CorrectedPFMet", //
-		"patType1p2CorrectedPFMetElectronEnUp", //
-		"patType1p2CorrectedPFMetElectronEnDown", //
-		"patType1p2CorrectedPFMetMuonEnUp", //
-		"patType1p2CorrectedPFMetMuonEnDown", //
-		"patType1p2CorrectedPFMetTauEnUp", //
-		"patType1p2CorrectedPFMetTauEnDown", //
-		"patType1p2CorrectedPFMetJetResUp", //
-		"patType1p2CorrectedPFMetJetResDown", //
-		"patType1p2CorrectedPFMetJetEnUp", //
-		"patType1p2CorrectedPFMetJetEnDown", //
-		"patType1p2CorrectedPFMetUnclusteredEnUp", //
-		"patType1p2CorrectedPFMetUnclusteredEnDown", //
-		//only available with nTuple version 8 or higher
-		"patPFMetElectronEnUp",//
-		"patPFMetElectronEnDown", //
-		"patPFMetMuonEnUp", //
-		"patPFMetMuonEnDown", //
-		"patPFMetTauEnUp", //
-		"patPFMetTauEnDown", //
-		"patPFMetJetResUp", //
-		"patPFMetJetResDown", //
-		"patPFMetJetEnUp", //
-		"patPFMetJetEnDown", //
-		"patPFMetUnclusteredEnUp", //
-		"patPFMetUnclusteredEnDown", //
-		"patType1CorrectedPFMetElectronEnUp", //
-		"patType1CorrectedPFMetElectronEnDown", //
-		"patType1CorrectedPFMetMuonEnUp", //
-		"patType1CorrectedPFMetMuonEnDown", //
-		"patType1CorrectedPFMetTauEnUp", //
-		"patType1CorrectedPFMetTauEnDown", //
-		"patType1CorrectedPFMetJetResUp", //
-		"patType1CorrectedPFMetJetResDown", //
-		"patType1CorrectedPFMetJetEnUp", //
-		"patType1CorrectedPFMetJetEnDown", //
-		"patType1CorrectedPFMetUnclusteredEnUp", //
-		"patType1CorrectedPFMetUnclusteredEnDown", //
-		//only available with nTuple version 9 or higher
-		"recoMetPFlow", //
+//		"patType1p2CorrectedPFMetElectronEnUp", //
+//		"patType1p2CorrectedPFMetElectronEnDown", //
+//		"patType1p2CorrectedPFMetMuonEnUp", //
+//		"patType1p2CorrectedPFMetMuonEnDown", //
+//		"patType1p2CorrectedPFMetTauEnUp", //
+//		"patType1p2CorrectedPFMetTauEnDown", //
+//		"patType1p2CorrectedPFMetJetResUp", //
+//		"patType1p2CorrectedPFMetJetResDown", //
+//		"patType1p2CorrectedPFMetJetEnUp", //
+//		"patType1p2CorrectedPFMetJetEnDown", //
+//		"patType1p2CorrectedPFMetUnclusteredEnUp", //
+//		"patType1p2CorrectedPFMetUnclusteredEnDown", //
+//		//only available with nTuple version 8 or higher
+//		"patPFMetElectronEnUp",//
+//		"patPFMetElectronEnDown", //
+//		"patPFMetMuonEnUp", //
+//		"patPFMetMuonEnDown", //
+//		"patPFMetTauEnUp", //
+//		"patPFMetTauEnDown", //
+//		"patPFMetJetResUp", //
+//		"patPFMetJetResDown", //
+//		"patPFMetJetEnUp", //
+//		"patPFMetJetEnDown", //
+//		"patPFMetUnclusteredEnUp", //
+//		"patPFMetUnclusteredEnDown", //
+//		"patType1CorrectedPFMetElectronEnUp", //
+//		"patType1CorrectedPFMetElectronEnDown", //
+//		"patType1CorrectedPFMetMuonEnUp", //
+//		"patType1CorrectedPFMetMuonEnDown", //
+//		"patType1CorrectedPFMetTauEnUp", //
+//		"patType1CorrectedPFMetTauEnDown", //
+//		"patType1CorrectedPFMetJetResUp", //
+//		"patType1CorrectedPFMetJetResDown", //
+//		"patType1CorrectedPFMetJetEnUp", //
+//		"patType1CorrectedPFMetJetEnDown", //
+//		"patType1CorrectedPFMetUnclusteredEnUp", //
+//		"patType1CorrectedPFMetUnclusteredEnDown", //
+//		//only available with nTuple version 9 or higher
+
 		} };
 
 const boost::array<std::string, METAlgorithm::NUMBER_OF_METALGORITHMS> names = { {
 //MET names as used in output file for the used (central) MET
-		"PFMET",//
+//		"PFMET",//
+//		"RecoMET"//
 		"GenMET",//
+//		"patType1p2CorrectedPFMet",//
 		"patType1CorrectedPFMet",//
-		"patType1p2CorrectedPFMet",//
-		"patType1p2CorrectedPFMetElectronEnUp",//
-		"patType1p2CorrectedPFMetElectronEnDown",//
-		"patType1p2CorrectedPFMetMuonEnUp",//
-		"patType1p2CorrectedPFMetMuonEnDown",//
-		"patType1p2CorrectedPFMetTauEnUp",//
-		"patType1p2CorrectedPFMetTauEnDown",//
-		"patType1p2CorrectedPFMetJetResUp",//
-		"patType1p2CorrectedPFMetJetResDown",//
-		"patType1p2CorrectedPFMetJetEnUp",//
-		"patType1p2CorrectedPFMetJetEnDown",//
-		"patType1p2CorrectedPFMetUnclusteredEnUp",//
-		"patType1p2CorrectedPFMetUnclusteredEnDown",//
-		//only available with nTuple version 8 or higher
-		"patPFMetElectronEnUp",//
-		"patPFMetElectronEnDown",//
-		"patPFMetMuonEnUp",//
-		"patPFMetMuonEnDown",//
-		"patPFMetTauEnUp",//
-		"patPFMetTauEnDown",//
-		"patPFMetJetResUp",//
-		"patPFMetJetResDown",//
-		"patPFMetJetEnUp",//
-		"patPFMetJetEnDown",//
-		"patPFMetUnclusteredEnUp",//
-		"patPFMetUnclusteredEnDown",//
-		"patType1CorrectedPFMetElectronEnUp",//
-		"patType1CorrectedPFMetElectronEnDown",//
-		"patType1CorrectedPFMetMuonEnUp",//
-		"patType1CorrectedPFMetMuonEnDown",//
-		"patType1CorrectedPFMetTauEnUp",//
-		"patType1CorrectedPFMetTauEnDown",//
-		"patType1CorrectedPFMetJetResUp",//
-		"patType1CorrectedPFMetJetResDown",//
-		"patType1CorrectedPFMetJetEnUp",//
-		"patType1CorrectedPFMetJetEnDown",//
-		"patType1CorrectedPFMetUnclusteredEnUp",//
-		"patType1CorrectedPFMetUnclusteredEnDown",//
-		//only available with nTuple version 9 or higher
-		"RecoMET"//
+//		"patType1p2CorrectedPFMetElectronEnUp",//
+//		"patType1p2CorrectedPFMetElectronEnDown",//
+//		"patType1p2CorrectedPFMetMuonEnUp",//
+//		"patType1p2CorrectedPFMetMuonEnDown",//
+//		"patType1p2CorrectedPFMetTauEnUp",//
+//		"patType1p2CorrectedPFMetTauEnDown",//
+//		"patType1p2CorrectedPFMetJetResUp",//
+//		"patType1p2CorrectedPFMetJetResDown",//
+//		"patType1p2CorrectedPFMetJetEnUp",//
+//		"patType1p2CorrectedPFMetJetEnDown",//
+//		"patType1p2CorrectedPFMetUnclusteredEnUp",//
+//		"patType1p2CorrectedPFMetUnclusteredEnDown",//
+//		//only available with nTuple version 8 or higher
+//		"patPFMetElectronEnUp",//
+//		"patPFMetElectronEnDown",//
+//		"patPFMetMuonEnUp",//
+//		"patPFMetMuonEnDown",//
+//		"patPFMetTauEnUp",//
+//		"patPFMetTauEnDown",//
+//		"patPFMetJetResUp",//
+//		"patPFMetJetResDown",//
+//		"patPFMetJetEnUp",//
+//		"patPFMetJetEnDown",//
+//		"patPFMetUnclusteredEnUp",//
+//		"patPFMetUnclusteredEnDown",//
+//		"patType1CorrectedPFMetElectronEnUp",//
+//		"patType1CorrectedPFMetElectronEnDown",//
+//		"patType1CorrectedPFMetMuonEnUp",//
+//		"patType1CorrectedPFMetMuonEnDown",//
+//		"patType1CorrectedPFMetTauEnUp",//
+//		"patType1CorrectedPFMetTauEnDown",//
+//		"patType1CorrectedPFMetJetResUp",//
+//		"patType1CorrectedPFMetJetResDown",//
+//		"patType1CorrectedPFMetJetEnUp",//
+//		"patType1CorrectedPFMetJetEnDown",//
+//		"patType1CorrectedPFMetUnclusteredEnUp",//
+//		"patType1CorrectedPFMetUnclusteredEnDown",//
+//		//only available with nTuple version 9 or higher
+
 } };
 	}
 

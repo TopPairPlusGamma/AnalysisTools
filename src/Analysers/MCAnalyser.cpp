@@ -238,9 +238,9 @@ void MCAnalyser::analyse(const EventPtr event) {
 		histMan_->H1D("m3_mc")->Fill(mcEvent.M3());
 
 		// comparing truth and reco objects
-		if (topEplusJetsRefSelection_->passesFullSelectionExceptLastTwoSteps(event)) {
-			const JetCollection jets = topEplusJetsRefSelection_->cleanedJets(event);
-			LeptonPointer selectedElectron = topEplusJetsRefSelection_->signalLepton(event);
+		if (topEERefSelection_->passesFullSelectionExceptLastTwoSteps(event)) {
+			const JetCollection jets = topEERefSelection_->cleanedJets(event);
+			LeptonPointer selectedElectron = topEERefSelection_->signalLepton(event);
 			METPointer met = event->MET();
 
 			histMan_->H1D("m3_diff")->Fill(fabs(mcEvent.M3() - TtbarHypothesis::M3(jets)));
@@ -292,7 +292,7 @@ void MCAnalyser::analyse(const EventPtr event) {
 
 MCAnalyser::MCAnalyser(boost::shared_ptr<HistogramManager> histMan, std::string histogramFolder) :
 		BasicAnalyser(histMan, histogramFolder), //
-		topEplusJetsRefSelection_(new TopPairEPlusJetsReferenceSelection()) {
+		topEERefSelection_(new TopPairEEReferenceSelection()) {
 
 }
 

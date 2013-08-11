@@ -107,6 +107,9 @@ void setConfiguration(ConfigFile config) {
 
 
 	//@Deprecated: move to selections
+
+	//Photons
+	Globals::photonAlgorithm = PhotonAlgorithm::Default;
 	//jets
 	Globals::jetAlgorithm = JetAlgorithm::PF2PAT;
 	//electrons
@@ -114,5 +117,5 @@ void setConfiguration(ConfigFile config) {
 	//muons
 	Globals::muonAlgorithm = MuonAlgorithm::ParticleFlow;
 	//mets
-	Globals::metAlgorithm = METAlgorithm::patMETsPFlow;
+	Globals::metAlgorithm = METAlgorithm::patType1CorrectedPFMet;
 }

@@ -26,25 +26,21 @@
 #include "../interface/EventCounter.h"
 #include "../interface/RecoObjects/Particle.h"
 //Analysers
-#include "../interface/Analysers/ABCDMethodAnalyser.h"
 #include "../interface/Analysers/DiElectronAnalyser.h"
 #include "../interface/Analysers/BJetAnalyser.h"
 #include "../interface/Analysers/ElectronAnalyser.h"
 #include "../interface/Analysers/EventCountAnalyser.h"
 //#include "../interface/Analysers/HitFitAnalyser.h"
-#include "../interface/Analysers/HLTriggerTurnOnAnalyser.h"
-#include "../interface/Analysers/HLTriggerQCDAnalyser.h"
 #include "../interface/Analysers/JetAnalyser.h"
 #include "../interface/Analysers/MCAnalyser.h"
 #include "../interface/Analysers/METAnalyser.h"
-#include "../interface/Analysers/MTtbarAnalyser.h"
-#include "../interface/Analysers/MuonAnalyser.h"
+//#include "../interface/Analysers/MuonAnalyser.h"
 #include "../interface/Analysers/MVAnalyser.h"
 #include "../interface/Analysers/NeutrinoReconstructionAnalyser.h"
-#include "../interface/Analysers/TTbar_plus_X_analyser.h"
 #include "../interface/Analysers/VertexAnalyser.h"
-#include "../interface/Analysers/DiffVariablesAnalyser.h"
-#include "../interface/Analysers/BinningAnalyser.h"
+#include "../interface/Analysers/PhotonAnalyser.h"
+#include "../interface/Analysers/TTbarDiLeptonAnalyser.h"
+#include "../interface/Analysers/TTbarPhotonAnalyser.h"
 
 //typedef boost::array<unsigned long, BAT::TTbarEPlusJetsSelection::NUMBER_OF_SELECTION_STEPS> ePlusJetscutarray;
 //typedef boost::array<unsigned long, BAT::TTbarMuPlusJetsSelection::NUMBER_OF_SELECTION_STEPS> muPlusJetscutarray;
@@ -68,25 +64,22 @@ private:
     float weight, pileUpWeight;
 //    BAT::Counter ePlusJetsCutflowPerSample, muPlusJetsCutflowPerSample;
 
-    BAT::ABCDMethodAnalyserLocalPtr abcdMethodAnalyser_;
     BAT::BJetAnalyserLocalPtr bjetAnalyser;
     boost::scoped_ptr<BAT::DiElectronAnalyser> diElectronAnalyser;
     boost::scoped_ptr<BAT::ElectronAnalyser> electronAnalyser;
     BAT::BasicAnalyserLocalPtr eventcountAnalyser;
 //    boost::scoped_ptr<BAT::HitFitAnalyser> hitfitAnalyser;
-    boost::scoped_ptr<BAT::HLTriggerTurnOnAnalyser> hltriggerAnalyser;
     BAT::BasicAnalyserLocalPtr hltriggerQCDAnalyserInclusive_, hltriggerQCDAnalyserExclusive_;
     boost::scoped_ptr<BAT::JetAnalyser> jetAnalyser;
     boost::scoped_ptr<BAT::MCAnalyser> mcAnalyser;
     boost::scoped_ptr<BAT::METAnalyser> metAnalyser;
-    boost::scoped_ptr<BAT::MTtbarAnalyser> mttbarAnalyser;
-    boost::scoped_ptr<BAT::MuonAnalyser> muonAnalyser;
+ //   boost::scoped_ptr<BAT::MuonAnalyser> muonAnalyser;
     BAT::MVAnalyserPtr mvAnalyser;
     BAT::NeutrinoRecoAnalyserLocalPtr neutrinoRecoAnalyser;
-    BAT::TTbar_plus_X_analyser_local_ptr ttbar_plus_X_analyser_;
     boost::scoped_ptr<BAT::VertexAnalyser> vertexAnalyser;
-    boost::scoped_ptr<BAT::DiffVariablesAnalyser> diffVariablesAnalyser;
-    boost::scoped_ptr<BAT::BinningAnalyser> binningAnalyser;
+    boost::scoped_ptr<BAT::PhotonAnalyser> photonAnalyser;
+    boost::scoped_ptr<BAT::TTbarDiLeptonAnalyser> ttbardileptonAnalyser;
+    boost::scoped_ptr<BAT::TTbarPhotonAnalyser> ttbarphotonAnalyser;
 
 public:
 //    static float luminosity;

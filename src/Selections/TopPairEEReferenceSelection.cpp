@@ -1,28 +1,27 @@
-
 /*
- * TopPairMuMuReferenceSelection.cpp
+ * TopPairEEReferenceSelection.cpp
  *
- *  Created on: 28 May 2013
- *      Author: N.Berry/P.Symonds
+ *  Created on: 30 May 2013
+ *      Author: N.Berry
  */
-
-#include "../../interface/Selections/TopPairMuMuReferenceSelection.h"
+	
+#include "../../interface/Selections/TopPairEEReferenceSelection.h"
 #include "../../interface/HighLevelTriggers.h"
 
 using namespace std;
 
 namespace BAT {
 
-TopPairMuMuReferenceSelection::TopPairMuMuReferenceSelection(unsigned int numberOfSelectionSteps) : //
+TopPairEEReferenceSelection::TopPairEEReferenceSelection(unsigned int numberOfSelectionSteps) : //
 		BasicSelection(numberOfSelectionSteps) //
 {
 
 }
 
-TopPairMuMuReferenceSelection::~TopPairMuMuReferenceSelection() {
+TopPairEEReferenceSelection::~TopPairEEReferenceSelection() {
 }
 
-bool TopPairMuMuReferenceSelection::isGoodJet(const JetPointer jet) const {
+bool TopPairEEReferenceSelection::isGoodJet(const JetPointer jet) const {
 
 	/**
 	 * This function tests the jet ID and eta (and pt) range for jet
@@ -57,31 +56,27 @@ bool TopPairMuMuReferenceSelection::isGoodJet(const JetPointer jet) const {
 
 }
 
-const LeptonPointer TopPairMuMuReferenceSelection::signalLepton(const EventPtr event) const {
+const LeptonPointer TopPairEEReferenceSelection::signalLepton(const EventPtr event) const {
 
-	const MuonCollection allMuons(event->Muons());
-	MuonCollection goodIsolatedMuons;
-	for (unsigned int index = 0; index < allMuons.size(); ++index) {
-		const MuonPointer muon(allMuons.at(index));
-		if (isGoodMuon(muon) && isIsolated(muon)) {
-			goodIsolatedMuons.push_back(muon);
+	const ElectronCollection allElectrons(event->Electrons());
+	ElectronCollection goodIsolatedElectrons;
+	for (unsigned int index = 0; index < allElectrons.size(); ++index) {
+		const ElectronPointer electron(allElectrons.at(index));
+		if (isGoodElectron(electron) && isIsolated(electron)) {
+			goodIsolatedElectrons.push_back(electron);
 		}
 	}
 
-	return goodIsolatedMuons.front();
+	return goodIsolatedElectrons.front();
 
 }
 
 
-bool TopPairMuMuReferenceSelection::isGoodPhoton(const PhotonPointer photon, const EventPtr event) const {
-
-	const MuonCollection muons(event->Muons());
-	const JetCollection jets(event->Jets());
+bool TopPairEEReferenceSelection::isGoodPhoton(const PhotonPointer photon, const EventPtr event) const {
 
 	bool passesEtAndEta = photon->et() > 20 && fabs(photon->eta()) < 2.5 && !photon->isInCrack();
 	bool passesTrackVeto = photon->TrackVeto() == false;
 	bool passesHOverE = photon->SingleTowerHoE() < 0.05; // same for EE and EB
-	
 	bool passesShowerShape = false;
 	bool passesTrackIso = false;
 	bool passesEcalIso = false;
@@ -108,30 +103,15 @@ bool TopPairMuMuReferenceSelection::isGoodPhoton(const PhotonPointer photon, con
 		passesPFPhotonIso = photon->PFPhotonIso() < 1.0 + 0.005 * photon->pt(); 
 	} 
 	
-	// bool passesDeltaRgammaMuons = false;
-// 	
-// 	for (unsigned int index = 0; index < muons.size(); ++index) { 
-// 			const MuonPointer muon(muons.at(index)); 
-// 			passesDeltaRgammaMuons = photon->deltaR(muon) < 0.7;
-// 	}
-// 	
-// 	bool passesDeltaRgammaJets = false;
-// 	
-// 	for (unsigned int index = 0; index < jets.size(); ++index) { 
-// 			const JetPointer jet(jets.at(index));
-// 			passesDeltaRgammaJets = photon->deltaR(jet) < 0.7;
-// 	}
-	
 	return passesEtAndEta && passesTrackVeto && passesHOverE && passesShowerShape && passesTrackIso && passesEcalIso && passesHcalIso &&
-	passesPFChargedIso && passesPFNeutralIso && passesPFPhotonIso; // && passesDeltaRgammaMuons && passesDeltaRgammaJets;
+	passesPFChargedIso && passesPFNeutralIso && passesPFPhotonIso;
 }
 
-bool TopPairMuMuReferenceSelection::isBJet(const JetPointer jet) const {
+bool TopPairEEReferenceSelection::isBJet(const JetPointer jet) const {
 	return jet->isBJet(BtagAlgorithm::CombinedSecondaryVertex, BtagAlgorithm::MEDIUM);
 }
 
-//adapted for dilepton channel
-bool TopPairMuMuReferenceSelection::isGoodMuon(const MuonPointer muon) const {
+bool TopPairEEReferenceSelection::isGoodMuon(const MuonPointer muon) const {
 	bool passesEtAndEta = muon->pt() > 20 && fabs(muon->eta()) < 2.4;
 	bool passesID = (muon->isGlobal() || muon->isTracker()) && muon->isPFMuon();
     bool passesIsolation  = isIsolated(muon);
@@ -139,28 +119,28 @@ bool TopPairMuMuReferenceSelection::isGoodMuon(const MuonPointer muon) const {
 	return passesEtAndEta && passesID && passesIsolation;
 }
 
-bool TopPairMuMuReferenceSelection::passesSelectionStep(const EventPtr event, unsigned int selectionStep) const {
-	TTbarMuMuReferenceSelection::Step step = TTbarMuMuReferenceSelection::Step(selectionStep);
+bool TopPairEEReferenceSelection::passesSelectionStep(const EventPtr event, unsigned int selectionStep) const {
+	TTbarEEReferenceSelection::Step step = TTbarEEReferenceSelection::Step(selectionStep);
 	switch (step) {
-	case TTbarMuMuReferenceSelection::EventCleaningAndTrigger:
+	case TTbarEEReferenceSelection::EventCleaningAndTrigger:
 		return passesEventCleaning(event) && passesTriggerSelection(event);
-	case TTbarMuMuReferenceSelection::DiMuonSelection:
-		return passesDiMuonSelection(event);
-	case TTbarMuMuReferenceSelection::ZmassVeto:
+	case TTbarEEReferenceSelection::DiElectronSelection:
+		return passesDiElectronSelection(event);
+	case TTbarEEReferenceSelection::ZmassVeto:
 		return passesZmassVeto(event);
-	case TTbarMuMuReferenceSelection::AtLeastOneGoodJets:
+	case TTbarEEReferenceSelection::AtLeastOneGoodJets:
 		return hasAtLeastNGoodJets(event, 1);
-	case TTbarMuMuReferenceSelection::AtLeastTwoGoodJets:
+	case TTbarEEReferenceSelection::AtLeastTwoGoodJets:
 		return hasAtLeastNGoodJets(event, 2);
-	case TTbarMuMuReferenceSelection::MetCut:
+	case TTbarEEReferenceSelection::MetCut:
 		return passesMetCut(event);
-	case TTbarMuMuReferenceSelection::AtLeastOneBtag:
+	case TTbarEEReferenceSelection::AtLeastOneBtag:
 		return hasAtLeastOneGoodBJet(event);
-//	case TTbarMuMuReferenceSelection::AtLeastTwoBtags:
+//	case TTbarEEReferenceSelection::AtLeastTwoBtags:
 //		return hasAtLeastTwoGoodBJets(event);
-	case TTbarMuMuReferenceSelection::AtLeastOnePhoton:
+	case TTbarEEReferenceSelection::AtLeastOnePhoton:
 		return hasAtLeastOneGoodPhoton(event);
-	case TTbarMuMuReferenceSelection::JustOneGoodPhoton:
+	case TTbarEEReferenceSelection::JustOneGoodPhoton:
 		return hasJustOneGoodPhoton(event);
 	default:
 		break;
@@ -169,7 +149,7 @@ bool TopPairMuMuReferenceSelection::passesSelectionStep(const EventPtr event, un
 	return false;
 }
 
-bool TopPairMuMuReferenceSelection::passesEventCleaning(const EventPtr event) const {
+bool TopPairEEReferenceSelection::passesEventCleaning(const EventPtr event) const {
 	bool passesAllFilters(!event->isBeamScraping());
 	passesAllFilters = passesAllFilters && event->passesHBHENoiseFilter();
 	passesAllFilters = passesAllFilters && event->passesCSCTightBeamHaloFilter();
@@ -186,29 +166,30 @@ bool TopPairMuMuReferenceSelection::passesEventCleaning(const EventPtr event) co
 	return passesAllFilters;
 }
 
-bool TopPairMuMuReferenceSelection::passesTriggerSelection(const EventPtr event) const {
+bool TopPairEEReferenceSelection::passesTriggerSelection(const EventPtr event) const {
 
-		return event->HLT(HLTriggers::HLT_Mu17_Mu8);
+		return event->HLT(HLTriggers::HLT_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_Ele8_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL);
 }
 
-bool TopPairMuMuReferenceSelection::isIsolated(const LeptonPointer lepton) const {
-	const MuonPointer muon(boost::static_pointer_cast<Muon>(lepton));
-
-	return muon->pfRelativeIsolation(0.4, true) < 0.2;
-
+bool TopPairEEReferenceSelection::isIsolated(const LeptonPointer lepton) const {
+	const ElectronPointer electron(boost::static_pointer_cast<Electron>(lepton));
+	return electron->pfRelativeIsolationRhoCorrected() < 0.15;
 }
 
-bool TopPairMuMuReferenceSelection::passesDiMuonSelection(const EventPtr event) const {
-	const MuonCollection muons(signalMuons(event));
+
+
+bool TopPairEEReferenceSelection::passesDiElectronSelection(const EventPtr event) const {
+
+ 	const ElectronCollection electrons(signalElectrons(event));
 
 	double mass = 0;
 
-	if(muons.size()>1){
-		const MuonPointer muon(muons.at(0));
-		const MuonPointer muon2(muons.at(1));
+	if(electrons.size()>1){
+		const ElectronPointer electron(electrons.at(0));
+		const ElectronPointer electron2(electrons.at(1));
 
 		ParticlePointer dilepton;
-		dilepton = ParticlePointer(new Particle(*muon + *muon2));
+		dilepton = ParticlePointer(new Particle(*electron + *electron2));
 		mass = dilepton->mass();
 	}
 
@@ -216,17 +197,17 @@ bool TopPairMuMuReferenceSelection::passesDiMuonSelection(const EventPtr event) 
 
 }
 
-bool TopPairMuMuReferenceSelection::passesZmassVeto(const EventPtr event) const {
-	const MuonCollection muons(signalMuons(event));
+bool TopPairEEReferenceSelection::passesZmassVeto(const EventPtr event) const {
+	const ElectronCollection electrons(signalElectrons(event));
 
 	double mass = 0;
 
-	if(muons.size()>1){
-		const MuonPointer muon(muons.at(0));
-		const MuonPointer muon2(muons.at(1));
+	if(electrons.size()>1){
+		const ElectronPointer electron(electrons.at(0));
+		const ElectronPointer electron2(electrons.at(1));
 
 		ParticlePointer dilepton;
-		dilepton = ParticlePointer(new Particle(*muon + *muon2));
+		dilepton = ParticlePointer(new Particle(*electron + *electron2));
 		mass = dilepton->mass();
 	}
 
@@ -234,15 +215,15 @@ bool TopPairMuMuReferenceSelection::passesZmassVeto(const EventPtr event) const 
 
 }
 
-bool TopPairMuMuReferenceSelection::passesMetCut(const EventPtr event) const {
+bool TopPairEEReferenceSelection::passesMetCut(const EventPtr event) const {
 
 	const METPointer met(event->MET());
 
-	return met->pt() > 20;
+	return met->pt() > 40;
 
 }
 
-bool TopPairMuMuReferenceSelection::hasAtLeastNGoodJets(const EventPtr event, int Njets) const {
+bool TopPairEEReferenceSelection::hasAtLeastNGoodJets(const EventPtr event, int Njets) const {
 	const JetCollection goodJets(cleanedJets(event));
 	int nJetsAbove30GeV(0);
 
@@ -255,23 +236,23 @@ bool TopPairMuMuReferenceSelection::hasAtLeastNGoodJets(const EventPtr event, in
 	return nJetsAbove30GeV >= Njets;
 }
 
-bool TopPairMuMuReferenceSelection::hasAtLeastOneGoodBJet(const EventPtr event) const {
+bool TopPairEEReferenceSelection::hasAtLeastOneGoodBJet(const EventPtr event) const {
 	return cleanedBJets(event).size() > 0;
 }
 
-// bool TopPairMuMuReferenceSelection::hasAtLeastTwoGoodBJets(const EventPtr event) const {
+// bool TopPairEEReferenceSelection::hasAtLeastTwoGoodBJets(const EventPtr event) const {
 // 	return cleanedBJets(event).size() > 1;
 // }
-	
-bool TopPairMuMuReferenceSelection::hasAtLeastOneGoodPhoton(const EventPtr event) const {
+
+bool TopPairEEReferenceSelection::hasAtLeastOneGoodPhoton(const EventPtr event) const {
 	return signalPhotons(event).size() > 0;
 }
 
-bool TopPairMuMuReferenceSelection::hasJustOneGoodPhoton(const EventPtr event) const {
+bool TopPairEEReferenceSelection::hasJustOneGoodPhoton(const EventPtr event) const {
 	return signalPhotons(event).size() == 1;
 }
 
-const ElectronCollection TopPairMuMuReferenceSelection::goodElectrons(const EventPtr event) const {
+const ElectronCollection TopPairEEReferenceSelection::goodElectrons(const EventPtr event) const {
 
 	const ElectronCollection allElectrons(event->Electrons());
 	ElectronCollection goodIsolatedElectrons;
@@ -286,7 +267,7 @@ const ElectronCollection TopPairMuMuReferenceSelection::goodElectrons(const Even
 
 }
 
-const MuonCollection TopPairMuMuReferenceSelection::goodMuons(const EventPtr event) const {
+const MuonCollection TopPairEEReferenceSelection::goodMuons(const EventPtr event) const {
 
 	const MuonCollection allMuons(event->Muons());
 	MuonCollection goodIsolatedMuons;
@@ -301,7 +282,7 @@ const MuonCollection TopPairMuMuReferenceSelection::goodMuons(const EventPtr eve
 
 }
 
-const MuonCollection TopPairMuMuReferenceSelection::signalMuons(const EventPtr event) const {
+const MuonCollection TopPairEEReferenceSelection::signalMuons(const EventPtr event) const {
 
 	const MuonCollection muons(goodMuons(event));
 	MuonCollection signalMuons;
@@ -320,15 +301,12 @@ const MuonCollection TopPairMuMuReferenceSelection::signalMuons(const EventPtr e
 						storeIndexB = indexB;
 					}
 				}
-
 		}
 
-
-    	if(storeIndexA != storeIndexB){
+		if(storeIndexA != storeIndexB){
 			signalMuons.push_back(muons.at(storeIndexA));
 			signalMuons.push_back(muons.at(storeIndexB));
-	}
-
+		}
 
 	}
 
@@ -336,7 +314,7 @@ const MuonCollection TopPairMuMuReferenceSelection::signalMuons(const EventPtr e
 
 }
 
-const ElectronCollection TopPairMuMuReferenceSelection::signalElectrons(const EventPtr event) const {
+const ElectronCollection TopPairEEReferenceSelection::signalElectrons(const EventPtr event) const {
 
 	const ElectronCollection electrons(goodElectrons(event));
 	ElectronCollection signalElectrons;
@@ -355,12 +333,11 @@ const ElectronCollection TopPairMuMuReferenceSelection::signalElectrons(const Ev
 						storeIndexB = indexB;
 					}
 				}
-
 		}
 
 		if(storeIndexA != storeIndexB){
-			signalElectrons.push_back(electrons.at(storeIndexA));
-			signalElectrons.push_back(electrons.at(storeIndexB));
+		signalElectrons.push_back(electrons.at(storeIndexA));
+		signalElectrons.push_back(electrons.at(storeIndexB));
 		}
 
 	}
@@ -369,7 +346,7 @@ const ElectronCollection TopPairMuMuReferenceSelection::signalElectrons(const Ev
 
 }
 
-const PhotonCollection TopPairMuMuReferenceSelection::signalPhotons(const EventPtr event) const {
+const PhotonCollection TopPairEEReferenceSelection::signalPhotons(const EventPtr event) const {
 
 	const PhotonCollection allPhotons(event->Photons());
 	PhotonCollection goodIsolatedPhotons;
@@ -382,14 +359,14 @@ const PhotonCollection TopPairMuMuReferenceSelection::signalPhotons(const EventP
 
 	return goodIsolatedPhotons;
 
-} 
-
-const JetCollection TopPairMuMuReferenceSelection::cleanedJets(const EventPtr event) const {
+}
+ 
+const JetCollection TopPairEEReferenceSelection::cleanedJets(const EventPtr event) const {
 	const JetCollection jets(event->Jets());
 	JetCollection cleanedJets;
 
 	//if no signal lepton is found, can't clean jets, return them all!
-	if (!passesDiMuonSelection(event))
+	if (!passesDiElectronSelection(event))
 		return jets;
 
 	const LeptonPointer lepton(signalLepton(event));
@@ -403,7 +380,7 @@ const JetCollection TopPairMuMuReferenceSelection::cleanedJets(const EventPtr ev
 	return cleanedJets;
 }
 
-const JetCollection TopPairMuMuReferenceSelection::cleanedBJets(const EventPtr event) const {
+const JetCollection TopPairEEReferenceSelection::cleanedBJets(const EventPtr event) const {
 	const JetCollection jets(cleanedJets(event));
 	JetCollection cleanedBJets;
 
@@ -417,7 +394,7 @@ const JetCollection TopPairMuMuReferenceSelection::cleanedBJets(const EventPtr e
 
 }
 
-bool TopPairMuMuReferenceSelection::isLooseMuon(const MuonPointer muon) const {
+bool TopPairEEReferenceSelection::isLooseMuon(const MuonPointer muon) const {
 	bool passesPt = muon->pt() > 10;
 	bool passesEta = fabs(muon->eta()) < 2.5;
 	bool isPFMuon = muon->isPFMuon();
@@ -427,7 +404,7 @@ bool TopPairMuMuReferenceSelection::isLooseMuon(const MuonPointer muon) const {
 	return isPFMuon && passesPt && passesEta && isGlobalOrTracker && isLooselyIsolated;
 }
 
-bool TopPairMuMuReferenceSelection::isLooseElectron(const ElectronPointer electron) const {
+bool TopPairEEReferenceSelection::isLooseElectron(const ElectronPointer electron) const {
 
 	bool passesEtAndEta = electron->et() > 20. && fabs(electron->eta()) < 2.5;
 	bool passesID(electron->passesElectronID(ElectronID::MVAIDTrigger));
@@ -435,12 +412,13 @@ bool TopPairMuMuReferenceSelection::isLooseElectron(const ElectronPointer electr
 	return passesEtAndEta && passesIso && passesID;
 }
 
-bool TopPairMuMuReferenceSelection::isGoodElectron(const ElectronPointer electron) const {
-	bool passesEtAndEta = electron->et() > 30 && fabs(electron->eta()) < 2.5 && !electron->isInCrack();
-	bool passesD0 = fabs(electron->d0()) < 0.02; //cm
-	bool passesHOverE = electron->HadOverEm() < 0.05; // same for EE and EB
+
+bool TopPairEEReferenceSelection::isGoodElectron(const ElectronPointer electron) const {
+	bool passesEtAndEta = electron->et() > 20 && fabs(electron->eta()) < 2.5;
+	bool passesD0 = fabs(electron->d0()) < 0.04; //cm
 	bool passesID(electron->passesElectronID(ElectronID::MVAIDTrigger));
-	return passesEtAndEta && passesD0 &&
-			passesHOverE && passesID;
+	bool passesIsolation  = isIsolated(electron);
+	bool passesConvVeto = electron->passConversionVeto();
+	return passesEtAndEta && passesD0 && passesID && passesIsolation && passesConvVeto;
 }
 } /* namespace BAT */

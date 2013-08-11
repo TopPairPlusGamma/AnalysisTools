@@ -38,3 +38,4 @@ typedef boost::shared_ptr<MuonAnalyser> MuonAnalyserPtr;
 }
 
 #endif /* MUONANALYSER_H_ */
+

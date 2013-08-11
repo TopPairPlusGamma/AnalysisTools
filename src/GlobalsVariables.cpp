@@ -27,6 +27,9 @@ std::string Globals::TQAFPath = "";
 bool Globals::useHitFit = false;
 bool Globals::produceFitterASCIIoutput = false;
 
+//Photons
+PhotonAlgorithm::value Globals::photonAlgorithm = PhotonAlgorithm::Default;
+
 //electrons
 ElectronAlgorithm::value Globals::electronAlgorithm = ElectronAlgorithm::ParticleFlow;
 
@@ -38,7 +41,6 @@ JetAlgorithm::value Globals::jetAlgorithm = JetAlgorithm::PF2PAT;
 int Globals::JESsystematic = 0;
 int Globals::BJetSystematic = 0;
 int Globals::LightJetSystematic = 0;
-int Globals::JetSmearingSystematic = -1;
 
 //Level7 JEC arrays
 boost::array< boost::shared_ptr<TF1>, 12 > Globals::bL7Corrections = {{

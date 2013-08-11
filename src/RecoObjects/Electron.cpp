@@ -22,7 +22,7 @@ Electron::Electron() :
 		usedAlgorithm_(ElectronAlgorithm::ParticleFlow), //
 		robustLooseId(false), //
 		robustTightId(false), //
-		superCluser_Eta(initialBigValue), //
+		superCluster_Eta(initialBigValue), //
 		innerLayerMissingHits_(initialBigValue), //
 		sigma_IEtaIEta(initialBigValue), //
 		dPhi_In(initialBigValue), //
@@ -42,7 +42,7 @@ Electron::Electron(double energy, double px, double py, double pz) :
 		Lepton(energy, px, py, pz), usedAlgorithm_(ElectronAlgorithm::ParticleFlow), //
 		robustLooseId(false), //
 		robustTightId(false), //
-		superCluser_Eta(initialBigValue), //
+		superCluster_Eta(initialBigValue), //
 		innerLayerMissingHits_(initialBigValue), //
 		sigma_IEtaIEta(initialBigValue), //
 		dPhi_In(initialBigValue), //
@@ -63,7 +63,7 @@ Electron::~Electron() {
 }
 
 double Electron::superClusterEta() const {
-	return superCluser_Eta;
+	return superCluster_Eta;
 }
 
 /*
@@ -118,7 +118,7 @@ ElectronAlgorithm::value Electron::getUsedAlgorithm() const {
 }
 
 void Electron::setSuperClusterEta(double eta) {
-	superCluser_Eta = eta;
+	superCluster_Eta = eta;
 }
 
 void Electron::setRobustLooseID(bool id) {

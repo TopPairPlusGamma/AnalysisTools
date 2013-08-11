@@ -19,9 +19,12 @@ public:
 	DiElectronAnalyser(HistogramManagerPtr histMan, std::string histogramFolder = "DiElectronAnalysis");
 	virtual ~DiElectronAnalyser();
 
-    void analyse(const EventPtr);
+	void analyse(const EventPtr);
+    void analyse(const EventPtr, const ElectronCollection);
     void createHistograms();
 };
+
+typedef boost::scoped_ptr<DiElectronAnalyser> DiElectronAnalyserLocalPtr;
 
 }
 

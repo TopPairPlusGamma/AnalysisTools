@@ -15,7 +15,7 @@ METReader::METReader() :
 		eyReader(), //
 		significanceReader(), //
 		met(), //
-		usedAlgorithm(METAlgorithm::patMETsPFlow) {
+		usedAlgorithm(METAlgorithm::patType1CorrectedPFMet) {
 
 }
 
