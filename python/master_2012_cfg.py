@@ -1,9 +1,11 @@
 mc_path = 'root://dc2-grid-64.brunel.ac.uk//dpm/brunel.ac.uk/home/cms//store/user/phy6phs/'
 data_path = 'root://dc2-grid-64.brunel.ac.uk//dpm/brunel.ac.uk/home/cms//store/user/nberry/'
-datasets = {'DoubleMu' : [  mc_path + 'DoubleMu_Run2012A-22Jan2013-v1_AOD_nTuple_v10_GoldenJSON_diLeptonPlus2Jets_final',
+datasets = {'DoubleMu' : [  mc_path + 'DoubleMu_EcalRecover_11Dec2012-v1_AOD_nTuple_v10_GoldenJSON_diLeptonPlus2Jets_final',
+			    mc_path + 'DoubleMu_Run2012A-22Jan2013-v1_AOD_nTuple_v10_GoldenJSON_diLeptonPlus2Jets_final',
                             mc_path + 'DoubleMu_Run2012B-13Jul2012-v4_AOD_nTuple_v10_GoldenJSON_diLeptonPlus2Jets_final',
                             mc_path + 'DoubleMu_Run2012C-24Aug2012-v1_AOD_nTuple_v10_GoldenJSON_diLeptonPlus2Jets_final',    
-			    mc_path + 'DoubleMu_Run2012D-16Jan2013-v2_AOD_nTuple_v10_GoldenJSON_diLeptonPlus2Jets_final'],
+			    mc_path + 'DoubleMu_Run2012C-PromptReco-v2_AOD_nTuple_v10_GoldenJSON_diLeptonPlus2Jets_final',
+			    mc_path + 'DoubleMu_Run2012D-PromptReco-v1_AOD_nTuple_v10_GoldenJSON_diLeptonPlus2Jets_final'],
 	'DoubleElectron' : [data_path + 'DoubleElectron_Run2012A-22Jan2013-v1_AOD_nTuple_v10_GoldenJSON_diLeptonPlus2Jets_final',
 			    data_path + 'DoubleElectron_Run2012B-22Jan2013-v1_AOD_nTuple_v10_GoldenJSON_diLeptonPlus2Jets_final',
 		 	    data_path + 'DoubleElectron_Run2012C-22Jan2013-v1_AOD_nTuple_v10_GoldenJSON_diLeptonPlus2Jets_final',
