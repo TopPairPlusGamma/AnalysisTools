@@ -103,9 +103,9 @@ datasetInfo['GJets_HT-40To100'] = {"cross-section": 23620., "NumberOfProcessedEv
 datasetInfo['GJets_HT-100To200'] = {"cross-section": 3476., "NumberOfProcessedEvents":1536287}
 datasetInfo['GJets_HT-200ToInf'] = {"cross-section": 485., "NumberOfProcessedEvents":9377170}
 
-datasetInfo['WWtoAnything'] = {"cross-section": 57.1097, "NumberOfProcessedEvents":10000431}
-datasetInfo['WZtoAnything'] = {"cross-section": 32.3161, "NumberOfProcessedEvents":10000283}
-datasetInfo['ZZtoAnything'] = {"cross-section": 8.25561, "NumberOfProcessedEvents":9799908}
+datasetInfo['WW'] = {"cross-section": 57.1097, "NumberOfProcessedEvents":10000431}
+datasetInfo['WZ'] = {"cross-section": 32.3161, "NumberOfProcessedEvents":10000283}
+datasetInfo['ZZ'] = {"cross-section": 8.25561, "NumberOfProcessedEvents":9799908}
 
 #Ttbar + Z/W from http://cms.cern.ch/iCMS/jsp/openfile.jsp?tp=draft&files=AN2011_288_v14.pdf
 datasetInfo['TTbarZIncl'] = {"cross-section": 0.14, "NumberOfProcessedEvents":196277}
@@ -148,6 +148,15 @@ datasetInfo['QCD_Pt-80to170_BCtoE'] = {"cross-section": 0.906e6 * 0.0104, "Numbe
 datasetInfo['QCD_Pt-20to30_EMEnriched'] = {"cross-section": 0.2355e9 * 0.0073, "NumberOfProcessedEvents":34607077}
 datasetInfo['QCD_Pt-30to80_EMEnriched'] = {"cross-section": 0.0593e9 * 0.059, "NumberOfProcessedEvents":70376046}
 datasetInfo['QCD_Pt-80to170_EMEnriched'] = {"cross-section": 0.906e6 * 0.148, "NumberOfProcessedEvents":8150672}
+
+#QCD
+datasetInfo['QCD_Pt_20_MuEnrichedPt_15'] = {"cross-section": 3.64e8 * 3.7e-4, "NumberOfProcessedEvents":21484602}
+datasetInfo['QCD_Pt_20_30_BCtoE'] = {"cross-section": 2.886e8 * 5.8e-4, "NumberOfProcessedEvents":1740229}
+datasetInfo['QCD_Pt_30_80_BCtoE'] = {"cross-section": 7.424e7 * 0.00225, "NumberOfProcessedEvents":2048152}
+datasetInfo['QCD_Pt_80_170_BCtoE'] = {"cross-section": 1191000.0 * 0.0109, "NumberOfProcessedEvents":1945525}
+datasetInfo['QCD_Pt_20_30_EMEnriched'] = {"cross-section": 2.886e8 * 0.0101, "NumberOfProcessedEvents":35040695}
+datasetInfo['QCD_Pt_30_80_EMEnriched'] = {"cross-section": 7.433e7 * 0.0621, "NumberOfProcessedEvents":33088888}
+datasetInfo['QCD_Pt_80_170_EMEnriched'] = {"cross-section": 1191000.0 * 0.1539, "NumberOfProcessedEvents":34542763}
 
 #extra ttbar samples
 datasetInfo['TTJets_SemiLept'] = {"cross-section": 245.8, "NumberOfProcessedEvents":25424818}

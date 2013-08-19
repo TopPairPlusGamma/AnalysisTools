@@ -24,10 +24,16 @@ datasets = {'DoubleMu' : [  mc_path + 'DoubleMu_EcalRecover_11Dec2012-v1_AOD_nTu
 		 'T_tW-channel' : [mc_path + 'T_tW-channel-DR_TuneZ2star_8TeV-powheg-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
                  'Tbar_tW-channel' : [mc_path + 'Tbar_tW-channel-DR_TuneZ2star_8TeV-powheg-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
 		 'WJetsToLNu' : [mc_path + 'WJetsToLNu_TuneZ2Star_8TeV-madgraph-tarball_Summer12_DR53X-PU_S10_START53_V7A-v2_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
-                 'QCD_Pt_20_MuEnrichedPt-15' : [mc_path + 'QCD_Pt_20_MuEnrichedPt_15_TuneZ2star_8TeV_pythia6_Summer12_DR53X-PU_S10_START53_V7A-v3_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
-		 'WWtoAnything' : [mc_path + 'WW_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
-                 'WZtoAnything' : [mc_path + 'WZ_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
-		 'ZZtoAnything' : [mc_path + 'ZZ_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
+                 'QCD_Pt_20_MuEnrichedPt_15' : [mc_path + 'QCD_Pt_20_MuEnrichedPt_15_TuneZ2star_8TeV_pythia6_Summer12_DR53X-PU_S10_START53_V7A-v3_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
+		 'QCD_Pt_20_30_BCtoE' : [mc_path + 'QCD_Pt_20_30_BCtoE_TuneZ2star_8TeV_pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
+		 'QCD_Pt_30_80_BCtoE' : [mc_path + 'QCD_Pt_30_80_BCtoE_TuneZ2star_8TeV_pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
+		 'QCD_Pt_20_30_EMEnriched' : [mc_path + 'QCD_Pt_20_30_EMEnriched_TuneZ2star_8TeV_pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
+		 'QCD_Pt_80_170_BCtoE' : [mc_path + 'QCD_Pt_80_170_BCtoE_TuneZ2star_8TeV_pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
+		 'QCD_Pt_30_80_EMEnriched' : [mc_path + 'QCD_Pt_30_80_EMEnriched_TuneZ2star_8TeV_pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
+		 'QCD_Pt_80_170_EMEnriched' : [mc_path + 'QCD_Pt_80_170_EMEnriched_TuneZ2star_8TeV_pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
+		 'WW' : [mc_path + 'WW_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
+                 'WZ' : [mc_path + 'WZ_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
+		 'ZZ' : [mc_path + 'ZZ_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
    
                      }
 

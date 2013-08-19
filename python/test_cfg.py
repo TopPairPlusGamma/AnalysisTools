@@ -29,7 +29,7 @@ else:
     #-5%
 #    PUFile = toolsFolder + "data/PileUp_2011_truth_finebin_64600microbarn.root"
 
-
+ZZtest = "root://dc2-grid-64.brunel.ac.uk//dpm/brunel.ac.uk/home/cms/store/user/phy6phs/ZZ_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final/*.root"
 wizardtest = "root://dc2-grid-64.brunel.ac.uk//dpm/brunel.ac.uk/home/cms/store/user/phy6phs/LHE2EDM_WHIZARD_2to5_ttA/nTuple_v10_Summer12-PU_S7_START52_V9-v1_diLeptonPlus2Jets_final/*.root"
 testntuple = "/data1/TTGammaAnalysis/TestNTuple/Test_nTuple_53X_mc.root"
 piondir = "root://dc2-grid-64.brunel.ac.uk//dpm/brunel.ac.uk/home/cms//store/user/phy6phs/TTJets_MassiveBinDECAY_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7C-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final/*.root"
@@ -47,12 +47,9 @@ lightJetResoFile = toolsFolder + "data/lightJetReso.root"
 #use HitFit for analysis
 useHitFit = False
 produceFitterASCIIoutput = False
-inputFiles = [
-#testntuple 
-#dir + SemiLept 
+inputFiles = [ 
  
- wizardtest
-#'root://dc2-grid-64.brunel.ac.uk//dpm/brunel.ac.uk/home/cms//store/user/phy6phs/DoubleMu_EcalRecover_11Dec2012-v1_AOD_nTuple_v10_GoldenJSON_diLeptonPlus2Jets_final/*.root' 
+ZZtest 
 #local 
             ]
 

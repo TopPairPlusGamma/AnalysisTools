@@ -20,7 +20,6 @@ enum value {
 	DoubleMu,
 	DoubleElectron,
 	MuEG,
-	TTGamma,
 	TTJets,
 	Wjets,
 	W1Jet,
@@ -28,6 +27,13 @@ enum value {
 	W3Jets,
 	W4Jets,
 	Zjets,
+	QCD_Pt_20_30_BCtoE,
+	QCD_Pt_20_30_EMEnriched,
+	QCD_Pt_20_MuEnrichedPt_15,
+	QCD_Pt_30_80_BCtoE,
+	QCD_Pt_30_80_EMEnriched,
+	QCD_Pt_80_170_BCtoE,
+	QCD_Pt_80_170_EMEnriched,
 	//2012 DY samples
 	Z1Jet,
 	Z2Jets,
@@ -93,9 +99,9 @@ enum value {
 	Zprime_M3TeV_W300GeV,
 	Zprime_M4TeV_W40GeV,
 	Zprime_M4TeV_W400GeV,
-	WWtoAnything,
-	WZtoAnything,
-	ZZtoAnything,
+	WW,
+	WZ,
+	ZZ,
 	ttbar161,
 	ttbar163,
 	ttbar166,
@@ -132,17 +138,23 @@ const boost::array<std::string, DataType::NUMBER_OF_DATA_TYPES> names = { {
 		"MuHad", //
 		"SingleElectron",//
 		"SingleMu",//
-		"DoubleMu", // 
+		"DoubleMu", //
 		"DoubleElectron",
-		"MuEG",
-		"TTGamma", //
+		"MuEG", 
 		"TTJet", //
 		"WJetsToLNu", //
 		"W1Jet", //
 		"W2Jets", //
 		"W3Jets", //
 		"W4Jets", //
-		"DYJetsToLL", //
+		"DYJetsToLL", 
+		"QCD_Pt_20_30_BCtoE",
+		"QCD_Pt_20_30_EMEnriched",
+		"QCD_Pt_20_MuEnrichedPt_15",
+		"QCD_Pt_30_80_BCtoE",
+		"QCD_Pt_30_80_EMEnriched",
+		"QCD_Pt_80_170_BCtoE",
+		"QCD_Pt_80_170_EMEnriched",
 		//2012 DY samples
 		"DY1JetsToLL", //
 		"DY2JetsToLL", //
@@ -208,9 +220,9 @@ const boost::array<std::string, DataType::NUMBER_OF_DATA_TYPES> names = { {
 		"Zprime_M3000GeV_W300GeV", //30
 		"Zprime_M4000GeV_W40GeV", //
 		"Zprime_M4000GeV_W400GeV", //
-		"WWtoAnything", //
-		"WZtoAnything", //
-		"ZZtoAnything", //
+		"WW", //
+		"WZ", //
+		"ZZ", //
 		"TTJets161", //
 		"TTJets163", //
 		"TTJets166", //

@@ -414,11 +414,21 @@ bool TopPairEEReferenceSelection::isLooseElectron(const ElectronPointer electron
 
 
 bool TopPairEEReferenceSelection::isGoodElectron(const ElectronPointer electron) const {
+
+//	const ElectronCollection electrons(event->Electrons());
+
 	bool passesEtAndEta = electron->et() > 20 && fabs(electron->eta()) < 2.5;
 	bool passesD0 = fabs(electron->d0()) < 0.04; //cm
 	bool passesID(electron->passesElectronID(ElectronID::MVAIDTrigger));
 	bool passesIsolation  = isIsolated(electron);
 	bool passesConvVeto = electron->passConversionVeto();
-	return passesEtAndEta && passesD0 && passesID && passesIsolation && passesConvVeto;
+//	bool passesDeltaRgammaElectrons = false;;
+
+//         for (unsigned int index = 0; index < electrons.size(); ++index) { 
+//                       const ElectronPointer electron(electrons.at(index));
+//                       passesDeltaRgammaElectrons = photon->deltaR(electron) < 0.7;	
+// 	}
+
+	return passesEtAndEta && passesD0 && passesID && passesIsolation && passesConvVeto; // && passesDeltaRgammaElectrons;
 }
 } /* namespace BAT */
