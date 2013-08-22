@@ -34,6 +34,7 @@ void Analysis::analyse() {
 		initiateEvent();
 		printNumberOfProccessedEventsEvery(Globals::printEveryXEvents);
 		inspectEvents();
+
 		const JetCollection jets(currentEvent->Jets());
 		unsigned int numberOfJets(jets.size());
 		unsigned int numberOfBJets(0);

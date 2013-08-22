@@ -103,14 +103,14 @@ bool TopPairMuMuReferenceSelection::isGoodPhoton(const PhotonPointer photon, con
 // 	
 // 	for (unsigned int index = 0; index < muons.size(); ++index) { 
 // 			const MuonPointer muon(muons.at(index)); 
-// 			passesDeltaRgammaMuons = photon->deltaR(muon) < 0.7;
+// 			passesDeltaRgammaMuons = photon->deltaR(muon) > 0.7;
 // 	}
 // 	
 // 	bool passesDeltaRgammaJets = false;
 // 	
 // 	for (unsigned int index = 0; index < jets.size(); ++index) { 
 // 			const JetPointer jet(jets.at(index));
-// 			passesDeltaRgammaJets = photon->deltaR(jet) < 0.7;
+// 			passesDeltaRgammaJets = photon->deltaR(jet) > 0.7;
 // 	}
 	
 	return passesEtAndEta && passesSafeElectronVeto && passesHOverE && passesShowerShape && passesPFChargedIso && passesPFNeutralIso && passesPFPhotonIso; // && passesDeltaRgammaMuons && passesDeltaRgammaJets;

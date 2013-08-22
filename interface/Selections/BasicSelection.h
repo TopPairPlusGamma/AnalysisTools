@@ -49,6 +49,8 @@ public:
 	virtual void useNonIsoTrigger(bool use = true);
 
 
+	virtual const MuonCollection goodMuons(const EventPtr event) const = 0;
+	virtual const ElectronCollection goodElectrons(const EventPtr event) const = 0;
 	virtual const PhotonCollection signalPhotons(const EventPtr event) const = 0;
  	virtual const MuonCollection signalMuons(const EventPtr event) const = 0;
  	virtual const ElectronCollection signalElectrons(const EventPtr event) const = 0;

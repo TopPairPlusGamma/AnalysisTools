@@ -35,7 +35,7 @@ EventWeightProvider::~EventWeightProvider() {
 }
 
 double EventWeightProvider::getWeight(DataType::value type) {
-	if (type < DataType::DoubleMu)
+	if (type <= DataType::ElectronHad)
 		return 1.;
 	else
 		return xsection[type] * Globals::luminosity / numberOfProcessedEvents[type];

@@ -25,6 +25,9 @@ void PhotonAnalyser::analyse(const EventPtr event){
 
 	histMan_->setCurrentHistogramFolder(histogramFolder_ + "/AllPhotons");
 
+	//const ElectronCollection electrons = topEERefSelection_->goodElectrons(event);
+	//const MuonCollection muons = topMuMuRefSelection_->goodMuons(event);
+
 	weight_ = event->weight() * prescale_ * scale_;
 	const JetCollection jets = event->Jets();
 	const ElectronCollection electrons = event->Electrons();
@@ -98,6 +101,9 @@ void PhotonAnalyser::analyse(const EventPtr event){
 void PhotonAnalyser::analyse_signalPhotons(const EventPtr event, PhotonCollection signalPhotons){
 
 	histMan_->setCurrentHistogramFolder(histogramFolder_ + "/SignalPhotons");
+
+	//const ElectronCollection electrons = topMuMuRefSelection_->goodElectrons(event);
+	//const MuonCollection muons = topMuMuRefSelection_->goodMuons(event);
 
 	weight_ = event->weight() * prescale_ * scale_;
 	const JetCollection jets = event->Jets();
@@ -201,9 +207,9 @@ void PhotonAnalyser::createHistograms() {
 	histMan_->addH1D_BJetBinned("Photon_E3x3", "Photon Ecal 3x3 Cluster; E3x3; Events", 1100, -100, 1000);
 	histMan_->addH1D_BJetBinned("Photon_E5x5", "Photon Ecal 5x5 Cluster; E5x5; Events", 1100, -100, 1000);
 	histMan_->addH1D_BJetBinned("Photon_TrkVeto", "Photon Track Veto; TrkVeto; Events", 2, 0, 2);
-	histMan_->addH1D_BJetBinned("Photon_deltaR_jets", "Photon #DeltaR(#gamma, jets); #DeltaR(#gamma, jets); Events", 25, 0, 5);
-	histMan_->addH1D_BJetBinned("Photon_deltaR_electrons", "Photon #DeltaR(#gamma, electrons); #DeltaR(#gamma, electrons); Events", 25, 0, 5);
-	histMan_->addH1D_BJetBinned("Photon_deltaR_muons", "Photon #DeltaR(#gamma, #mu); #DeltaR(#gamma, #mu); Events", 25, 0, 5);	
+	histMan_->addH1D_BJetBinned("Photon_deltaR_jets", "Photon #DeltaR(#gamma, jets); #DeltaR(#gamma, jets); Events", 500, 0, 5);
+	histMan_->addH1D_BJetBinned("Photon_deltaR_electrons", "Photon #DeltaR(#gamma, electrons); #DeltaR(#gamma, electrons); Events", 500, 0, 5);
+	histMan_->addH1D_BJetBinned("Photon_deltaR_muons", "Photon #DeltaR(#gamma, #mu); #DeltaR(#gamma, #mu); Events", 500, 0, 5);	
 	histMan_->addH1D_BJetBinned("Photon_ConvSEVeto", "Photon Conversion Safe Electron Veto; 0=false, 1=true; Events", 30, 0, 1.2);
 	histMan_->addH1D_BJetBinned("Photon_HtowoE", "Photon Single Tower HoverE; ; Events", 33, 0, 0.33);
 	histMan_->addH1D_BJetBinned("Photon_PFChargedHadronIso", "Photon PFChargedHadronIso; ; Events", 100, 0, 100);
@@ -245,9 +251,9 @@ void PhotonAnalyser::createHistograms() {
 	histMan_->addH1D_BJetBinned("Photon_E3x3", "Photon Ecal 3x3 Cluster; E3x3; Events", 1100, -100, 1000);
 	histMan_->addH1D_BJetBinned("Photon_E5x5", "Photon Ecal 5x5 Cluster; E5x5; Events", 1100, -100, 1000);
 	histMan_->addH1D_BJetBinned("Photon_TrkVeto", "Photon Track Veto; TrkVeto; Events", 2, 0, 2);
-	histMan_->addH1D_BJetBinned("Photon_deltaR_jets", "Photon #DeltaR(#gamma, jets); #DeltaR(#gamma, jets); Events", 25, 0, 5);
-	histMan_->addH1D_BJetBinned("Photon_deltaR_electrons", "Photon #DeltaR(#gamma, electrons); #DeltaR(#gamma, electrons); Events", 25, 0, 5);
-	histMan_->addH1D_BJetBinned("Photon_deltaR_muons", "Photon #DeltaR(#gamma, #mu); #DeltaR(#gamma, #mu); Events", 25, 0, 5);
+	histMan_->addH1D_BJetBinned("Photon_deltaR_jets", "Photon #DeltaR(#gamma, jets); #DeltaR(#gamma, jets); Events", 500, 0, 5);
+	histMan_->addH1D_BJetBinned("Photon_deltaR_electrons", "Photon #DeltaR(#gamma, electrons); #DeltaR(#gamma, electrons); Events", 500, 0, 5);
+	histMan_->addH1D_BJetBinned("Photon_deltaR_muons", "Photon #DeltaR(#gamma, #mu); #DeltaR(#gamma, #mu); Events", 500, 0, 5);
 	histMan_->addH1D_BJetBinned("Photon_ConvSEVeto", "Photon Conversion Safe Electron Veto; 0=false, 1=true; Events", 30, 0, 1.2);
 	histMan_->addH1D_BJetBinned("Photon_HtowoE", "Photon Single Tower HoverE; ; Events", 33, 0, 0.33);
 	histMan_->addH1D_BJetBinned("Photon_PFChargedHadronIso", "Photon PFChargedHadronIso; ; Events", 100, 0, 100);

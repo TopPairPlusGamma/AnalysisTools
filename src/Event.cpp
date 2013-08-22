@@ -31,7 +31,7 @@ Event::Event() : //
 		genParticles(), //
 		mets_(), //
 		genMet_(), //
-		dataType(DataType::DoubleMu), //
+		dataType(DataType::ElectronHad), //
 		runNumber(0), //
 		eventNumber(0), //
 		localEventNumber(0), //

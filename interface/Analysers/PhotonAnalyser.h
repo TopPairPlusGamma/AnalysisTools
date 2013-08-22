@@ -24,11 +24,11 @@ public:
 	void analyse_signalPhotons(const EventPtr, PhotonCollection signalPhotons);
 
 	void createHistograms();
-	
+
 private:
-	SelectionPointer topMuMuRefSelection_;
-	SelectionPointer topEERefSelection_;
-	SelectionPointer topEMuRefSelection_;
+ 	SelectionPointer topMuMuRefSelection_;
+ 	SelectionPointer topEERefSelection_;
+ 	SelectionPointer topEMuRefSelection_;
 	
 };
 typedef boost::scoped_ptr<PhotonAnalyser> PhotonAnalyserLocalPtr;

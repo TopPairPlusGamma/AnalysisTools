@@ -82,6 +82,8 @@ bool TopPairEEReferenceSelection::isGoodPhoton(const PhotonPointer photon, const
 	bool passesPFChargedIso = false;
 	bool passesPFNeutralIso = false;
 	bool passesPFPhotonIso = false;
+//	bool passesDeltaRgammaElectrons = false;
+//	bool passesDeltaRgammaJets = false;
 	
 	if (photon->isInBarrelRegion()) {
 		passesShowerShape = photon->sigmaIEtaIEta() < 0.011;
@@ -94,8 +96,24 @@ bool TopPairEEReferenceSelection::isGoodPhoton(const PhotonPointer photon, const
 		passesPFNeutralIso = photon->RhoCorrectedPFNeutralHadronIso(event->rho()) < 1.5 + 0.04 * photon->pt();
 		passesPFPhotonIso = photon->RhoCorrectedPFPhotonIso(event->rho()) < 1.0 + 0.005 * photon->pt();
 	} 
+
+// 	const JetCollection jets = event->Jets();
+// 	const ElectronCollection electrons = event->Electrons();
+// 
+//         for (unsigned int index = 0; index < electrons.size(); ++index) { 
+//                       const ElectronPointer electron(electrons.at(index));
+//                       passesDeltaRgammaElectrons = photon->deltaR(electron) > 0.7;	
+// 	}
+// 	
+// 	for (unsigned int index = 0; index < jets.size(); ++index) { 
+// 			const JetPointer jet(jets.at(index));
+// 			passesDeltaRgammaJets = photon->deltaR(jet) > 0.7;
+// 	
+// 	}
+	
 	
 	return passesEtAndEta  && passesSafeElectronVeto && passesHOverE && passesShowerShape && 	passesPFChargedIso && passesPFNeutralIso && passesPFPhotonIso;
+
 }
 
 bool TopPairEEReferenceSelection::isBJet(const JetPointer jet) const {
@@ -406,20 +424,12 @@ bool TopPairEEReferenceSelection::isLooseElectron(const ElectronPointer electron
 
 bool TopPairEEReferenceSelection::isGoodElectron(const ElectronPointer electron) const {
 
-//	const ElectronCollection electrons(event->Electrons());
-
 	bool passesEtAndEta = electron->et() > 20 && fabs(electron->eta()) < 2.5;
 	bool passesD0 = fabs(electron->d0()) < 0.04; //cm
 	bool passesID(electron->passesElectronID(ElectronID::MVAIDTrigger));
 	bool passesIsolation  = isIsolated(electron);
 	bool passesConvVeto = electron->passConversionVeto();
-//	bool passesDeltaRgammaElectrons = false;;
 
-//         for (unsigned int index = 0; index < electrons.size(); ++index) { 
-//                       const ElectronPointer electron(electrons.at(index));
-//                       passesDeltaRgammaElectrons = photon->deltaR(electron) < 0.7;	
-// 	}
-
-	return passesEtAndEta && passesD0 && passesID && passesIsolation && passesConvVeto; // && passesDeltaRgammaElectrons;
+	return passesEtAndEta && passesD0 && passesID && passesIsolation && passesConvVeto;
 }
 } /* namespace BAT */

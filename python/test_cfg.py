@@ -7,7 +7,7 @@ if os.environ.has_key('toolsFolder'):
 #this value will be part of the output file name: DataType_CenterOfMassEnergyTeV_lumipb-1_....
 centerOfMassEnergy = 8    
 #number of events to be processed
-maxEvents = 10000 # -1 to run over all
+maxEvents = 1000 # -1 to run over all
 #integrated luminosity the MC simulation will be scaled to
 lumi = 19584#pb-1
 
@@ -29,6 +29,7 @@ else:
     #-5%
 #    PUFile = toolsFolder + "data/PileUp_2011_truth_finebin_64600microbarn.root"
 
+DoubleMuTest = "root://dc2-grid-64.brunel.ac.uk//dpm/brunel.ac.uk/home/cms/store/user/phy6phs/DoubleMu_Run2012A-22Jan2013-v1_AOD_nTuple_v10_GoldenJSON_diLeptonPlus2Jets_final/*.root"
 ZZtest = "root://dc2-grid-64.brunel.ac.uk//dpm/brunel.ac.uk/home/cms/store/user/phy6phs/ZZ_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final/*.root"
 wizardtest = "root://dc2-grid-64.brunel.ac.uk//dpm/brunel.ac.uk/home/cms/store/user/phy6phs/LHE2EDM_WHIZARD_2to5_ttA/nTuple_v10_Summer12-PU_S7_START52_V9-v1_diLeptonPlus2Jets_final/*.root"
 testntuple = "/data1/TTGammaAnalysis/TestNTuple/Test_nTuple_53X_mc.root"
@@ -49,7 +50,7 @@ useHitFit = False
 produceFitterASCIIoutput = False
 inputFiles = [ 
  
-ZZtest 
+wizardtest 
 #local 
             ]
 

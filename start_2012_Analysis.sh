@@ -9,26 +9,26 @@ export exe=${exe}
 export TQAFPath=${TQAFPath}
 
 #Central samples
-#sample="TTGamma" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTGamma_central.log &
+sample="TTGamma" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTGamma_central.log &
 #sample="TTJet" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJet_central.log &
-sample="WJetsToLNu" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WJetsToLNu_central.log &
+#sample="WJetsToLNu" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WJetsToLNu_central.log &
 #sample="T_tW-channel" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_tW-channel_central.log &
 #sample="Tbar_tW-channel" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_tW-channel_central.log &
-sample="DYJetsToLL_M-10To50" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DYJetsToLL_M-10To50_central.log &
-sample="DYJetsToLL_M-50" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DYJetsToLL_M-50_central.log &
-sample="TTJets_SemiLept" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJets_SemiLept_central.log &
-sample="TTJets_FullLept" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJets_FullLept_central.log &
-sample="TTJets_Hadronic" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJets_Hadronic_central.log &
-sample="QCD_Pt_20_MuEnrichedPt_15" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> QCD_Pt_20_MuEnrichedPt_15_central.log &
-sample="QCD_Pt_20_30_BCtoE" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> QCD_Pt_20_30_BCtoE_central.log &
-sample="QCD_Pt_30_80_BCtoE" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> QCD_Pt_30_80_BCtoE_central.log &
-sample="QCD_Pt_80_170_BCtoE" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> QCD_Pt_80_170_BCtoE_central.log &
-sample="QCD_Pt_20_30_EMEnriched" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> QCD_Pt_20_30_EMEnriched_central.log &
-sample="QCD_Pt_30_80_EMEnriched" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> QCD_Pt_30_80_EMEnriched_central.log &
-sample="QCD_Pt_80_170_EMEnriched" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> QCD_Pt_80_170_EMEnriched_central.log &
-sample="WW" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WW_central.log &
-sample="WZ" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WZ_central.log &
-sample="ZZ" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> ZZ_central.log &
+#sample="DYJetsToLL_M-10To50" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DYJetsToLL_M-10To50_central.log &
+#sample="DYJetsToLL_M-50" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DYJetsToLL_M-50_central.log &
+#sample="TTJets_SemiLept" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJets_SemiLept_central.log &
+#sample="TTJets_FullLept" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJets_FullLept_central.log &
+#sample="TTJets_Hadronic" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJets_Hadronic_central.log &
+#sample="QCD_Pt_20_MuEnrichedPt_15" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> QCD_Pt_20_MuEnrichedPt_15_central.log &
+#sample="QCD_Pt_20_30_BCtoE" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> QCD_Pt_20_30_BCtoE_central.log &
+#sample="QCD_Pt_30_80_BCtoE" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> QCD_Pt_30_80_BCtoE_central.log &
+#sample="QCD_Pt_80_170_BCtoE" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> QCD_Pt_80_170_BCtoE_central.log &
+#sample="QCD_Pt_20_30_EMEnriched" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> QCD_Pt_20_30_EMEnriched_central.log &
+#sample="QCD_Pt_30_80_EMEnriched" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> QCD_Pt_30_80_EMEnriched_central.log &
+#sample="QCD_Pt_80_170_EMEnriched" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> QCD_Pt_80_170_EMEnriched_central.log &
+#sample="WW" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WW_central.log &
+#sample="WZ" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WZ_central.log &
+#sample="ZZ" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> ZZ_central.log &
 #sample="DoubleMu" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DoubleMu_central.log &
 #sample="DoubleElectron" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DoubleElectron_central.log &
 #sample="MuEG" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> MuEG_central.log &
