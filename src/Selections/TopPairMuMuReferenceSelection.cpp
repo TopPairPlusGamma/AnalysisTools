@@ -76,7 +76,7 @@ const LeptonPointer TopPairMuMuReferenceSelection::signalLepton(const EventPtr e
 bool TopPairMuMuReferenceSelection::isGoodPhoton(const PhotonPointer photon, const EventPtr event) const {
 
 	const MuonCollection muons(goodMuons(event));
-	const JetCollection jets(cleanedJets(event));
+	const JetCollection jets(event->Jets());
 
 	bool passesEtAndEta = photon->et() > 20 && fabs(photon->eta()) < 2.5 && !photon->isInCrack();
 	bool passesSafeElectronVeto = photon->ConversionSafeElectronVeto();
@@ -382,11 +382,26 @@ const JetCollection TopPairMuMuReferenceSelection::cleanedJets(const EventPtr ev
 	if (!passesDiMuonSelection(event))
 		return jets;
 
-	const LeptonPointer lepton(signalLepton(event));
+	const MuonCollection muons(signalMuons(event));
+	const PhotonCollection photons(signalPhotons(event));
+
+	double minDR = 999999999.;
+	double minDR_pho = 999999999.;
 
 	for (unsigned int index = 0; index < jets.size(); ++index) {
 		const JetPointer jet(jets.at(index));
-		if (!jet->isWithinDeltaR(0.3, lepton) && isGoodJet(jet))
+		for (unsigned int lep = 0; lep < muons.size(); lep++){
+			const MuonPointer lepton(muons.at(lep));
+			if(jet->deltaR(lepton) < minDR)
+				minDR = jet->deltaR(lepton);
+		}
+		for (unsigned int pho = 0; pho < photons.size(); pho++){
+					const PhotonPointer photon(photons.at(pho));
+					if(jet->deltaR(photon) < minDR_pho)
+						minDR_pho = jet->deltaR(photon);
+		}
+
+		if (minDR > 0.5 && minDR_pho > 0.3 && isGoodJet(jet))
 			cleanedJets.push_back(jet);
 	}
 

@@ -12,12 +12,12 @@
 
 namespace BAT {
 
-void PhotonAnalyser::analyse(const EventPtr event, PhotonCollection signalPhotons){
+void PhotonAnalyser::analyse(const EventPtr event, PhotonCollection signalPhotons, JetCollection cleanJets, ElectronCollection signalElectrons, MuonCollection signalMuons){
 
 	//all photons
 	analyse(event);
 	//signal photons
-	analyse_signalPhotons(event, signalPhotons);
+	analyse_signalPhotons(event, signalPhotons, cleanJets, signalElectrons, signalMuons);
 
 }
 
@@ -98,7 +98,7 @@ void PhotonAnalyser::analyse(const EventPtr event){
 
 }
 
-void PhotonAnalyser::analyse_signalPhotons(const EventPtr event, PhotonCollection signalPhotons){
+void PhotonAnalyser::analyse_signalPhotons(const EventPtr event, PhotonCollection signalPhotons, JetCollection jets, ElectronCollection electrons, MuonCollection muons){
 
 	histMan_->setCurrentHistogramFolder(histogramFolder_ + "/SignalPhotons");
 
@@ -106,9 +106,9 @@ void PhotonAnalyser::analyse_signalPhotons(const EventPtr event, PhotonCollectio
 	//const MuonCollection muons = topMuMuRefSelection_->goodMuons(event);
 
 	weight_ = event->weight() * prescale_ * scale_;
-	const JetCollection jets = event->Jets();
-	const ElectronCollection electrons = event->Electrons();
-	const MuonCollection muons = event->Muons();
+//	const JetCollection jets = event->Jets();
+//	const ElectronCollection electrons = event->Electrons();
+//	const MuonCollection muons = event->Muons();
 
 	histMan_->H1D_BJetBinned("Number_Of_Photons")->Fill(signalPhotons.size(), weight_);
 
@@ -172,7 +172,6 @@ void PhotonAnalyser::analyse_signalPhotons(const EventPtr event, PhotonCollectio
 		}
 	}
 }
-
 
 PhotonAnalyser::PhotonAnalyser(HistogramManagerPtr histMan, std::string histogramFolder) :
                 BasicAnalyser(histMan, histogramFolder) { //

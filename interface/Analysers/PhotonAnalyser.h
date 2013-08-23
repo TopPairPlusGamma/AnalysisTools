@@ -19,10 +19,9 @@ public:
 	/**
 	 * Analyses all photons in an event
 	 */
-	void analyse(const EventPtr, PhotonCollection signalPhotons);
+	void analyse(const EventPtr, PhotonCollection signalPhotons, JetCollection cleanJets, ElectronCollection signalElectrons, MuonCollection signalMuons);
 	void analyse(const EventPtr);
-	void analyse_signalPhotons(const EventPtr, PhotonCollection signalPhotons);
-
+	void analyse_signalPhotons(const EventPtr, PhotonCollection signalPhotons, JetCollection cleanJets, ElectronCollection signalElectrons, MuonCollection signalMuons);
 	void createHistograms();
 
 private:

@@ -378,11 +378,26 @@ const JetCollection TopPairEEReferenceSelection::cleanedJets(const EventPtr even
 	if (!passesDiElectronSelection(event))
 		return jets;
 
-	const LeptonPointer lepton(signalLepton(event));
+	const ElectronCollection electrons(signalElectrons(event));
+	const PhotonCollection photons(signalPhotons(event));
+
+	double minDR = 999999999.;
+	double minDR_pho = 999999999.;
 
 	for (unsigned int index = 0; index < jets.size(); ++index) {
 		const JetPointer jet(jets.at(index));
-		if (!jet->isWithinDeltaR(0.3, lepton) && isGoodJet(jet))
+		for (unsigned int lep = 0; lep < electrons.size(); lep++){
+			const LeptonPointer lepton(electrons.at(lep));
+			if(jet->deltaR(lepton) < minDR)
+				minDR = jet->deltaR(lepton);
+		}
+		for (unsigned int pho = 0; pho < photons.size(); pho++){
+					const PhotonPointer photon(photons.at(pho));
+					if(jet->deltaR(photon) < minDR_pho)
+						minDR_pho = jet->deltaR(photon);
+		}
+
+		if (minDR > 0.5 && minDR_pho > 0.3 && isGoodJet(jet))
 			cleanedJets.push_back(jet);
 	}
 

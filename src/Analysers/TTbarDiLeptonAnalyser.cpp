@@ -37,11 +37,13 @@ void TTbarDiLeptonAnalyser::muMuSignalAnalysis(const EventPtr event) {
 				bjetWeights = BjetWeights(jets, numberOfBjets);
 			histMan_->setCurrentJetBin(jets.size());
 			histMan_->setCurrentBJetBin(numberOfBjets);
+
 			const LeptonPointer signalLepton = topMuMuRefSelection_->signalLepton(event);
 			const ElectronPointer signalElectron(boost::static_pointer_cast<Electron>(signalLepton));
 			const PhotonCollection photons = topMuMuRefSelection_->signalPhotons(event);
 
 			    //get dilepton collection
+				const ElectronCollection electrons = topMuMuRefSelection_->signalElectrons(event);
 				const MuonCollection muons = topMuMuRefSelection_->signalMuons(event);
 
 				for (unsigned int weightIndex = 0; weightIndex < bjetWeights.size(); ++weightIndex) {
@@ -64,7 +66,7 @@ void TTbarDiLeptonAnalyser::muMuSignalAnalysis(const EventPtr event) {
 
 			    //photons
 			    photonAnalyserMuMuRefSelection_->setScale(bjetWeight);
-			    photonAnalyserMuMuRefSelection_->analyse(event, photons);
+			    photonAnalyserMuMuRefSelection_->analyse(event, photons, jets, electrons, muons);
 
 			}
 	}
@@ -98,6 +100,7 @@ void TTbarDiLeptonAnalyser::eESignalAnalysis(const EventPtr event) {
 
 			//get dilepton collection
 			const ElectronCollection electrons = topEERefSelection_->signalElectrons(event);
+			const MuonCollection muons = topEERefSelection_->signalMuons(event);
 
 			for (unsigned int weightIndex = 0; weightIndex < bjetWeights.size(); ++weightIndex) {
 
@@ -118,7 +121,7 @@ void TTbarDiLeptonAnalyser::eESignalAnalysis(const EventPtr event) {
 
 			    //photons
 			    photonAnalyserEERefSelection_->setScale(bjetWeight);
-			    photonAnalyserEERefSelection_->analyse(event, photons);
+			    photonAnalyserEERefSelection_->analyse(event, photons, jets, electrons, muons);
 
 			}
 	}
@@ -172,7 +175,7 @@ void TTbarDiLeptonAnalyser::eMuSignalAnalysis(const EventPtr event) {
 
 			    //photon
 			    photonAnalyserEMuRefSelection_->setScale(bjetWeight);
-			    photonAnalyserEMuRefSelection_->analyse(event, photons);
+			    photonAnalyserEMuRefSelection_->analyse(event, photons, jets, electrons, muons);
 
 			}
 	}

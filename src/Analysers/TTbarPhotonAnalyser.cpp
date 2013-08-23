@@ -43,6 +43,7 @@ void TTbarPhotonAnalyser::muMuSignalAnalysis(const EventPtr event) {
 			const PhotonCollection photons = topMuMuPhotonSelection_->signalPhotons(event);
 
 			    //get dilepton collection
+			    const ElectronCollection electrons = topMuMuPhotonSelection_->signalElectrons(event);
 				const MuonCollection muons = topMuMuPhotonSelection_->signalMuons(event);
 
 				for (unsigned int weightIndex = 0; weightIndex < bjetWeights.size(); ++weightIndex) {
@@ -65,7 +66,7 @@ void TTbarPhotonAnalyser::muMuSignalAnalysis(const EventPtr event) {
 
 			    //photons
 			    photonAnalyserMuMuPhotonSelection_->setScale(bjetWeight);
-			    photonAnalyserMuMuPhotonSelection_->analyse(event, photons);
+			    photonAnalyserMuMuPhotonSelection_->analyse(event, photons, jets, electrons, muons);
 
 			}
 	}
@@ -99,6 +100,7 @@ void TTbarPhotonAnalyser::eESignalAnalysis(const EventPtr event) {
 
 			//get dilepton collection
 			const ElectronCollection electrons = topEEPhotonSelection_->signalElectrons(event);
+			const MuonCollection muons = topEEPhotonSelection_->signalMuons(event);
 
 			for (unsigned int weightIndex = 0; weightIndex < bjetWeights.size(); ++weightIndex) {
 
@@ -119,7 +121,7 @@ void TTbarPhotonAnalyser::eESignalAnalysis(const EventPtr event) {
 
 			    //photons
 			    photonAnalyserEEPhotonSelection_->setScale(bjetWeight);
-			    photonAnalyserEEPhotonSelection_->analyse(event, photons);
+			    photonAnalyserEEPhotonSelection_->analyse(event, photons, jets, electrons, muons);
 
 			}
 	}
@@ -173,7 +175,7 @@ void TTbarPhotonAnalyser::eMuSignalAnalysis(const EventPtr event) {
 
 			    //photon
 			    photonAnalyserEMuPhotonSelection_->setScale(bjetWeight);
-			    photonAnalyserEMuPhotonSelection_->analyse(event, photons);
+			    photonAnalyserEMuPhotonSelection_->analyse(event, photons, jets, electrons, muons);
 
 			}
 	}
