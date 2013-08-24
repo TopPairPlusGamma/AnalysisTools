@@ -123,7 +123,7 @@ bool TopPairEEReferenceSelection::isBJet(const JetPointer jet) const {
 bool TopPairEEReferenceSelection::isGoodMuon(const MuonPointer muon) const {
 	bool passesEtAndEta = muon->pt() > 20 && fabs(muon->eta()) < 2.4;
 	bool passesID = (muon->isGlobal() || muon->isTracker()) && muon->isPFMuon();
-    bool passesIsolation  = isIsolated(muon);
+        bool passesIsolation  = muon->pfRelativeIsolation(0.4, true) < 0.2;
 
 	return passesEtAndEta && passesID && passesIsolation;
 }
