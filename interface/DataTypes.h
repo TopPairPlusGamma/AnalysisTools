@@ -43,9 +43,9 @@ enum value {
 	singleAntiTop_And_W,
 	singleAntiTopTChannel,
 	singleAntiTopSChannel,
-	WW,
-	WZ,
-	ZZ,
+	WWtoAnything,
+	WZtoAnything,
+	ZZtoAnything,
 	TTJets_matchingdown,
 	TTJets_matchingup,
 	TTJets_scaledown,
@@ -100,9 +100,9 @@ const boost::array<std::string, DataType::NUMBER_OF_DATA_TYPES> names = { {
 		"Tbar_tW-channel", //
 		"Tbar_t-channel", //20
 		"Tbar_s-channel", //
-		"WW", //
-		"WZ", //
-		"ZZ", //
+		"WWtoAnything", //
+		"WZtoAnything", //
+		"ZZtoAnything", //
 		"TTJets-matchingdown", //
 		"TTJets-matchingup", //
 		"TTJets-scaledown", //

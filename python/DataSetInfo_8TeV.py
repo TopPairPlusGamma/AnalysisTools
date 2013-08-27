@@ -75,9 +75,9 @@ datasetInfo['GJets_HT-40To100'] = {"cross-section": 23620., "NumberOfProcessedEv
 datasetInfo['GJets_HT-100To200'] = {"cross-section": 3476., "NumberOfProcessedEvents":1536287}
 datasetInfo['GJets_HT-200ToInf'] = {"cross-section": 485., "NumberOfProcessedEvents":9377170}
 
-datasetInfo['WW'] = {"cross-section": 57.1097, "NumberOfProcessedEvents":10000431}
-datasetInfo['WZ'] = {"cross-section": 32.3161, "NumberOfProcessedEvents":10000283}
-datasetInfo['ZZ'] = {"cross-section": 8.25561, "NumberOfProcessedEvents":9799908}
+datasetInfo['WWtoAnything'] = {"cross-section": 57.1097, "NumberOfProcessedEvents":10000431}
+datasetInfo['WZtoAnything'] = {"cross-section": 32.3161, "NumberOfProcessedEvents":10000283}
+datasetInfo['ZZtoAnything'] = {"cross-section": 8.25561, "NumberOfProcessedEvents":9799908}
 
 #Ttbar + Z/W from http://cms.cern.ch/iCMS/jsp/openfile.jsp?tp=draft&files=AN2011_288_v14.pdf
 datasetInfo['TTbarZIncl'] = {"cross-section": 0.14, "NumberOfProcessedEvents":196277}
