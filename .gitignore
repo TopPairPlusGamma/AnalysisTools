@@ -16,3 +16,4 @@ data/Test*.root
 data/*data.root
 *.txt
 scripts/
+python/test_cfg.py

@@ -39,20 +39,20 @@ void EMuAnalyser::analyse(const EventPtr event, const ElectronCollection electro
 		histMan_->H1D_BJetBinned("diLepton_Mass")->Fill(electron->invariantMass(muon), weight_);
 		histMan_->H1D_BJetBinned("diLepton_DeltaR")->Fill(electron->deltaR(muon), weight_);
 		//lead
-		histMan_->H1D_BJetBinned("LeadElectron_Pt")->Fill(electron->pt(), weight_);
-		histMan_->H1D_BJetBinned("LeadElectron_Eta")->Fill(electron->eta(), weight_);
-		histMan_->H1D_BJetBinned("LeadElectron_AbsEta")->Fill(abs(electron->eta()), weight_);
-		histMan_->H1D_BJetBinned("LeadElectron_Phi")->Fill(electron->phi(), weight_);
-		histMan_->H1D_BJetBinned("LeadElectron_RelIso")->Fill(electron->pfRelativeIsolationRhoCorrected(), weight_);
-		histMan_->H1D_BJetBinned("LeadElectron_HadOverEM")->Fill(electron->HadOverEm(), weight_);
-		histMan_->H1D_BJetBinned("LeadElectron_dB")->Fill(electron->d0_wrtBeamSpot(), weight_);
+		histMan_->H1D_BJetBinned("LeadLepton_Pt")->Fill(electron->pt(), weight_);
+		histMan_->H1D_BJetBinned("LeadLepton_Eta")->Fill(electron->eta(), weight_);
+		histMan_->H1D_BJetBinned("LeadLepton_AbsEta")->Fill(abs(electron->eta()), weight_);
+		histMan_->H1D_BJetBinned("LeadLepton_Phi")->Fill(electron->phi(), weight_);
+		histMan_->H1D_BJetBinned("LeadLepton_RelIso")->Fill(electron->pfRelativeIsolationRhoCorrected(), weight_);
+		histMan_->H1D_BJetBinned("LeadLepton_HadOverEM")->Fill(electron->HadOverEm(), weight_);
+		histMan_->H1D_BJetBinned("LeadLepton_dB")->Fill(electron->d0_wrtBeamSpot(), weight_);
 
 		//muon
-		histMan_->H1D_BJetBinned("LeadMuon_Pt")->Fill(muon->pt(), weight_);
-		histMan_->H1D_BJetBinned("LeadMuon_Eta")->Fill(muon->eta(), weight_);
-		histMan_->H1D_BJetBinned("LeadMuon_AbsEta")->Fill(abs(muon->eta()), weight_);
-		histMan_->H1D_BJetBinned("LeadMuon_Phi")->Fill(muon->phi(), weight_);
-		histMan_->H1D_BJetBinned("LeadMuon_RelIso")->Fill(muon->pfRelativeIsolation(0.4, true), weight_);
+		histMan_->H1D_BJetBinned("SecondLepton_Pt")->Fill(muon->pt(), weight_);
+		histMan_->H1D_BJetBinned("SecondLepton_Eta")->Fill(muon->eta(), weight_);
+		histMan_->H1D_BJetBinned("SecondLepton_AbsEta")->Fill(abs(muon->eta()), weight_);
+		histMan_->H1D_BJetBinned("SecondLepton_Phi")->Fill(muon->phi(), weight_);
+		histMan_->H1D_BJetBinned("SecondLepton_RelIso")->Fill(muon->pfRelativeIsolation(0.4, true), weight_);
 	}
 }
 
@@ -63,20 +63,20 @@ void EMuAnalyser::createHistograms() {
 	histMan_->addH1D_BJetBinned("diLepton_Mass", "di-electron mass; m(ee) [GeV]; events;", 1000, 0, 1000);
 	histMan_->addH1D_BJetBinned("diLepton_DeltaR", "di-electron mass; #Delta R; events;", 500, 0, 5);
 
-	histMan_->addH1D_BJetBinned("LeadElectron_Pt", "lead electron p_{T} [GeV]; events", 300, 0, 1000);
-	histMan_->addH1D_BJetBinned("LeadElectron_Eta", "lead electron #eta; events", 300, -3., 3. );
-	histMan_->addH1D_BJetBinned("LeadElectron_AbsEta", "lead electron #eta; events", 300, 0., 3. );
-	histMan_->addH1D_BJetBinned("LeadElectron_Phi", "lead electron #phi; events", 400, -4. , 4. );
-	histMan_->addH1D_BJetBinned("LeadElectron_RelIso", "lead electron ReliIso; events", 500, 0. , 5. );
+	histMan_->addH1D_BJetBinned("LeadLepton_Pt", "lead electron p_{T} [GeV]; events", 1000, 0, 1000);
+	histMan_->addH1D_BJetBinned("LeadLepton_Eta", "lead electron #eta; events", 300, -3., 3. );
+	histMan_->addH1D_BJetBinned("LeadLepton_AbsEta", "lead electron #eta; events", 300, 0., 3. );
+	histMan_->addH1D_BJetBinned("LeadLepton_Phi", "lead electron #phi; events", 400, -4. , 4. );
+	histMan_->addH1D_BJetBinned("LeadLepton_RelIso", "lead electron ReliIso; events", 500, 0. , 5. );
 
-	histMan_->addH1D_BJetBinned("LeadElectron_HadOverEM", "Electron HadronicOverEM; HadOverEM; Events/(0.01)", 500, 0, 5);
-	histMan_->addH1D_BJetBinned("LeadElectron_dB", "Electron dB(PV); dB/cm; Events/(0.001 cm)", 200, 0, 0.2);
+	histMan_->addH1D_BJetBinned("LeadLepton_HadOverEM", "Electron HadronicOverEM; HadOverEM; Events/(0.01)", 500, 0, 5);
+	histMan_->addH1D_BJetBinned("LeadLepton_dB", "Electron dB(PV); dB/cm; Events/(0.001 cm)", 200, 0, 0.2);
 
-	histMan_->addH1D_BJetBinned("LeadMuon_Pt", "lead electron p_{T} [GeV]; events", 300, 0, 1000);
-	histMan_->addH1D_BJetBinned("LeadMuon_Eta", "lead electron #eta; events", 300, -3., 3. );
-	histMan_->addH1D_BJetBinned("LeadMuon_AbsEta", "lead electron #eta; events", 300, 0., 3. );
-	histMan_->addH1D_BJetBinned("LeadMuon_Phi", "lead electron #phi; events", 400, -4. , 4. );
-	histMan_->addH1D_BJetBinned("LeadMuon_RelIso", "lead electron ReliIso; events", 500, 0. , 5. );
+	histMan_->addH1D_BJetBinned("SecondLepton_Pt", "lead electron p_{T} [GeV]; events", 1000, 0, 1000);
+	histMan_->addH1D_BJetBinned("SecondLepton_Eta", "lead electron #eta; events", 300, -3., 3. );
+	histMan_->addH1D_BJetBinned("SecondLepton_AbsEta", "lead electron #eta; events", 300, 0., 3. );
+	histMan_->addH1D_BJetBinned("SecondLepton_Phi", "lead electron #phi; events", 400, -4. , 4. );
+	histMan_->addH1D_BJetBinned("SecondLepton_RelIso", "lead electron ReliIso; events", 500, 0. , 5. );
 }
 
 EMuAnalyser::EMuAnalyser(boost::shared_ptr<HistogramManager> histMan, std::string histogramFolder) :
