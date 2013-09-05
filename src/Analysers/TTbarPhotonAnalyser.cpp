@@ -68,6 +68,10 @@ void TTbarPhotonAnalyser::muMuSignalAnalysis(const EventPtr event) {
 			    photonAnalyserMuMuPhotonSelection_->setScale(bjetWeight);
 			    photonAnalyserMuMuPhotonSelection_->analyse(event, photons, jets, electrons, muons);
 
+			    if(event->getDataType() == DataType::TTJets){
+			    ttphotonAnalyserMuMuRefSelection_->setScale(bjetWeight);
+			    ttphotonAnalyserMuMuRefSelection_->analyse(event, photons, jets, electrons, muons);
+			    }
 			}
 	}
 }
@@ -123,6 +127,10 @@ void TTbarPhotonAnalyser::eESignalAnalysis(const EventPtr event) {
 			    photonAnalyserEEPhotonSelection_->setScale(bjetWeight);
 			    photonAnalyserEEPhotonSelection_->analyse(event, photons, jets, electrons, muons);
 
+			    if(event->getDataType() == DataType::TTJets){
+			    ttphotonAnalyserEERefSelection_->setScale(bjetWeight);
+			    ttphotonAnalyserEERefSelection_->analyse(event, photons, jets, electrons, muons);
+			    }
 			}
 	}
 }
@@ -177,6 +185,10 @@ void TTbarPhotonAnalyser::eMuSignalAnalysis(const EventPtr event) {
 			    photonAnalyserEMuPhotonSelection_->setScale(bjetWeight);
 			    photonAnalyserEMuPhotonSelection_->analyse(event, photons, jets, electrons, muons);
 
+			    if(event->getDataType() == DataType::TTJets){
+			    ttphotonAnalyserEMuRefSelection_->setScale(bjetWeight);
+			    ttphotonAnalyserEMuRefSelection_->analyse(event, photons, jets, electrons, muons);
+			    }
 			}
 	}
 }
@@ -187,22 +199,25 @@ TTbarPhotonAnalyser::TTbarPhotonAnalyser(HistogramManagerPtr histMan, std::strin
 		topEEPhotonSelection_(new TopPairEEReferenceSelection()),
 		topEMuPhotonSelection_(new TopPairEMuReferenceSelection()),
 		//signal regions MET
-		metAnalyserMuMuPhotonSelection_(new METAnalyser(histMan, histogramFolder + "/MuMu/One Photon/MET")), //
-		metAnalyserEEPhotonSelection_(new METAnalyser(histMan, histogramFolder + "/EE/One Photon/MET")), //
-		metAnalyserEMuPhotonSelection_(new METAnalyser(histMan, histogramFolder + "/EMu/One Photon/MET")),//
+		metAnalyserMuMuPhotonSelection_(new METAnalyser(histMan, histogramFolder + "/MuMu/Ref selection/MET")), //
+		metAnalyserEEPhotonSelection_(new METAnalyser(histMan, histogramFolder + "/EE/Ref selection/MET")), //
+		metAnalyserEMuPhotonSelection_(new METAnalyser(histMan, histogramFolder + "/EMu/Ref selection/MET")),//
 		//signal regions MET
-		jetAnalyserMuMuPhotonSelection_(new JetAnalyser(histMan, histogramFolder + "/MuMu/One Photon/Jets")), //
-		jetAnalyserEEPhotonSelection_(new JetAnalyser(histMan, histogramFolder + "/EE/One Photon/Jets")), //
-		jetAnalyserEMuPhotonSelection_(new JetAnalyser(histMan, histogramFolder + "/EMu/One Photon/Jets")),//
+		jetAnalyserMuMuPhotonSelection_(new JetAnalyser(histMan, histogramFolder + "/MuMu/Ref selection/Jets")), //
+		jetAnalyserEEPhotonSelection_(new JetAnalyser(histMan, histogramFolder + "/EE/Ref selection/Jets")), //
+		jetAnalyserEMuPhotonSelection_(new JetAnalyser(histMan, histogramFolder + "/EMu/Ref selection/Jets")),//
 		//signal regions di electron
-		diElectronAnalyserEEPhotonSelection_(new DiElectronAnalyser(histMan, histogramFolder + "/EE/One Photon/DiElectron")), //
-		diMuonAnalyserMuMuPhotonSelection_(new DiMuonAnalyser(histMan, histogramFolder + "/MuMu/One Photon/DiMuon")), //
-		eMuAnalyserEMuPhotonSelection_(new EMuAnalyser(histMan, histogramFolder + "/EMu/One Photon/DiLepton")), //
+		diElectronAnalyserEEPhotonSelection_(new DiElectronAnalyser(histMan, histogramFolder + "/EE/Ref selection/DiElectron")), //
+		diMuonAnalyserMuMuPhotonSelection_(new DiMuonAnalyser(histMan, histogramFolder + "/MuMu/Ref selection/DiMuon")), //
+		eMuAnalyserEMuPhotonSelection_(new EMuAnalyser(histMan, histogramFolder + "/EMu/Ref selection/DiLepton")), //
 		//signal regions Photons
-		photonAnalyserMuMuPhotonSelection_(new PhotonAnalyser(histMan, histogramFolder + "/MuMu/One Photon/Photons")), //
-		photonAnalyserEEPhotonSelection_(new PhotonAnalyser(histMan, histogramFolder + "/EE/One Photon/Photons")), //
-		photonAnalyserEMuPhotonSelection_(new PhotonAnalyser(histMan, histogramFolder + "/EMu/One Photon/Photons"))//
-
+		photonAnalyserMuMuPhotonSelection_(new PhotonAnalyser(histMan, histogramFolder + "/MuMu/Ref selection/Photons")), //
+		photonAnalyserEEPhotonSelection_(new PhotonAnalyser(histMan, histogramFolder + "/EE/Ref selection/Photons")), //
+		photonAnalyserEMuPhotonSelection_(new PhotonAnalyser(histMan, histogramFolder + "/EMu/Ref selection/Photons")),//
+		//tt photon analyser
+		ttphotonAnalyserMuMuRefSelection_(new SignalPhotonAnalyser(histMan, histogramFolder + "/MuMu/Ref selection/Photons")), //
+		ttphotonAnalyserEERefSelection_(new SignalPhotonAnalyser(histMan, histogramFolder + "/EE/Ref selection/Photons")), //
+		ttphotonAnalyserEMuRefSelection_(new SignalPhotonAnalyser(histMan, histogramFolder + "/EMu/Ref selection/Photons")) //
 		{
 
 }
@@ -228,7 +243,10 @@ void TTbarPhotonAnalyser::createHistograms() {
 	photonAnalyserEEPhotonSelection_->createHistograms();
 	photonAnalyserMuMuPhotonSelection_->createHistograms();
 	photonAnalyserEMuPhotonSelection_->createHistograms();
-
+	//for ttbar
+	ttphotonAnalyserMuMuRefSelection_->createHistograms();
+	ttphotonAnalyserEERefSelection_->createHistograms();
+	ttphotonAnalyserEMuRefSelection_->createHistograms();
 }
 
 }

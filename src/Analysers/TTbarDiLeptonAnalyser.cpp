@@ -68,6 +68,10 @@ void TTbarDiLeptonAnalyser::muMuSignalAnalysis(const EventPtr event) {
 			    photonAnalyserMuMuRefSelection_->setScale(bjetWeight);
 			    photonAnalyserMuMuRefSelection_->analyse(event, photons, jets, electrons, muons);
 
+			    if(event->getDataType() == DataType::TTJets){
+			    ttphotonAnalyserMuMuRefSelection_->setScale(bjetWeight);
+			    ttphotonAnalyserMuMuRefSelection_->analyse(event, photons, jets, electrons, muons);
+			    }
 			}
 	}
 }
@@ -123,6 +127,11 @@ void TTbarDiLeptonAnalyser::eESignalAnalysis(const EventPtr event) {
 			    photonAnalyserEERefSelection_->setScale(bjetWeight);
 			    photonAnalyserEERefSelection_->analyse(event, photons, jets, electrons, muons);
 
+			    if(event->getDataType() == DataType::TTJets){
+			    ttphotonAnalyserEERefSelection_->setScale(bjetWeight);
+			    ttphotonAnalyserEERefSelection_->analyse(event, photons, jets, electrons, muons);
+			    }
+
 			}
 	}
 }
@@ -177,6 +186,10 @@ void TTbarDiLeptonAnalyser::eMuSignalAnalysis(const EventPtr event) {
 			    photonAnalyserEMuRefSelection_->setScale(bjetWeight);
 			    photonAnalyserEMuRefSelection_->analyse(event, photons, jets, electrons, muons);
 
+			    if(event->getDataType() == DataType::TTJets){
+			    ttphotonAnalyserEMuRefSelection_->setScale(bjetWeight);
+			    ttphotonAnalyserEMuRefSelection_->analyse(event, photons, jets, electrons, muons);
+			    }
 			}
 	}
 }
@@ -201,8 +214,11 @@ TTbarDiLeptonAnalyser::TTbarDiLeptonAnalyser(HistogramManagerPtr histMan, std::s
 		//signal regions Photons
 		photonAnalyserMuMuRefSelection_(new PhotonAnalyser(histMan, histogramFolder + "/MuMu/Ref selection/Photons")), //
 		photonAnalyserEERefSelection_(new PhotonAnalyser(histMan, histogramFolder + "/EE/Ref selection/Photons")), //
-		photonAnalyserEMuRefSelection_(new PhotonAnalyser(histMan, histogramFolder + "/EMu/Ref selection/Photons"))//
-
+		photonAnalyserEMuRefSelection_(new PhotonAnalyser(histMan, histogramFolder + "/EMu/Ref selection/Photons")),//
+		//tt photon analyser
+		ttphotonAnalyserMuMuRefSelection_(new SignalPhotonAnalyser(histMan, histogramFolder + "/MuMu/Ref selection/Photons")), //
+		ttphotonAnalyserEERefSelection_(new SignalPhotonAnalyser(histMan, histogramFolder + "/EE/Ref selection/Photons")), //
+		ttphotonAnalyserEMuRefSelection_(new SignalPhotonAnalyser(histMan, histogramFolder + "/EMu/Ref selection/Photons")) //
 		{
 
 }
@@ -228,7 +244,10 @@ void TTbarDiLeptonAnalyser::createHistograms() {
 	photonAnalyserEERefSelection_->createHistograms();
 	photonAnalyserMuMuRefSelection_->createHistograms();
 	photonAnalyserEMuRefSelection_->createHistograms();
-
+	//for ttbar
+	ttphotonAnalyserMuMuRefSelection_->createHistograms();
+	ttphotonAnalyserEERefSelection_->createHistograms();
+	ttphotonAnalyserEMuRefSelection_->createHistograms();
 }
 
 }
