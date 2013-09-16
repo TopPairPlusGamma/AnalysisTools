@@ -22,7 +22,9 @@ public:
 	void analyse(const EventPtr, PhotonCollection signalPhotons, JetCollection cleanJets, ElectronCollection signalElectrons, MuonCollection signalMuons);
 	void analyse(const EventPtr);
 	void analyse_signalPhotons(const EventPtr, PhotonCollection signalPhotons, JetCollection cleanJets, ElectronCollection signalElectrons, MuonCollection signalMuons);
+	void analyse_NminusOnePhotons(const EventPtr, PhotonCollection signalPhotons, JetCollection cleanJets, ElectronCollection signalElectrons, MuonCollection signalMuons, TString cut);
 	void createHistograms();
+	void createHistograms(TString cut);
 
 private:
  	SelectionPointer topMuMuRefSelection_;

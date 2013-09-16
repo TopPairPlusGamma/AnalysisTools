@@ -87,30 +87,133 @@ const MuonCollection TopPairEMuReferenceSelection::goodMuons(const EventPtr even
 
 
 bool TopPairEMuReferenceSelection::isGoodPhoton(const PhotonPointer photon, const EventPtr event) const {
-
-	bool passesEtAndEta = photon->et() > 20 && fabs(photon->eta()) < 2.5 && !photon->isInCrack();
+	
+	bool passesEtAndEta = photon->et() > 25 && fabs(photon->eta()) < 2.5 && !photon->isInCrack();
 	bool passesSafeElectronVeto = photon->ConversionSafeElectronVeto();
 	bool passesHOverE = photon->SingleTowerHoE() < 0.05; // same for EE and EB
-
+	
 	bool passesShowerShape = false;
 	bool passesPFChargedIso = false;
 	bool passesPFNeutralIso = false;
 	bool passesPFPhotonIso = false;
 	
 	if (photon->isInBarrelRegion()) {
-		passesShowerShape = photon->sigmaIEtaIEta() < 0.011;
-		passesPFChargedIso = photon->RhoCorrectedPFChargedHadronIso(event->rho()) < 0.7;
-		passesPFNeutralIso = photon->RhoCorrectedPFNeutralHadronIso(event->rho()) < 0.4 + 0.04 * photon->pt();
-		passesPFPhotonIso = photon->RhoCorrectedPFPhotonIso(event->rho()) < 0.5 + 0.005 * photon->pt();
+		passesShowerShape = photon->sigmaIEtaIEta() < 0.012;
+		passesPFChargedIso = photon->RhoCorrectedPFChargedHadronIso(event->rho()) < 2.6;
+		passesPFNeutralIso = photon->RhoCorrectedPFNeutralHadronIso(event->rho()) < 3.5 + 0.04 * photon->pt();
+		passesPFPhotonIso = photon->RhoCorrectedPFPhotonIso(event->rho()) < 1.3 + 0.005 * photon->pt();
 	} else if (photon->isInEndCapRegion()) {
-		passesShowerShape = photon->sigmaIEtaIEta() < 0.031;
-		passesPFChargedIso = photon->RhoCorrectedPFChargedHadronIso(event->rho()) < 0.5;
-		passesPFNeutralIso = photon->RhoCorrectedPFNeutralHadronIso(event->rho()) < 1.5 + 0.04 * photon->pt();
-		passesPFPhotonIso = photon->RhoCorrectedPFPhotonIso(event->rho()) < 1.0 + 0.005 * photon->pt();
-	} 
+		passesShowerShape = photon->sigmaIEtaIEta() < 0.034;
+		passesPFChargedIso = photon->RhoCorrectedPFChargedHadronIso(event->rho()) < 2.3;
+		passesPFNeutralIso = photon->RhoCorrectedPFNeutralHadronIso(event->rho()) < 2.9 + 0.04 * photon->pt();
+		passesPFPhotonIso = photon->RhoCorrectedPFPhotonIso(event->rho()) < 1.5 + 0.005 * photon->pt();
+	}
 	
-	return passesEtAndEta && passesSafeElectronVeto && passesHOverE && passesShowerShape  &&	passesPFChargedIso && passesPFNeutralIso && passesPFPhotonIso;
+	const ElectronCollection electrons(goodElectrons(event));
+	const MuonCollection muons(goodMuons(event));
+
+	   bool passesDeltaRgammaMuons = false;
+
+	 	for (unsigned int index = 0; index < muons.size(); ++index) {
+	 			const MuonPointer muon(muons.at(index));
+	 			passesDeltaRgammaMuons = photon->deltaR(muon) > 0.5;
+				
+				if(photon->deltaR(muon) < 0.5)
+				break;
+	 	}
+
+	 	bool passesDeltaRgammaElectrons = false;
+
+	 	 	for (unsigned int index = 0; index < electrons.size(); ++index) {
+	 	 		const ElectronPointer electron(electrons.at(index));
+	 	 		passesDeltaRgammaElectrons = photon->deltaR(electron) > 0.5;
+					
+				if(photon->deltaR(electron) < 0.5)
+				break;	
+	  	}
+
+
+	return passesEtAndEta && passesSafeElectronVeto && passesHOverE && passesShowerShape  && passesPFChargedIso && passesPFNeutralIso && passesPFPhotonIso && passesDeltaRgammaMuons && passesDeltaRgammaElectrons;
 }
+
+bool TopPairEMuReferenceSelection::isNminusOnePhoton(const PhotonPointer photon, const EventPtr event, TString cut) const {
+
+	const ElectronCollection electrons(goodElectrons(event));
+	const MuonCollection muons(goodMuons(event));
+	const JetCollection jets(event->Jets());
+
+	bool passesEtAndEta = photon->et() > 25 && fabs(photon->eta()) < 2.5 && !photon->isInCrack();
+	bool passesSafeElectronVeto = photon->ConversionSafeElectronVeto();
+	bool passesHOverE = photon->SingleTowerHoE() < 0.05; // same for EE and EB
+	
+	bool passesShowerShape = false;
+	bool passesPFChargedIso = false;
+	bool passesPFNeutralIso = false;
+	bool passesPFPhotonIso = false;
+	
+	if (photon->isInBarrelRegion()) {
+		passesShowerShape = photon->sigmaIEtaIEta() < 0.012;
+		passesPFChargedIso = photon->RhoCorrectedPFChargedHadronIso(event->rho()) < 2.6;
+		passesPFNeutralIso = photon->RhoCorrectedPFNeutralHadronIso(event->rho()) < 3.5 + 0.04 * photon->pt();
+		passesPFPhotonIso = photon->RhoCorrectedPFPhotonIso(event->rho()) < 1.3 + 0.005 * photon->pt();
+	} else if (photon->isInEndCapRegion()) {
+		passesShowerShape = photon->sigmaIEtaIEta() < 0.034;
+		passesPFChargedIso = photon->RhoCorrectedPFChargedHadronIso(event->rho()) < 2.3;
+		passesPFNeutralIso = photon->RhoCorrectedPFNeutralHadronIso(event->rho()) < 2.9 + 0.04 * photon->pt();
+		passesPFPhotonIso = photon->RhoCorrectedPFPhotonIso(event->rho()) < 1.5 + 0.005 * photon->pt();
+	}
+
+	  bool passesDeltaRgammaMuons = false;
+
+	 	for (unsigned int index = 0; index < muons.size(); ++index) {
+	 			const MuonPointer muon(muons.at(index));
+	 			passesDeltaRgammaMuons = photon->deltaR(muon) > 0.5;
+				
+				if(photon->deltaR(muon) < 0.5)
+				break;
+	 	}
+
+	 	bool passesDeltaRgammaElectrons = false;
+
+	 	 	for (unsigned int index = 0; index < electrons.size(); ++index) {
+	 	 		const ElectronPointer electron(electrons.at(index));
+	 	 		passesDeltaRgammaElectrons = photon->deltaR(electron) > 0.5;
+					
+				if(photon->deltaR(electron) < 0.5)
+				break;
+	  	}
+
+	//
+	// 	bool passesDeltaRgammaJets = false;
+	//
+	// 	for (unsigned int index = 0; index < jets.size(); ++index) {
+	// 			const JetPointer jet(jets.at(index));
+	// 			passesDeltaRgammaJets = photon->deltaR(jet) > 0.7;
+	// 	}
+
+		if(cut == "passesEtAndEta")
+			return passesSafeElectronVeto && passesHOverE && passesShowerShape && passesPFChargedIso && passesPFNeutralIso && passesPFPhotonIso && passesDeltaRgammaMuons && passesDeltaRgammaElectrons; // && passesDeltaRgammaMuons && passesDeltaRgammaJets;
+		else if(cut == "passesHOverE")
+			return passesEtAndEta && passesSafeElectronVeto && passesShowerShape && passesPFChargedIso && passesPFNeutralIso && passesPFPhotonIso && passesDeltaRgammaMuons && passesDeltaRgammaElectrons;
+		else if(cut == "passesShowerShape")
+			return passesEtAndEta && passesSafeElectronVeto && passesHOverE && passesPFChargedIso && passesPFNeutralIso && passesPFPhotonIso && passesDeltaRgammaMuons && passesDeltaRgammaElectrons;
+		else if(cut == "passesPFChargedIso")
+			return passesEtAndEta && passesSafeElectronVeto && passesHOverE && passesShowerShape && passesPFNeutralIso && passesPFPhotonIso && passesDeltaRgammaMuons && passesDeltaRgammaElectrons;
+		else if(cut == "passesPFNeutralIso")
+			return passesEtAndEta && passesSafeElectronVeto && passesHOverE && passesShowerShape && passesPFChargedIso && passesPFPhotonIso && passesDeltaRgammaMuons && passesDeltaRgammaElectrons;
+		else if(cut == "passesPFPhotonIso")
+			return passesEtAndEta && passesSafeElectronVeto && passesHOverE && passesShowerShape && passesPFChargedIso && passesPFNeutralIso && passesDeltaRgammaMuons && passesDeltaRgammaElectrons;
+		else if(cut == "passesDeltaRgammaElectrons")
+			return passesEtAndEta && passesSafeElectronVeto && passesHOverE && passesShowerShape && passesPFChargedIso && passesPFNeutralIso && passesPFPhotonIso && passesDeltaRgammaMuons;
+		else if(cut == "passesDeltaRgammaMuons")
+			return passesEtAndEta && passesSafeElectronVeto && passesHOverE && passesShowerShape && passesPFChargedIso && passesPFNeutralIso && passesPFPhotonIso && passesDeltaRgammaElectrons;
+		else
+			return passesEtAndEta && passesSafeElectronVeto && passesHOverE && passesShowerShape && passesPFChargedIso && passesPFNeutralIso && passesPFPhotonIso && passesDeltaRgammaMuons && passesDeltaRgammaElectrons;
+
+
+
+}
+
 
 bool TopPairEMuReferenceSelection::isBJet(const JetPointer jet) const {
 	return jet->isBJet(BtagAlgorithm::CombinedSecondaryVertex, BtagAlgorithm::MEDIUM);
@@ -374,6 +477,21 @@ const PhotonCollection TopPairEMuReferenceSelection::signalPhotons(const EventPt
 	return goodIsolatedPhotons;
 
 } 
+
+const PhotonCollection TopPairEMuReferenceSelection::nMinusOnePhotons(const EventPtr event, TString cut) const {
+
+	const PhotonCollection allPhotons(event->Photons());
+	PhotonCollection nMinusOnePhotons;
+	for (unsigned int index = 0; index < allPhotons.size(); ++index) {
+		const PhotonPointer photon(allPhotons.at(index));
+		if (isNminusOnePhoton(photon, event, cut)){
+			nMinusOnePhotons.push_back(photon);
+		}
+	}
+
+	return nMinusOnePhotons;
+
+}
 
 const JetCollection TopPairEMuReferenceSelection::cleanedJets(const EventPtr event) const {
 	const JetCollection jets(event->Jets());

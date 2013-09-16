@@ -52,6 +52,7 @@ public:
 	virtual bool isGoodMuon(const MuonPointer muon) const;
 	virtual bool isGoodElectron(const ElectronPointer electron) const;
 	virtual bool isGoodPhoton(const PhotonPointer photon, const EventPtr event) const;
+	virtual bool isNminusOnePhoton(const PhotonPointer photon, const EventPtr event, TString cut) const;
 	
 	//definitions of loose objects
 	virtual bool isLooseElectron(const ElectronPointer electron) const;
@@ -79,6 +80,7 @@ public:
 	virtual const MuonCollection signalMuons(const EventPtr event) const;
 	virtual const ElectronCollection signalElectrons(const EventPtr event) const;
 	virtual const PhotonCollection signalPhotons(const EventPtr event) const;
+	virtual const PhotonCollection nMinusOnePhotons(const EventPtr event, TString cut) const;
 	virtual const JetCollection cleanedJets(const EventPtr event) const;
 	virtual const JetCollection cleanedBJets(const EventPtr event) const;
 };
