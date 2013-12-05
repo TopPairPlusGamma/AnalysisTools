@@ -233,10 +233,12 @@ bool TopPairEMuReferenceSelection::passesSelectionStep(const EventPtr event, uns
 		return hasAtLeastNGoodJets(event, 2);
 	case TTbarEMuReferenceSelection::AtLeastOneBtag:
 		return hasAtLeastOneGoodBJet(event);
-	case TTbarEMuReferenceSelection::AtLeastOnePhoton:
-		return hasAtLeastOneGoodPhoton(event);
-	case TTbarEMuReferenceSelection::JustOneGoodPhoton:
-		return hasJustOneGoodPhoton(event);
+	case TTbarEMuReferenceSelection::AtLeastOnePhotonPreSelection:
+		return hasAtLeastOnePhotonPreSelection(event);
+	case TTbarEMuReferenceSelection::AtLeastOnePhotonPostSelection:
+		return hasAtLeastOneGoodPhotonPostSelection(event);
+	case TTbarEMuReferenceSelection::JustOneGoodPhotonPostSelection:
+		return hasJustOneGoodPhotonPostSelection(event);
 	default:
 		break;
 	}
@@ -440,11 +442,15 @@ bool TopPairEMuReferenceSelection::hasAtLeastOneGoodBJet(const EventPtr event) c
 // 	return cleanedBJets(event).size() > 1;
 // }
 
-bool TopPairEMuReferenceSelection::hasAtLeastOneGoodPhoton(const EventPtr event) const {
+bool TopPairEMuReferenceSelection::hasAtLeastOnePhotonPreSelection(const EventPtr event) const {
+	return AllPhotonsPreSelection(event).size() > 0;
+}
+
+bool TopPairEMuReferenceSelection::hasAtLeastOneGoodPhotonPostSelection(const EventPtr event) const {
 	return signalPhotons(event).size() > 0;
 }
 
-bool TopPairEMuReferenceSelection::hasJustOneGoodPhoton(const EventPtr event) const {
+bool TopPairEMuReferenceSelection::hasJustOneGoodPhotonPostSelection(const EventPtr event) const {
 	return signalPhotons(event).size() == 1;
 }
 const LeptonPointer TopPairEMuReferenceSelection::signalLepton(const EventPtr event) const {
@@ -491,6 +497,18 @@ const PhotonCollection TopPairEMuReferenceSelection::nMinusOnePhotons(const Even
 
 	return nMinusOnePhotons;
 
+}
+
+const PhotonCollection TopPairEMuReferenceSelection::AllPhotonsPreSelection(const EventPtr event) const {
+	
+	const PhotonCollection allPhotons(event->Photons());
+	PhotonCollection AllPhotonsPreSelection;
+	for (unsigned int index = 0; index < allPhotons.size(); ++index) {
+		const PhotonPointer photon(allPhotons.at(index));
+		AllPhotonsPreSelection.push_back(photon);
+	}
+	
+	return AllPhotonsPreSelection; 
 }
 
 const JetCollection TopPairEMuReferenceSelection::cleanedJets(const EventPtr event) const {

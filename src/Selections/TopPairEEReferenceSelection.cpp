@@ -212,10 +212,12 @@ bool TopPairEEReferenceSelection::passesSelectionStep(const EventPtr event, unsi
 		return hasAtLeastOneGoodBJet(event);
 //	case TTbarEEReferenceSelection::AtLeastTwoBtags:
 //		return hasAtLeastTwoGoodBJets(event);
-	case TTbarEEReferenceSelection::AtLeastOnePhoton:
-		return hasAtLeastOneGoodPhoton(event);
-	case TTbarEEReferenceSelection::JustOneGoodPhoton:
-		return hasJustOneGoodPhoton(event);
+	case TTbarEEReferenceSelection::AtLeastOnePhotonPreSelection:
+		return hasAtLeastOnePhotonPreSelection(event);
+	case TTbarEEReferenceSelection::AtLeastOnePhotonPostSelection:
+		return hasAtLeastOneGoodPhotonPostSelection(event);
+	case TTbarEEReferenceSelection::JustOneGoodPhotonPostSelection:
+		return hasJustOneGoodPhotonPostSelection(event);
 	default:
 		break;
 	}
@@ -318,11 +320,15 @@ bool TopPairEEReferenceSelection::hasAtLeastOneGoodBJet(const EventPtr event) co
 // 	return cleanedBJets(event).size() > 1;
 // }
 
-bool TopPairEEReferenceSelection::hasAtLeastOneGoodPhoton(const EventPtr event) const {
+bool TopPairEEReferenceSelection::hasAtLeastOnePhotonPreSelection(const EventPtr event) const {
+	return AllPhotonsPreSelection(event).size() > 0;
+}
+
+bool TopPairEEReferenceSelection::hasAtLeastOneGoodPhotonPostSelection(const EventPtr event) const {
 	return signalPhotons(event).size() > 0;
 }
 
-bool TopPairEEReferenceSelection::hasJustOneGoodPhoton(const EventPtr event) const {
+bool TopPairEEReferenceSelection::hasJustOneGoodPhotonPostSelection(const EventPtr event) const {
 	return signalPhotons(event).size() == 1;
 }
 
@@ -469,6 +475,18 @@ const PhotonCollection TopPairEEReferenceSelection::nMinusOnePhotons(const Event
 
 	return nMinusOnePhotons;
 
+}
+
+const PhotonCollection TopPairEEReferenceSelection::AllPhotonsPreSelection(const EventPtr event) const {
+	
+	const PhotonCollection allPhotons(event->Photons());
+	PhotonCollection AllPhotonsPreSelection;
+	for (unsigned int index = 0; index < allPhotons.size(); ++index) {
+		const PhotonPointer photon(allPhotons.at(index));
+		AllPhotonsPreSelection.push_back(photon);
+	}
+	
+	return AllPhotonsPreSelection; 
 }
 
 const JetCollection TopPairEEReferenceSelection::cleanedJets(const EventPtr event) const {

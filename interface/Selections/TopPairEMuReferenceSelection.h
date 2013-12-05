@@ -19,8 +19,9 @@ enum Step {
 	AtLeastOneGoodJets,
 	AtLeastTwoGoodJets,
 	AtLeastOneBtag,
-	AtLeastOnePhoton,
-	JustOneGoodPhoton,
+	AtLeastOnePhotonPreSelection,
+	AtLeastOnePhotonPostSelection,
+	JustOneGoodPhotonPostSelection,
 	NUMBER_OF_SELECTION_STEPS
 };
 
@@ -30,8 +31,9 @@ const std::string StringSteps[NUMBER_OF_SELECTION_STEPS] = { //
 				">= 1 jets",
 				">= 2 jets",
 				">=1 CSV b-tag", //
-				">=1 Photon",
-				"==1 Photon"
+				">=1 Photon Presel",
+				">=1 Photon Postsel",
+				"==1 Photon Postsel"
 		};
 }
 
@@ -66,11 +68,12 @@ public:
 	virtual bool hasAtLeastOneGoodBJet(const EventPtr event) const;
 //	virtual bool hasAtLeastTwoGoodBJets(const EventPtr event) const;
 	virtual bool passesMetCut(const EventPtr event) const;
-	virtual bool hasAtLeastOneGoodPhoton(const EventPtr event) const;
-	virtual bool hasJustOneGoodPhoton(const EventPtr event) const;
+	virtual bool hasAtLeastOnePhotonPreSelection(const EventPtr event) const;
+	virtual bool hasAtLeastOneGoodPhotonPostSelection(const EventPtr event) const;
+	virtual bool hasJustOneGoodPhotonPostSelection(const EventPtr event) const;
 
 
-
+	virtual const PhotonCollection AllPhotonsPreSelection(const EventPtr event) const;
 	virtual const LeptonPointer signalLepton(const EventPtr event) const;
 	virtual const ElectronCollection goodElectrons(const EventPtr event) const;
 	virtual const MuonCollection goodMuons(const EventPtr event) const;

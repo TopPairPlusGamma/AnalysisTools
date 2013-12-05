@@ -22,7 +22,7 @@ void TTbarPhotonAnalyser::analyse(const EventPtr event) {
 
 void TTbarPhotonAnalyser::muMuSignalAnalysis(const EventPtr event) {
 
-	if (topMuMuPhotonSelection_->passesSelectionUpToStep(event, TTbarMuMuReferenceSelection::JustOneGoodPhoton)) {
+	if (topMuMuPhotonSelection_->passesSelectionUpToStep(event, TTbarMuMuReferenceSelection::JustOneGoodPhotonPostSelection)) {
 			const JetCollection jets(topMuMuPhotonSelection_->cleanedJets(event));
 			const JetCollection bJets(topMuMuPhotonSelection_->cleanedBJets(event));
 			unsigned int numberOfBjets(bJets.size());
@@ -117,7 +117,7 @@ void TTbarPhotonAnalyser::muMuSignalAnalysis(const EventPtr event) {
 
 void TTbarPhotonAnalyser::eESignalAnalysis(const EventPtr event) {
 
-	if (topEEPhotonSelection_->passesSelectionUpToStep(event, TTbarEEReferenceSelection::JustOneGoodPhoton)) {
+	if (topEEPhotonSelection_->passesSelectionUpToStep(event, TTbarEEReferenceSelection::JustOneGoodPhotonPostSelection)) {
 
 			const JetCollection jets(topEEPhotonSelection_->cleanedJets(event));
 			const JetCollection bJets(topEEPhotonSelection_->cleanedBJets(event));
@@ -214,7 +214,7 @@ void TTbarPhotonAnalyser::eESignalAnalysis(const EventPtr event) {
 
 void TTbarPhotonAnalyser::eMuSignalAnalysis(const EventPtr event) {
 
-	if (topEMuPhotonSelection_->passesSelectionUpToStep(event, TTbarEMuReferenceSelection::JustOneGoodPhoton)) {
+	if (topEMuPhotonSelection_->passesSelectionUpToStep(event, TTbarEMuReferenceSelection::JustOneGoodPhotonPostSelection)) {
 
 			const JetCollection jets(topEMuPhotonSelection_->cleanedJets(event));
 			const JetCollection bJets(topEMuPhotonSelection_->cleanedBJets(event));

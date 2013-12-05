@@ -28,7 +28,7 @@ class BasicSelection {
 public:
 	BasicSelection(unsigned int numberOfSelectionSteps);
 	virtual ~BasicSelection();
-	
+
 	//definitions of good objects
 	virtual bool isGoodJet(const JetPointer jet) const = 0;
 	virtual bool isBJet(const JetPointer jet) const = 0;
@@ -49,7 +49,7 @@ public:
 	virtual unsigned int prescale(const EventPtr event) const;
 	virtual void useNonIsoTrigger(bool use = true);
 
-
+	virtual const PhotonCollection AllPhotonsPreSelection(const EventPtr event) const = 0;
 	virtual const MuonCollection goodMuons(const EventPtr event) const = 0;
 	virtual const ElectronCollection goodElectrons(const EventPtr event) const = 0;
 	virtual const PhotonCollection signalPhotons(const EventPtr event) const = 0;
