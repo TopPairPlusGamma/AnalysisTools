@@ -32,9 +32,13 @@ PhotonAlgorithm::value Globals::photonAlgorithm = PhotonAlgorithm::Default;
 
 //electrons
 ElectronAlgorithm::value Globals::electronAlgorithm = ElectronAlgorithm::ParticleFlow;
+bool Globals::ElectronIDSFUp = false;
+bool Globals::ElectronIDSFDown = false;
 
 //muons
 MuonAlgorithm::value Globals::muonAlgorithm = MuonAlgorithm::ParticleFlow;
+bool Globals::MuonIDSFUp = false;
+bool Globals::MuonIDSFDown = false;
 
 //jets
 JetAlgorithm::value Globals::jetAlgorithm = JetAlgorithm::PF2PAT;
@@ -59,6 +63,10 @@ bool Globals::applyType1MetCorrection = false;
 
 //top pt reweighting
 bool Globals::applyTopPtReweighting = true;
+
+//Trigger SFs
+bool Globals::TriggerSFUp = false;
+bool Globals::TriggerSFDown = false;
 
 
 std::string Globals::custom_file_suffix = "";

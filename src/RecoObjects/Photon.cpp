@@ -41,7 +41,16 @@ Photon::Photon() :
 		pfPhotonIso(initialBigValue),
 		rhocorrectedpfChargedIso(initialBigValue),
 		rhocorrectedpfNeutralIso(initialBigValue),
-		rhocorrectedpfPhotonIso(initialBigValue){
+		rhocorrectedpfPhotonIso(initialBigValue),
+		phoscchIso(initialBigValue),
+		phoscnuIso(initialBigValue),
+		phoscphIso(initialBigValue),
+		phorandconechIso(initialBigValue),
+		phorandconenuIso(initialBigValue),
+		phorandconephIso(initialBigValue),
+		rhocorrectedscchIso(initialBigValue),
+		rhocorrectedscnuIso(initialBigValue),
+		rhocorrectedscphIso(initialBigValue){
 
 }
 
@@ -68,7 +77,16 @@ Photon::Photon(double energy, double px, double py, double pz) :
 		pfPhotonIso(initialBigValue),
 		rhocorrectedpfChargedIso(initialBigValue),
 		rhocorrectedpfNeutralIso(initialBigValue),
-		rhocorrectedpfPhotonIso(initialBigValue){
+		rhocorrectedpfPhotonIso(initialBigValue),
+		phoscchIso(initialBigValue),
+		phoscnuIso(initialBigValue),
+		phoscphIso(initialBigValue),
+		phorandconechIso(initialBigValue),
+		phorandconenuIso(initialBigValue),
+		phorandconephIso(initialBigValue),
+		rhocorrectedscchIso(initialBigValue),
+		rhocorrectedscnuIso(initialBigValue),
+		rhocorrectedscphIso(initialBigValue){
 		
 }
 
@@ -162,6 +180,45 @@ void Photon::setRhoCorrectedPFNeutralHadronIso(double RhoCorrPfNeutralIso03) {
 void Photon::setRhoCorrectedPFPhotonIso(double RhoCorrPfPhotonIso03) {
 	rhocorrectedpfPhotonIso = RhoCorrPfPhotonIso03;
 }
+
+void Photon::setphoSCChIso(double phoSCChIso) {
+	phoscchIso = phoSCChIso;
+}
+
+void Photon::setphoSCNuIso(double phoSCNuIso) {
+	phoscnuIso = phoSCNuIso;
+}
+
+void Photon::setphoSCPhIso(double phoSCPhIso) {
+	phoscphIso = phoSCPhIso;
+}
+
+void Photon::setphoRandConeChIso(double phoRandConeChIso) {
+	phorandconechIso = phoRandConeChIso;
+}
+
+void Photon::setphoRandConeNuIso(double phoRandConeNuIso) {
+	phorandconenuIso = phoRandConeNuIso;
+}
+
+void Photon::setphoRandConePhIso(double phoRandConePhIso) {
+	phorandconephIso = phoRandConePhIso;
+}
+
+void Photon::setRhoCorrectedSCChIso(double RhoCorrSCChIso) {
+	rhocorrectedscchIso = RhoCorrSCChIso;
+}
+
+void Photon::setRhoCorrectedSCNuIso(double RhoCorrSCNuIso) {
+	rhocorrectedscnuIso = RhoCorrSCNuIso;
+}
+
+void Photon::setRhoCorrectedSCPhIso(double RhoCorrSCPhIso) {
+	rhocorrectedscphIso = RhoCorrSCPhIso;
+}
+
+
+
 
 double Photon::ecalIsolation() const {
 	return EcalIso;
@@ -320,4 +377,164 @@ double Photon::RhoCorrectedPFPhotonIso(double rho) const {
 	return rhocorrectedpfPhotonIso;
 }
 
+double Photon::phoSCChIso() const {
+	return phoscchIso;
 }
+
+double Photon::phoSCNuIso() const {
+	return phoscnuIso;
+}
+
+double Photon::phoSCPhIso() const {
+	return phoscphIso;
+}
+
+double Photon::phoRandConeChIso() const {
+	return phorandconechIso;
+}
+
+double Photon::phoRandConeNuIso() const {
+	return phorandconenuIso;
+}
+
+double Photon::phoRandConePhIso() const {
+	return phorandconephIso;
+}
+
+
+double Photon::RhoCorrectedSCChIso(double rho) const {
+	double effectiveArea = 0;
+	double eta = fabs(this->eta());
+	if (eta < 1.)
+		effectiveArea = 0.12;
+	if (eta > 1. && eta < 1.479)
+		effectiveArea = 0.01;
+	if (eta > 1.479 && eta < 2.0)
+		effectiveArea = 0.014;
+	if (eta > 2.0 && eta < 2.2)
+		effectiveArea = 0.012;
+	if (eta > 2.2 && eta < 2.3)
+		effectiveArea = 0.016;
+	if (eta > 2.3 && eta < 2.4)
+		effectiveArea = 0.020;
+	if (eta > 2.4)
+		effectiveArea = 0.012;
+
+	double rhocorrectedscchIso =	max(phoSCChIso() - rho * effectiveArea, 0.);
+	return rhocorrectedscchIso;
+}
+
+double Photon::RhoCorrectedSCNuIso(double rho) const {
+	double effectiveArea = 0;
+	double eta = fabs(this->eta());
+	if (eta < 1.)
+		effectiveArea = 0.030;
+	if (eta > 1. && eta < 1.479)
+		effectiveArea = 0.057;
+	if (eta > 1.479 && eta < 2.0)
+		effectiveArea = 0.039;
+	if (eta > 2.0 && eta < 2.2)
+		effectiveArea = 0.015;
+	if (eta > 2.2 && eta < 2.3)
+		effectiveArea = 0.024;
+	if (eta > 2.3 && eta < 2.4)
+		effectiveArea = 0.039;
+	if (eta > 2.4)
+		effectiveArea = 0.072;
+
+	double rhocorrectedscnuIso =	max(phoSCNuIso() - rho * effectiveArea, 0.);
+	return rhocorrectedscnuIso;
+}
+
+double Photon::RhoCorrectedSCPhIso(double rho) const {
+	double effectiveArea = 0;
+	double eta = fabs(this->eta());
+	if (eta < 1.)
+		effectiveArea = 0.148;
+	if (eta > 1. && eta < 1.479)
+		effectiveArea = 0.13;
+	if (eta > 1.479 && eta < 2.0)
+		effectiveArea = 0.112;
+	if (eta > 2.0 && eta < 2.2)
+		effectiveArea = 0.216;
+	if (eta > 2.2 && eta < 2.3)
+		effectiveArea = 0.262;
+	if (eta > 2.3 && eta < 2.4)
+		effectiveArea = 0.26;
+	if (eta > 2.4)
+		effectiveArea = 0.266;
+
+	double rhocorrectedscphIso =	max(phoSCPhIso() - rho * effectiveArea, 0.);
+	return rhocorrectedscphIso;
+}
+
+
+double Photon::getEfficiencyCorrection() const {
+        double correction(1.);
+        double eta = fabs(this->eta());
+	double pt = this->pt();
+
+	if( pt > 15. &&  pt < 20. ){
+	
+        	if(abs(eta)<0.8)
+               		correction = 0.9625;
+        	else if(abs(eta)>=0.8 && abs(eta)<1.4442)                                                                                                                                   
+                	correction = 0.9912;
+        	else if(abs(eta)>=1.566 && abs(eta)<2.0)
+                	correction = 0.9998;
+        	else if(abs(eta)>=2.0 && abs(eta)<2.5)
+                	correction = 1.0275;
+	}
+	
+	if( pt > 20. && pt < 30. ){
+	
+        	if(abs(eta)<0.8)
+               		correction = 0.9714;
+        	else if(abs(eta)>=0.8 && abs(eta)<1.4442)                                                                                                                                   
+                	correction = 0.9899;
+        	else if(abs(eta)>=1.566 && abs(eta)<2.0)
+                	correction = 0.9906;
+        	else if(abs(eta)>=2.0 && abs(eta)<2.5)
+                	correction = 1.0052;
+	}
+	
+	if( pt > 30. && pt < 40. ){
+	
+        	if(abs(eta)<0.8)
+               		correction = 0.9884;
+        	else if(abs(eta)>=0.8 && abs(eta)<1.4442)                                                                                                                                   
+                	correction = 0.9871;
+        	else if(abs(eta)>=1.566 && abs(eta)<2.0)
+                	correction = 0.9991;
+        	else if(abs(eta)>=2.0 && abs(eta)<2.5)
+                	correction = 1.0021;
+	}
+	
+	if( pt > 40. && pt < 50. ){
+	
+        	if(abs(eta)<0.8)
+               		correction = 0.9905;
+        	else if(abs(eta)>=0.8 && abs(eta)<1.4442)                                                                                                                                   
+                	correction = 0.9919;
+        	else if(abs(eta)>=1.566 && abs(eta)<2.0)
+                	correction = 1.0009;
+        	else if(abs(eta)>=2.0 && abs(eta)<2.5)
+                	correction = 1.0023;
+	}
+	
+	if( pt >= 50. ){
+	
+        	if(abs(eta)<0.8)
+               		correction = 0.9893;
+        	else if(abs(eta)>=0.8 && abs(eta)<1.4442)                                                                                                                                   
+                	correction = 0.9924;
+        	else if(abs(eta)>=1.566 && abs(eta)<2.0)
+                	correction = 1.0004;
+        	else if(abs(eta)>=2.0 && abs(eta)<2.5)
+                	correction = 1.0019;
+	}
+
+        return correction;
+}
+}
+

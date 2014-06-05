@@ -19,6 +19,7 @@
 #include "SignalPhotonAnalyser.h"
 #include "VertexAnalyser.h"
 #include "JetAnalyser.h"
+#include "ABCDAnalyser.h"
 #include "../Selections/BasicSelection.h"
 
 #include <string>
@@ -56,6 +57,9 @@ private:
 
 	//Vertex analyser
  	//  VertexAnalyserLocalPtr vertexAnalyserMuMuPhotonSelection_, vertexAnalyserEEPhotonSelection_, vertexAnalyserEMuPhotonSelection_;
+
+	//ABCD Analyser
+	//ABCDAnalyserLocalPtr abcdAnalyserMuMuPhotonSelection_, abcdAnalyserEEPhotonSelection_, abcdAnalyserEMuPhotonSelection_;
  
 };
 

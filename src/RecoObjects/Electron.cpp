@@ -434,21 +434,21 @@ double Electron::mvaNonTrigV0() const {
 	return mvaNonTrigV0_;
 }
 
-double Electron::getEfficiencyCorrection() const {
-	double correction(1.);
-	double eEta(eta());
-
-	if(abs(eEta)<0.9)
-		correction = 1.0000;
-	else if(abs(eEta)>=0.9 && abs(eEta)<1.2)
-		correction = 1.0000;
-	else if(abs(eEta)>=1.2 && abs(eEta)<2.1)
-		correction = 1.0000;
-	else if(abs(eEta)>=2.1 && abs(eEta)<2.4)
-		correction = 1.0000;
-
-	return correction;
-}
+// double Electron::getEfficiencyCorrection() const {
+// 	double correction(1.);
+// 	double eEta(eta());
+// 
+// 	if(abs(eEta)<0.9)
+// 		correction = 1.0000;
+// 	else if(abs(eEta)>=0.9 && abs(eEta)<1.2)
+// 		correction = 1.0000;
+// 	else if(abs(eEta)>=1.2 && abs(eEta)<2.1)
+// 		correction = 1.0000;
+// 	else if(abs(eEta)>=2.1 && abs(eEta)<2.4)
+// 		correction = 1.0000;
+// 
+// 	return correction;
+// }
 
 double Electron::getdiElectronTriggerSF() const {
 
@@ -457,5 +457,166 @@ double Electron::getdiElectronTriggerSF() const {
 	return SF;
 }
 
+double Electron::getEfficiencyCorrection() const {
+        double correction(1.);
+        double eta = fabs(this->eta());
+	double pt = this->pt();
 
+if(Globals::ElectronIDSFUp == true){
+
+        if( pt > 20. && pt < 30. ){
+
+                if(abs(eta)<0.8)
+                        correction = 0.976;
+                else if(abs(eta)>=0.8 && abs(eta)<1.4442)
+                        correction = 0.952;
+                else if(abs(eta)>=1.4442 && abs(eta)<1.5660)
+                        correction = 1.071;
+                else if(abs(eta)>=1.5660 && abs(eta)<2.5)
+                        correction = 0.9330;
+        }
+
+        if( pt > 30. && pt < 40. ){
+
+                if(abs(eta)<0.8)
+                        correction = 0.929;
+                else if(abs(eta)>=0.8 && abs(eta)<1.4442)
+                        correction = 0.949;
+                else if(abs(eta)>=1.4442 && abs(eta)<1.5660)
+                        correction = 0.922;
+                else if(abs(eta)>=1.5660 && abs(eta)<2.5)
+                        correction = 0.931;
+        }
+
+        if( pt > 40. && pt < 50. ){
+
+                if(abs(eta)<0.8)
+                        correction = 0.971;
+                else if(abs(eta)>=0.8 && abs(eta)<1.4442)
+                        correction = 0.966;
+                else if(abs(eta)>=1.4442 && abs(eta)<1.5660)
+                        correction = 0.979;
+                else if(abs(eta)>=1.5660 && abs(eta)<2.5)
+                        correction = 0.953;
+        }
+
+        if( pt >= 50. ){
+
+                if(abs(eta)<0.8)
+                        correction = 0.975;
+                else if(abs(eta)>=0.8 && abs(eta)<1.4442)
+                        correction = 0.976;
+                else if(abs(eta)>=1.4442 && abs(eta)<1.5660)
+                        correction = 0.897;
+                else if(abs(eta)>=1.5660 && abs(eta)<2.5)
+                        correction = 0.955;
+        }
+
+} else if(Globals::ElectronIDSFDown == true){
+
+        if( pt > 20. && pt < 30. ){
+
+                if(abs(eta)<0.8)
+                        correction = 0.962;
+                else if(abs(eta)>=0.8 && abs(eta)<1.4442)
+                        correction = 0.918;
+                else if(abs(eta)>=1.4442 && abs(eta)<1.5660)
+                        correction = 0.993;
+                else if(abs(eta)>=1.5660 && abs(eta)<2.5)
+                        correction = 0.905;
+        }
+
+        if( pt > 30. && pt < 40. ){
+
+                if(abs(eta)<0.8)
+                        correction = 0.923;
+                else if(abs(eta)>=0.8 && abs(eta)<1.4442)
+                        correction = 0.941;
+                else if(abs(eta)>=1.4442 && abs(eta)<1.5660)
+                        correction = 0.882;
+                else if(abs(eta)>=1.5660 && abs(eta)<2.5)
+                        correction = 0.921;
+        }
+
+        if( pt > 40. && pt < 50. ){
+
+                if(abs(eta)<0.8)
+                        correction = 0.967;
+                else if(abs(eta)>=0.8 && abs(eta)<1.4442)
+                        correction = 0.962;
+                else if(abs(eta)>=1.4442 && abs(eta)<1.5660)
+                        correction = 0.935;
+                else if(abs(eta)>=1.5660 && abs(eta)<2.5)
+                        correction = 0.949;
+        }
+
+        if( pt >= 50. ){
+
+                if(abs(eta)<0.8)
+                        correction = 0.975;
+                else if(abs(eta)>=0.8 && abs(eta)<1.4442)
+                        correction = 0.972;
+                else if(abs(eta)>=1.4442 && abs(eta)<1.5660)
+                        correction = 0.857;
+                else if(abs(eta)>=1.5660 && abs(eta)<2.5)
+                        correction = 0.945;
+        }
+
+} else {
+	
+	if( pt > 20. && pt < 30. ){
+	
+        	if(abs(eta)<0.8)
+               		correction = 0.969;
+        	else if(abs(eta)>=0.8 && abs(eta)<1.4442)                                                                                                                                   
+                	correction = 0.935;
+        	else if(abs(eta)>=1.4442 && abs(eta)<1.5660)
+                	correction = 1.032;
+        	else if(abs(eta)>=1.5660 && abs(eta)<2.5)
+                	correction = 0.9190;
+	}
+	
+	if( pt > 30. && pt < 40. ){
+	
+        	if(abs(eta)<0.8)
+               		correction = 0.926;
+        	else if(abs(eta)>=0.8 && abs(eta)<1.4442)                                                                                                                                   
+                	correction = 0.945;
+        	else if(abs(eta)>=1.4442 && abs(eta)<1.5660)
+                	correction = 0.907;
+        	else if(abs(eta)>=1.5660 && abs(eta)<2.5)
+                	correction = 0.926;
+	}
+	
+	if( pt > 40. && pt < 50. ){
+	
+        	if(abs(eta)<0.8)
+               		correction = 0.969;
+        	else if(abs(eta)>=0.8 && abs(eta)<1.4442)                                                                                                                                   
+                	correction = 0.964;
+        	else if(abs(eta)>=1.4442 && abs(eta)<1.5660)
+                	correction = 0.957;
+        	else if(abs(eta)>=1.5660 && abs(eta)<2.5)
+                	correction = 0.952;
+	}
+	
+	if( pt >= 50. ){
+	
+        	if(abs(eta)<0.8)
+               		correction = 0.975;
+        	else if(abs(eta)>=0.8 && abs(eta)<1.4442)                                                                                                                                   
+                	correction = 0.974;
+        	else if(abs(eta)>=1.4442 && abs(eta)<1.5660)
+                	correction = 0.877;
+        	else if(abs(eta)>=1.5660 && abs(eta)<2.5)
+                	correction = 0.950;
+	}
+
+}
+
+	return correction;
+
+
+
+}
 }

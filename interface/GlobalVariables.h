@@ -42,11 +42,15 @@ struct Globals {
 
 	//electrons
 	static ElectronAlgorithm::value electronAlgorithm;
-//
+	static bool ElectronIDSFUp;
+	static bool ElectronIDSFDown;	
+
 //	//muons
 	static MuonAlgorithm::value muonAlgorithm;
-//
-//	//jets
+	static bool MuonIDSFUp;
+	static bool MuonIDSFDown;
+
+	//jets
 	static JetAlgorithm::value jetAlgorithm;
 	static boost::array<boost::shared_ptr<TF1>, 12> bL7Corrections;
 	static boost::array<boost::shared_ptr<TF1>, 12> lightL7Corrections;
@@ -67,6 +71,10 @@ struct Globals {
 	//miscellaneous
 	static std::string custom_file_suffix;
 	static unsigned int pdfWeightNumber;
+
+	//Trigger SF
+	static bool TriggerSFUp;
+	static bool TriggerSFDown;
 };
 
 }

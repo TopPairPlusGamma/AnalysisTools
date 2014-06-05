@@ -20,7 +20,7 @@ datasetInfo = {}
 #if using the designated subset:
 datasetInfo['TTGamma'] = {"cross-section": 1.8, "NumberOfProcessedEvents":1074860}
 datasetInfo['TTJet'] = {"cross-section": 245.8, "NumberOfProcessedEvents":6923652}
-datasetInfo['WJetsToLNu'] = {"cross-section": 36257.2, "NumberOfProcessedEvents":57709905}
+datasetInfo['WJetsToLNu'] = {"cross-section": 37509.0, "NumberOfProcessedEvents":30491743}
 datasetInfo['W1Jet'] = {"cross-section": 5400.0, "NumberOfProcessedEvents":23140779 }
 datasetInfo['W2Jets'] = {"cross-section": 1750.0, "NumberOfProcessedEvents":34041404}
 datasetInfo['W3Jets'] = {"cross-section": 519.0, "NumberOfProcessedEvents":15536443}
@@ -75,9 +75,9 @@ datasetInfo['GJets_HT-40To100'] = {"cross-section": 23620., "NumberOfProcessedEv
 datasetInfo['GJets_HT-100To200'] = {"cross-section": 3476., "NumberOfProcessedEvents":1536287}
 datasetInfo['GJets_HT-200ToInf'] = {"cross-section": 485., "NumberOfProcessedEvents":9377170}
 
-datasetInfo['WWtoAnything'] = {"cross-section": 57.1097, "NumberOfProcessedEvents":10000431}
-datasetInfo['WZtoAnything'] = {"cross-section": 32.3161, "NumberOfProcessedEvents":10000283}
-datasetInfo['ZZtoAnything'] = {"cross-section": 8.25561, "NumberOfProcessedEvents":9799908}
+datasetInfo['WWToAnything'] = {"cross-section": 57.1097, "NumberOfProcessedEvents":10000431}
+datasetInfo['WZToAnything'] = {"cross-section": 32.3161, "NumberOfProcessedEvents":10000283}
+datasetInfo['ZZToAnything'] = {"cross-section": 8.25561, "NumberOfProcessedEvents":9799908}
 
 #Ttbar + Z/W from http://cms.cern.ch/iCMS/jsp/openfile.jsp?tp=draft&files=AN2011_288_v14.pdf
 datasetInfo['TTbarZIncl'] = {"cross-section": 0.14, "NumberOfProcessedEvents":196277}

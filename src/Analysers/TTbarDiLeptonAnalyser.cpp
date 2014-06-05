@@ -92,6 +92,18 @@ void TTbarDiLeptonAnalyser::muMuSignalAnalysis(const EventPtr event) {
 			    const PhotonCollection photonsMinuspassesPFPhotonIso = topMuMuRefSelection_->nMinusOnePhotons(event, "passesPFPhotonIso");
 			    photonAnalyserMuMuRefSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesPFPhotonIso, jets, electrons, muons, "passesPFPhotonIso");
 			    
+			    //n-passesphoSCChIso photons
+			    const PhotonCollection photonsMinuspassesphoSCChIso = topMuMuRefSelection_->nMinusOnePhotons(event, "passesphoSCChIso");
+			    photonAnalyserMuMuRefSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesphoSCChIso, jets, electrons, muons, "passesphoSCChIso");
+
+			    //n-passesphoSCNuIso photons
+			    const PhotonCollection photonsMinuspassesphoSCNuIso = topMuMuRefSelection_->nMinusOnePhotons(event, "passesphoSCNuIso");
+			    photonAnalyserMuMuRefSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesphoSCNuIso, jets, electrons, muons, "passesphoSCNuIso");
+
+			    //n-passesphoSCPhIso photons
+			    const PhotonCollection photonsMinuspassesphoSCPhIso = topMuMuRefSelection_->nMinusOnePhotons(event, "passesphoSCPhIso");
+			    photonAnalyserMuMuRefSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesphoSCPhIso, jets, electrons, muons, "passesphoSCPhIso");
+			    
 			    //n-passesDeltaRgammaMuons photons
 			    const PhotonCollection photonsMinuspassesDeltaRgammaMuons = topMuMuRefSelection_->nMinusOnePhotons(event, "passesDeltaRgammaMuons");
 			    photonAnalyserMuMuRefSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesDeltaRgammaMuons, jets, electrons, muons, "passesDeltaRgammaMuons");
@@ -182,6 +194,18 @@ void TTbarDiLeptonAnalyser::eESignalAnalysis(const EventPtr event) {
 			    //n-passesPFPhotonIso photons
 			    const PhotonCollection photonsMinuspassesPFPhotonIso = topEERefSelection_->nMinusOnePhotons(event, "passesPFPhotonIso");
 			    photonAnalyserEERefSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesPFPhotonIso, jets, electrons, muons, "passesPFPhotonIso");
+			    
+			    //n-passesphoSCChIso photons
+			    const PhotonCollection photonsMinuspassesphoSCChIso = topEERefSelection_->nMinusOnePhotons(event, "passesphoSCChIso");
+			    photonAnalyserEERefSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesphoSCChIso, jets, electrons, muons, "passesphoSCChIso");
+
+			    //n-passesphoSCNuIso photons
+			    const PhotonCollection photonsMinuspassesphoSCNuIso = topEERefSelection_->nMinusOnePhotons(event, "passesphoSCNuIso");
+			    photonAnalyserEERefSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesphoSCNuIso, jets, electrons, muons, "passesphoSCNuIso");
+
+			    //n-passesphoSCPhIso photons
+			    const PhotonCollection photonsMinuspassesphoSCPhIso = topEERefSelection_->nMinusOnePhotons(event, "passesphoSCPhIso");
+			    photonAnalyserEERefSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesphoSCPhIso, jets, electrons, muons, "passesphoSCPhIso");
 			    
 			    //n-passesDeltaRgammaMuons photons
 			    const PhotonCollection photonsMinuspassesDeltaRgammaMuons = topEERefSelection_->nMinusOnePhotons(event, "passesDeltaRgammaMuons");
@@ -275,6 +299,18 @@ void TTbarDiLeptonAnalyser::eMuSignalAnalysis(const EventPtr event) {
 			    //n-passesPFPhotonIso photons
 			    const PhotonCollection photonsMinuspassesPFPhotonIso = topEMuRefSelection_->nMinusOnePhotons(event, "passesPFPhotonIso");
 			    photonAnalyserEMuRefSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesPFPhotonIso, jets, electrons, muons, "passesPFPhotonIso");
+			    
+			    //n-passesphoSCChIso photons
+			    const PhotonCollection photonsMinuspassesphoSCChIso = topEMuRefSelection_->nMinusOnePhotons(event, "passesphoSCChIso");
+			    photonAnalyserEMuRefSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesphoSCChIso, jets, electrons, muons, "passesphoSCChIso");
+
+			    //n-passesphoSCNuIso photons
+			    const PhotonCollection photonsMinuspassesphoSCNuIso = topEMuRefSelection_->nMinusOnePhotons(event, "passesphoSCNuIso");
+			    photonAnalyserEMuRefSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesphoSCNuIso, jets, electrons, muons, "passesphoSCNuIso");
+
+			    //n-passesphoSCPhIso photons
+			    const PhotonCollection photonsMinuspassesphoSCPhIso = topEMuRefSelection_->nMinusOnePhotons(event, "passesphoSCPhIso");
+			    photonAnalyserEMuRefSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesphoSCPhIso, jets, electrons, muons, "passesphoSCPhIso");
 		    
 			    //n-passesDeltaRgammaMuons photons
 			    const PhotonCollection photonsMinuspassesDeltaRgammaMuons = topEMuRefSelection_->nMinusOnePhotons(event, "passesDeltaRgammaMuons");

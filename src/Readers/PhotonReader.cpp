@@ -36,6 +36,12 @@ PhotonReader::PhotonReader() :
 		PFChargedHadronIsoReader(),
 		PFNeutralHadronIsoReader(),
 		PFPhotonIsoReader(),
+		phoSCChIsoReader(),
+		phoSCNuIsoReader(),
+		phoSCPhIsoReader(),
+		phoRandConeChIsoReader(),
+		phoRandConeNuIsoReader(),
+		phoRandConePhIsoReader(),
 		algorithm(PhotonAlgorithm::Default), //
 		photons() {
 }
@@ -63,6 +69,12 @@ PhotonReader::PhotonReader(TChainPointer input, PhotonAlgorithm::value algo) :
 		PFChargedHadronIsoReader(input, PhotonAlgorithm::prefixes.at(algo) + ".PfChargedIso03"),
 		PFNeutralHadronIsoReader(input, PhotonAlgorithm::prefixes.at(algo) + ".PfNeutralIso03"),
 		PFPhotonIsoReader(input, PhotonAlgorithm::prefixes.at(algo) + ".PfPhotonIso03"),
+		phoSCChIsoReader(input, PhotonAlgorithm::prefixes.at(algo) + ".phoSCChIso"),
+		phoSCNuIsoReader(input, PhotonAlgorithm::prefixes.at(algo) + ".phoSCNuIso"),
+		phoSCPhIsoReader(input, PhotonAlgorithm::prefixes.at(algo) + ".phoSCPhIso"),
+		phoRandConeChIsoReader(input, PhotonAlgorithm::prefixes.at(algo) + ".phoRandConeChIso"),
+		phoRandConeNuIsoReader(input, PhotonAlgorithm::prefixes.at(algo) + ".phoRandConeNuIso"),
+		phoRandConePhIsoReader(input, PhotonAlgorithm::prefixes.at(algo) + ".phoRandConePhIso"),
 		algorithm(algo), photons() {
 }
 
@@ -90,6 +102,12 @@ void PhotonReader::initialise() {
 		PFChargedHadronIsoReader.initialise();
 		PFNeutralHadronIsoReader.initialise();
 		PFPhotonIsoReader.initialise();
+		phoSCChIsoReader.initialise();
+		phoSCNuIsoReader.initialise();
+		phoSCPhIsoReader.initialise();
+		phoRandConeChIsoReader.initialise();
+		phoRandConeNuIsoReader.initialise();
+		phoRandConePhIsoReader.initialise();
 }		
 
 const PhotonCollection& PhotonReader::getPhotons() {
@@ -127,6 +145,12 @@ void PhotonReader::readPhotons() {
 		photon->setPFChargedHadronIso(PFChargedHadronIsoReader.getVariableAt(index));
 		photon->setPFNeutralHadronIso(PFNeutralHadronIsoReader.getVariableAt(index));
 		photon->setPFPhotonIso(PFPhotonIsoReader.getVariableAt(index));
+		photon->setphoSCChIso(phoSCChIsoReader.getVariableAt(index));
+		photon->setphoSCNuIso(phoSCNuIsoReader.getVariableAt(index));
+		photon->setphoSCPhIso(phoSCPhIsoReader.getVariableAt(index));
+		photon->setphoRandConeChIso(phoRandConeChIsoReader.getVariableAt(index));
+		photon->setphoRandConeNuIso(phoRandConeNuIsoReader.getVariableAt(index));
+		photon->setphoRandConePhIso(phoRandConePhIsoReader.getVariableAt(index));
 		photons.push_back(photon);
 		}
 }

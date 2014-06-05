@@ -55,7 +55,16 @@ public:
 	double RhoCorrectedPFChargedHadronIso(double rho) const;
 	double RhoCorrectedPFNeutralHadronIso(double rho) const;
 	double RhoCorrectedPFPhotonIso(double rho) const;
-	
+	double phoSCChIso() const;
+	double phoSCNuIso() const;
+	double phoSCPhIso() const;
+	double phoRandConeChIso() const;
+	double phoRandConeNuIso() const;
+	double phoRandConePhIso() const;
+	double RhoCorrectedSCChIso(double rho) const;
+	double RhoCorrectedSCNuIso(double rho) const;
+	double RhoCorrectedSCPhIso(double rho) const;
+	double getEfficiencyCorrection() const;	
 	
 	//void setUsedAlgorithm(PhotonAlgorithm::value algo);
 	void setEcalIsolation(double EIso);
@@ -79,6 +88,15 @@ public:
 	void setRhoCorrectedPFChargedHadronIso(double RhoCorrPfChargedIso03);
 	void setRhoCorrectedPFNeutralHadronIso(double RhoCorrPfNeutralIso03);
 	void setRhoCorrectedPFPhotonIso(double RhoCorrPfPhotonIso03);
+	void setphoSCChIso(double phoSCChIso);
+	void setphoSCNuIso(double phoSCNuIso);
+	void setphoSCPhIso(double phoSCPhIso);
+	void setphoRandConeChIso(double phoRandConeChIso);
+	void setphoRandConeNuIso(double phoRandConeNuIso);
+	void setphoRandConePhIso(double phoRandConePhIso);
+	void setRhoCorrectedSCChIso(double RhoCorrSCChIso);
+	void setRhoCorrectedSCNuIso(double RhoCorrSCNuIso);
+	void setRhoCorrectedSCPhIso(double RhoCorrSCPhIso);
 	
 	
 	virtual bool isInBarrelRegion() const;
@@ -109,6 +127,15 @@ private:
 	double rhocorrectedpfChargedIso;
 	double rhocorrectedpfNeutralIso;
 	double rhocorrectedpfPhotonIso;
+	double phoscchIso;
+	double phoscnuIso;
+	double phoscphIso;
+	double phorandconechIso;
+	double phorandconenuIso;
+	double phorandconephIso;
+	double rhocorrectedscchIso;
+	double rhocorrectedscnuIso;
+	double rhocorrectedscphIso;
 
 };
 

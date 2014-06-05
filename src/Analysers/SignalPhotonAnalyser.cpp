@@ -35,16 +35,17 @@ void SignalPhotonAnalyser::analyse(const EventPtr event){
 			// find photon
 			if (abs(genPart.at(i)->pdgId()) == (22)){
 				motherInd = genPart.at(genPart.at(i)->motherIndex())->pdgId();
-				cout << "found photon, mother is: " << genPart.at(genPart.at(i)->motherIndex())->pdgId() << endl;
+				///cout << "found photon, mother is: " << genPart.at(genPart.at(i)->motherIndex())->pdgId() << endl;
 				break;
 			}
 			//	&& abs(genPart.at(genPart.at(i)->motherIndex())->pdgId()) == (24))
 
 		}
 
-	if(abs(motherInd) == 6 || abs(motherInd) == 5 || abs(motherInd) == 24 || abs(motherInd) == 2212){
+	
+	if(abs(motherInd) == 6 || abs(motherInd) == 5 || abs(motherInd) == 24 || abs(motherInd) == 2212 || abs(motherInd) == 11 || abs(motherInd) == 13){
 	histMan_->setCurrentHistogramFolder(histogramFolder_ + "/ttsigAllPhotons");
-	}else if(abs(motherInd) == 11 || abs(motherInd) == 13 || abs(motherInd) == 15){
+	}else if(abs(motherInd) == 11 || abs(motherInd) == 13){
 	histMan_->setCurrentHistogramFolder(histogramFolder_ + "/ttlepAllPhotons");
 	}else{
 	histMan_->setCurrentHistogramFolder(histogramFolder_ + "/ttfakeAllPhotons");
@@ -68,6 +69,12 @@ void SignalPhotonAnalyser::analyse(const EventPtr event){
 			histMan_->H1D_BJetBinned("Photon_RhoCorrectedPFChargedHadronIso_endcap")->Fill(photon->PFChargedHadronIso(), weight_);
 			histMan_->H1D_BJetBinned("Photon_RhoCorrectedPFNeutralHadronIso_endcap")->Fill(photon->PFNeutralHadronIso(), weight_);
 			histMan_->H1D_BJetBinned("Photon_RhoCorrectedPFPhotonIso_endcap")->Fill(photon->PFPhotonIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_SCChIso_endcap")->Fill(photon->phoSCChIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_SCNuIso_endcap")->Fill(photon->phoSCNuIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_SCPhIso_endcap")->Fill(photon->phoSCPhIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_RhoCorrectedSCChIso_endcap")->Fill(photon->RhoCorrectedSCChIso(event->rho()), weight_);
+			histMan_->H1D_BJetBinned("Photon_RhoCorrectedSCNuIso_endcap")->Fill(photon->RhoCorrectedSCNuIso(event->rho()), weight_);
+			histMan_->H1D_BJetBinned("Photon_RhoCorrectedSCPhIso_endcap")->Fill(photon->RhoCorrectedSCPhIso(event->rho()), weight_);
 		} else if (photon->isInBarrelRegion()) {
 			histMan_->H1D_BJetBinned("Photon_sigma_ietaieta_barrel")->Fill(photon->sigmaIEtaIEta(), weight_);
 			histMan_->H1D_BJetBinned("Photon_PFChargedHadronIso_barrel")->Fill(photon->PFChargedHadronIso(), weight_);
@@ -76,6 +83,15 @@ void SignalPhotonAnalyser::analyse(const EventPtr event){
 			histMan_->H1D_BJetBinned("Photon_RhoCorrectedPFChargedHadronIso_barrel")->Fill(photon->PFChargedHadronIso(), weight_);
 			histMan_->H1D_BJetBinned("Photon_RhoCorrectedPFNeutralHadronIso_barrel")->Fill(photon->PFNeutralHadronIso(), weight_);
 			histMan_->H1D_BJetBinned("Photon_RhoCorrectedPFPhotonIso_barrel")->Fill(photon->PFPhotonIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_SCChIso_barrel")->Fill(photon->phoSCChIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_SCNuIso_barrel")->Fill(photon->phoSCNuIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_SCPhIso_barrel")->Fill(photon->phoSCPhIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_RhoCorrectedSCChIso_barrel")->Fill(photon->RhoCorrectedSCChIso(event->rho()), weight_);
+			histMan_->H1D_BJetBinned("Photon_RhoCorrectedSCNuIso_barrel")->Fill(photon->RhoCorrectedSCNuIso(event->rho()), weight_);
+			histMan_->H1D_BJetBinned("Photon_RhoCorrectedSCPhIso_barrel")->Fill(photon->RhoCorrectedSCPhIso(event->rho()), weight_);
+			histMan_->H1D_BJetBinned("Photon_RandConeChIso_barrel")->Fill(photon->phoRandConeChIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_RandConeNuIso_barrel")->Fill(photon->phoRandConeNuIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_RandConePhIso_barrel")->Fill(photon->phoRandConePhIso(), weight_);
 		}
 
 		histMan_->H1D_BJetBinned("Photon_HadOverEM")->Fill(photon->HadOverEm(), weight_);
@@ -95,6 +111,15 @@ void SignalPhotonAnalyser::analyse(const EventPtr event){
 		histMan_->H1D_BJetBinned("Photon_PFChargedHadronIso")->Fill(photon->PFChargedHadronIso(), weight_);
 		histMan_->H1D_BJetBinned("Photon_PFNeutralHadronIso")->Fill(photon->PFNeutralHadronIso(), weight_);
 		histMan_->H1D_BJetBinned("Photon_PFPhotonIso")->Fill(photon->PFPhotonIso(), weight_);
+		histMan_->H1D_BJetBinned("Photon_SCChIso")->Fill(photon->phoSCChIso(), weight_);
+		histMan_->H1D_BJetBinned("Photon_SCNuIso")->Fill(photon->phoSCNuIso(), weight_);
+		histMan_->H1D_BJetBinned("Photon_SCPhIso")->Fill(photon->phoSCPhIso(), weight_);
+		histMan_->H1D_BJetBinned("Photon_RandConeChIso")->Fill(photon->phoRandConeChIso(), weight_);
+		histMan_->H1D_BJetBinned("Photon_RandConeNuIso")->Fill(photon->phoRandConeNuIso(), weight_);
+		histMan_->H1D_BJetBinned("Photon_RandConePhIso")->Fill(photon->phoRandConePhIso(), weight_);
+		histMan_->H1D_BJetBinned("Photon_RhoCorrectedSCChIso")->Fill(photon->RhoCorrectedSCChIso(event->rho()), weight_);
+		histMan_->H1D_BJetBinned("Photon_RhoCorrectedSCNuIso")->Fill(photon->RhoCorrectedSCNuIso(event->rho()), weight_);
+		histMan_->H1D_BJetBinned("Photon_RhoCorrectedSCPhIso")->Fill(photon->RhoCorrectedSCPhIso(event->rho()), weight_);
 
 		for (unsigned int index = 0; index < jets.size(); ++index) {
 			const JetPointer jet(jets.at(index));
@@ -116,7 +141,7 @@ void SignalPhotonAnalyser::analyse(const EventPtr event){
 
 void SignalPhotonAnalyser::analyse_signalPhotons(const EventPtr event, PhotonCollection signalPhotons, JetCollection jets, ElectronCollection electrons, MuonCollection muons){
 
-	histMan_->setCurrentHistogramFolder(histogramFolder_ + "/SignalPhotons");
+//	histMan_->setCurrentHistogramFolder(histogramFolder_ + "/SignalPhotons");
 
 	//const ElectronCollection electrons = topMuMuRefSelection_->goodElectrons(event);
 	//const MuonCollection muons = topMuMuRefSelection_->goodMuons(event);
@@ -130,24 +155,40 @@ void SignalPhotonAnalyser::analyse_signalPhotons(const EventPtr event, PhotonCol
 	
 	unsigned int numberOfGenParts(genPart.size());
 	int motherInd = 0;
+	MCParticlePointer phoMother;
+	MCParticleCollection phoMothers;
+	MCParticleCollection genPhotons;
+	
 		for (unsigned int i = 0; i < numberOfGenParts; i++) {
 
 			// find photon
-			if (abs(genPart.at(i)->pdgId()) == (22)){
+			if (abs(genPart.at(i)->pdgId()) == (22) && !event->isRealData()){
+			
+				const MCParticlePointer phoMother(genPart.at(genPart.at(i)->motherIndex()));
+				phoMothers.push_back(phoMother);
+//				cout << "The number of photon mothers is " << phoMothers.size() << endl;
+				
 				motherInd = genPart.at(genPart.at(i)->motherIndex())->pdgId();
-				cout << "found photon, mother is: " << genPart.at(genPart.at(i)->motherIndex())->pdgId() << endl;
-				break;
+//				cout << "found photon, mother is: " << genPart.at(genPart.at(i)->motherIndex())->pdgId() << endl;
+				
+				const MCParticlePointer genPhoton(genPart.at(i));
+				genPhotons.push_back(genPhoton);
+				//cout << "Number of generated photons = " << genPhotons.size() << endl;
+			
+			
 			}
 			//	&& abs(genPart.at(genPart.at(i)->motherIndex())->pdgId()) == (24))
+			
 
 		}
+		
 
-	if(abs(motherInd) == 6 || abs(motherInd) == 5 || abs(motherInd) == 24 || abs(motherInd) == 2212){
-	histMan_->setCurrentHistogramFolder(histogramFolder_ + "/ttsigSignalPhotons");
-	}else if(abs(motherInd) == 11 || abs(motherInd) == 13 || abs(motherInd) == 15){
-	histMan_->setCurrentHistogramFolder(histogramFolder_ + "/ttlepSignalPhotons");
+	if(abs(motherInd) == 6 || abs(motherInd) == 5 || abs(motherInd) == 24 || abs(motherInd) == 2212 || abs(motherInd) == 11 || abs(motherInd) == 13 ){
+		histMan_->setCurrentHistogramFolder(histogramFolder_ + "/ttsigSignalPhotons");
+	}else if(abs(motherInd) == 11 || abs(motherInd) == 13){
+		histMan_->setCurrentHistogramFolder(histogramFolder_ + "/ttlepSignalPhotons");
 	}else{
-	histMan_->setCurrentHistogramFolder(histogramFolder_ + "/ttfakeSignalPhotons");
+		histMan_->setCurrentHistogramFolder(histogramFolder_ + "/ttfakeSignalPhotons");
 	}
 
 
@@ -169,6 +210,12 @@ void SignalPhotonAnalyser::analyse_signalPhotons(const EventPtr event, PhotonCol
 			histMan_->H1D_BJetBinned("Photon_RhoCorrectedPFChargedHadronIso_endcap")->Fill(photon->PFChargedHadronIso(), weight_);
 			histMan_->H1D_BJetBinned("Photon_RhoCorrectedPFNeutralHadronIso_endcap")->Fill(photon->PFNeutralHadronIso(), weight_);
 			histMan_->H1D_BJetBinned("Photon_RhoCorrectedPFPhotonIso_endcap")->Fill(photon->PFPhotonIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_SCChIso_endcap")->Fill(photon->phoSCChIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_SCNuIso_endcap")->Fill(photon->phoSCNuIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_SCPhIso_endcap")->Fill(photon->phoSCPhIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_RhoCorrectedSCChIso_endcap")->Fill(photon->RhoCorrectedSCChIso(event->rho()), weight_);
+			histMan_->H1D_BJetBinned("Photon_RhoCorrectedSCNuIso_endcap")->Fill(photon->RhoCorrectedSCNuIso(event->rho()), weight_);
+			histMan_->H1D_BJetBinned("Photon_RhoCorrectedSCPhIso_endcap")->Fill(photon->RhoCorrectedSCPhIso(event->rho()), weight_);
 		} else if (photon->isInBarrelRegion()) {
 			histMan_->H1D_BJetBinned("Photon_sigma_ietaieta_barrel")->Fill(photon->sigmaIEtaIEta(), weight_);
 			histMan_->H1D_BJetBinned("Photon_PFChargedHadronIso_barrel")->Fill(photon->PFChargedHadronIso(), weight_);
@@ -177,6 +224,15 @@ void SignalPhotonAnalyser::analyse_signalPhotons(const EventPtr event, PhotonCol
 			histMan_->H1D_BJetBinned("Photon_RhoCorrectedPFChargedHadronIso_barrel")->Fill(photon->PFChargedHadronIso(), weight_);
 			histMan_->H1D_BJetBinned("Photon_RhoCorrectedPFNeutralHadronIso_barrel")->Fill(photon->PFNeutralHadronIso(), weight_);
 			histMan_->H1D_BJetBinned("Photon_RhoCorrectedPFPhotonIso_barrel")->Fill(photon->PFPhotonIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_SCChIso_barrel")->Fill(photon->phoSCChIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_SCNuIso_barrel")->Fill(photon->phoSCNuIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_SCPhIso_barrel")->Fill(photon->phoSCPhIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_RhoCorrectedSCChIso_barrel")->Fill(photon->RhoCorrectedSCChIso(event->rho()), weight_);
+			histMan_->H1D_BJetBinned("Photon_RhoCorrectedSCNuIso_barrel")->Fill(photon->RhoCorrectedSCNuIso(event->rho()), weight_);
+			histMan_->H1D_BJetBinned("Photon_RhoCorrectedSCPhIso_barrel")->Fill(photon->RhoCorrectedSCPhIso(event->rho()), weight_);
+			histMan_->H1D_BJetBinned("Photon_RandConeChIso_barrel")->Fill(photon->phoRandConeChIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_RandConeNuIso_barrel")->Fill(photon->phoRandConeNuIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_RandConePhIso_barrel")->Fill(photon->phoRandConePhIso(), weight_);
 		}
 
 		histMan_->H1D_BJetBinned("Photon_HadOverEM")->Fill(photon->HadOverEm(), weight_);
@@ -196,6 +252,15 @@ void SignalPhotonAnalyser::analyse_signalPhotons(const EventPtr event, PhotonCol
 		histMan_->H1D_BJetBinned("Photon_PFChargedHadronIso")->Fill(photon->PFChargedHadronIso(), weight_);
 		histMan_->H1D_BJetBinned("Photon_PFNeutralHadronIso")->Fill(photon->PFNeutralHadronIso(), weight_);
 		histMan_->H1D_BJetBinned("Photon_PFPhotonIso")->Fill(photon->PFPhotonIso(), weight_);
+		histMan_->H1D_BJetBinned("Photon_SCChIso")->Fill(photon->phoSCChIso(), weight_);
+		histMan_->H1D_BJetBinned("Photon_SCNuIso")->Fill(photon->phoSCNuIso(), weight_);
+		histMan_->H1D_BJetBinned("Photon_SCPhIso")->Fill(photon->phoSCPhIso(), weight_);
+		histMan_->H1D_BJetBinned("Photon_RandConeChIso")->Fill(photon->phoRandConeChIso(), weight_);
+		histMan_->H1D_BJetBinned("Photon_RandConeNuIso")->Fill(photon->phoRandConeNuIso(), weight_);
+		histMan_->H1D_BJetBinned("Photon_RandConePhIso")->Fill(photon->phoRandConePhIso(), weight_);
+		histMan_->H1D_BJetBinned("Photon_RhoCorrectedSCChIso")->Fill(photon->RhoCorrectedSCChIso(event->rho()), weight_);
+		histMan_->H1D_BJetBinned("Photon_RhoCorrectedSCNuIso")->Fill(photon->RhoCorrectedSCNuIso(event->rho()), weight_);
+		histMan_->H1D_BJetBinned("Photon_RhoCorrectedSCPhIso")->Fill(photon->RhoCorrectedSCPhIso(event->rho()), weight_);
 
 		for (unsigned int index = 0; index < jets.size(); ++index) {
 			const JetPointer jet(jets.at(index));
@@ -267,6 +332,30 @@ void SignalPhotonAnalyser::createHistograms() {
 	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFChargedHadronIso_endcap", "Photon PFChargedHadronIso; ; Events", 500, -20, 100);
 	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFNeutralHadronIso_endcap", "Photon PFNeutralHadronIso; ; Events", 500, -20, 50);
 	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFPhotonIso_endcap", "Photon PFPhotonIso; ; Events", 500, -20, 130);
+	histMan_->addH1D_BJetBinned("Photon_SCChIso_barrel", "SCFR Charged Hadron Iso (barrel); ; Events", 110, 0, 110);
+	histMan_->addH1D_BJetBinned("Photon_SCNuIso_barrel", "SCFR Neutral Hadron Iso (barrel); ; Events", 105, 0, 35);
+	histMan_->addH1D_BJetBinned("Photon_SCPhIso_barrel", "SCFR Photon Iso (barrel); ; Events", 500, 0, 130);
+	histMan_->addH1D_BJetBinned("Photon_SCChIso_endcap", "SCFR Charged Hadron Iso (endcap); ; Events", 110, 0, 110);
+	histMan_->addH1D_BJetBinned("Photon_SCNuIso_endcap", "SCFR Neutral Hadron Iso (endcap); ; Events", 105, 0, 35);
+	histMan_->addH1D_BJetBinned("Photon_SCPhIso_endcap", "SCFR Photon Iso (endcap); ; Events", 500, 0, 130);
+	histMan_->addH1D_BJetBinned("Photon_SCChIso", "SCFR Charged Hadron Iso; ; Events", 110, 0, 110);
+	histMan_->addH1D_BJetBinned("Photon_SCNuIso", "SCFR Neutral Hadron Iso; ; Events", 105, 0, 35);
+	histMan_->addH1D_BJetBinned("Photon_SCPhIso", "SCFR Photon Iso; ; Events", 500, 0, 130);
+	histMan_->addH1D_BJetBinned("Photon_RandConeChIso", "Random Cone Iso (Charged); ; Events", 100, 0, 20);
+	histMan_->addH1D_BJetBinned("Photon_RandConeNuIso", "Random Cone Iso (Neutral); ; Events", 100, 0, 20);
+	histMan_->addH1D_BJetBinned("Photon_RandConePhIso", "Random Cone Iso (Photon); ; Events", 100, 0, 20);
+	histMan_->addH1D_BJetBinned("Photon_RandConeChIso_barrel", "Random Cone Iso (Charged); ; Events", 100, 0, 20);
+	histMan_->addH1D_BJetBinned("Photon_RandConeNuIso_barrel", "Random Cone Iso (Neutral); ; Events", 100, 0, 20);
+	histMan_->addH1D_BJetBinned("Photon_RandConePhIso_barrel", "Random Cone Iso (Photon); ; Events", 100, 0, 20);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCChIso_barrel", "SCFR Ch. Had.Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCNuIso_barrel", "SCFR Nu. Had.Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCPhIso_barrel", "SCFR Photon Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCChIso_endcap", "SCFR Ch. Had.Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCNuIso_endcap", "SCFR Nu. Had.Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCPhIso_endcap", "SCFR Photon Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCChIso", "SCFR Ch. Had.Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCNuIso", "SCFR Nu. Had.Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCPhIso", "SCFR Photon Iso. (#rho-corr)", 600, -1100, 100);
 	
 	histMan_->setCurrentHistogramFolder(histogramFolder_+"/ttlepAllPhotons");
 
@@ -311,6 +400,30 @@ void SignalPhotonAnalyser::createHistograms() {
 	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFChargedHadronIso_endcap", "Photon PFChargedHadronIso; ; Events", 500, -20, 100);
 	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFNeutralHadronIso_endcap", "Photon PFNeutralHadronIso; ; Events", 500, -20, 50);
 	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFPhotonIso_endcap", "Photon PFPhotonIso; ; Events", 500, -20, 130);
+	histMan_->addH1D_BJetBinned("Photon_SCChIso_barrel", "SCFR Charged Hadron Iso (barrel); ; Events", 110, 0, 110);
+	histMan_->addH1D_BJetBinned("Photon_SCNuIso_barrel", "SCFR Neutral Hadron Iso (barrel); ; Events", 105, 0, 35);
+	histMan_->addH1D_BJetBinned("Photon_SCPhIso_barrel", "SCFR Photon Iso (barrel); ; Events", 500, 0, 130);
+	histMan_->addH1D_BJetBinned("Photon_SCChIso_endcap", "SCFR Charged Hadron Iso (endcap); ; Events", 110, 0, 110);
+	histMan_->addH1D_BJetBinned("Photon_SCNuIso_endcap", "SCFR Neutral Hadron Iso (endcap); ; Events", 105, 0, 35);
+	histMan_->addH1D_BJetBinned("Photon_SCPhIso_endcap", "SCFR Photon Iso (endcap); ; Events", 500, 0, 130);
+	histMan_->addH1D_BJetBinned("Photon_SCChIso", "SCFR Charged Hadron Iso; ; Events", 110, 0, 110);
+	histMan_->addH1D_BJetBinned("Photon_SCNuIso", "SCFR Neutral Hadron Iso; ; Events", 105, 0, 35);
+	histMan_->addH1D_BJetBinned("Photon_SCPhIso", "SCFR Photon Iso; ; Events", 500, 0, 130);
+	histMan_->addH1D_BJetBinned("Photon_RandConeChIso", "Random Cone Iso (Charged); ; Events", 100, 0, 20);
+	histMan_->addH1D_BJetBinned("Photon_RandConeNuIso", "Random Cone Iso (Neutral); ; Events", 100, 0, 20);
+	histMan_->addH1D_BJetBinned("Photon_RandConePhIso", "Random Cone Iso (Photon); ; Events", 100, 0, 20);
+	histMan_->addH1D_BJetBinned("Photon_RandConeChIso_barrel", "Random Cone Iso (Charged); ; Events", 100, 0, 20);
+	histMan_->addH1D_BJetBinned("Photon_RandConeNuIso_barrel", "Random Cone Iso (Neutral); ; Events", 100, 0, 20);
+	histMan_->addH1D_BJetBinned("Photon_RandConePhIso_barrel", "Random Cone Iso (Photon); ; Events", 100, 0, 20);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCChIso_barrel", "SCFR Ch. Had.Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCNuIso_barrel", "SCFR Nu. Had.Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCPhIso_barrel", "SCFR Photon Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCChIso_endcap", "SCFR Ch. Had.Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCNuIso_endcap", "SCFR Nu. Had.Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCPhIso_endcap", "SCFR Photon Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCChIso", "SCFR Ch. Had.Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCNuIso", "SCFR Nu. Had.Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCPhIso", "SCFR Photon Iso. (#rho-corr)", 600, -1100, 100);
 	
 		
 	histMan_->setCurrentHistogramFolder(histogramFolder_+"/ttfakeAllPhotons");
@@ -356,6 +469,30 @@ void SignalPhotonAnalyser::createHistograms() {
 	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFChargedHadronIso_endcap", "Photon PFChargedHadronIso; ; Events", 500, -20, 100);
 	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFNeutralHadronIso_endcap", "Photon PFNeutralHadronIso; ; Events", 500, -20, 50);
 	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFPhotonIso_endcap", "Photon PFPhotonIso; ; Events", 500, -20, 130);
+	histMan_->addH1D_BJetBinned("Photon_SCChIso_barrel", "SCFR Charged Hadron Iso (barrel); ; Events", 110, 0, 110);
+	histMan_->addH1D_BJetBinned("Photon_SCNuIso_barrel", "SCFR Neutral Hadron Iso (barrel); ; Events", 105, 0, 35);
+	histMan_->addH1D_BJetBinned("Photon_SCPhIso_barrel", "SCFR Photon Iso (barrel); ; Events", 500, 0, 130);
+	histMan_->addH1D_BJetBinned("Photon_SCChIso_endcap", "SCFR Charged Hadron Iso (endcap); ; Events", 110, 0, 110);
+	histMan_->addH1D_BJetBinned("Photon_SCNuIso_endcap", "SCFR Neutral Hadron Iso (endcap); ; Events", 105, 0, 35);
+	histMan_->addH1D_BJetBinned("Photon_SCPhIso_endcap", "SCFR Photon Iso (endcap); ; Events", 500, 0, 130);
+	histMan_->addH1D_BJetBinned("Photon_SCChIso", "SCFR Charged Hadron Iso; ; Events", 110, 0, 110);
+	histMan_->addH1D_BJetBinned("Photon_SCNuIso", "SCFR Neutral Hadron Iso; ; Events", 105, 0, 35);
+	histMan_->addH1D_BJetBinned("Photon_SCPhIso", "SCFR Photon Iso; ; Events", 500, 0, 130);
+	histMan_->addH1D_BJetBinned("Photon_RandConeChIso", "Random Cone Iso (Charged); ; Events", 100, 0, 20);
+	histMan_->addH1D_BJetBinned("Photon_RandConeNuIso", "Random Cone Iso (Neutral); ; Events", 100, 0, 20);
+	histMan_->addH1D_BJetBinned("Photon_RandConePhIso", "Random Cone Iso (Photon); ; Events", 100, 0, 20);
+	histMan_->addH1D_BJetBinned("Photon_RandConeChIso_barrel", "Random Cone Iso (Charged); ; Events", 100, 0, 20);
+	histMan_->addH1D_BJetBinned("Photon_RandConeNuIso_barrel", "Random Cone Iso (Neutral); ; Events", 100, 0, 20);
+	histMan_->addH1D_BJetBinned("Photon_RandConePhIso_barrel", "Random Cone Iso (Photon); ; Events", 100, 0, 20);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCChIso_barrel", "SCFR Ch. Had.Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCNuIso_barrel", "SCFR Nu. Had.Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCPhIso_barrel", "SCFR Photon Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCChIso_endcap", "SCFR Ch. Had.Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCNuIso_endcap", "SCFR Nu. Had.Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCPhIso_endcap", "SCFR Photon Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCChIso", "SCFR Ch. Had.Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCNuIso", "SCFR Nu. Had.Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCPhIso", "SCFR Photon Iso. (#rho-corr)", 600, -1100, 100);
 	
 	histMan_->setCurrentHistogramFolder(histogramFolder_ + "/ttsigSignalPhotons");
 
@@ -400,6 +537,30 @@ void SignalPhotonAnalyser::createHistograms() {
 	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFChargedHadronIso_endcap", "Photon PFChargedHadronIso; ; Events", 500, -20, 100);
 	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFNeutralHadronIso_endcap", "Photon PFNeutralHadronIso; ; Events", 500, -20, 50);
 	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFPhotonIso_endcap", "Photon PFPhotonIso; ; Events", 500, -20, 130);
+	histMan_->addH1D_BJetBinned("Photon_SCChIso_barrel", "SCFR Charged Hadron Iso (barrel); ; Events", 110, 0, 110);
+	histMan_->addH1D_BJetBinned("Photon_SCNuIso_barrel", "SCFR Neutral Hadron Iso (barrel); ; Events", 105, 0, 35);
+	histMan_->addH1D_BJetBinned("Photon_SCPhIso_barrel", "SCFR Photon Iso (barrel); ; Events", 500, 0, 130);
+	histMan_->addH1D_BJetBinned("Photon_SCChIso_endcap", "SCFR Charged Hadron Iso (endcap); ; Events", 110, 0, 110);
+	histMan_->addH1D_BJetBinned("Photon_SCNuIso_endcap", "SCFR Neutral Hadron Iso (endcap); ; Events", 105, 0, 35);
+	histMan_->addH1D_BJetBinned("Photon_SCPhIso_endcap", "SCFR Photon Iso (endcap); ; Events", 500, 0, 130);
+	histMan_->addH1D_BJetBinned("Photon_SCChIso", "SCFR Charged Hadron Iso; ; Events", 110, 0, 110);
+	histMan_->addH1D_BJetBinned("Photon_SCNuIso", "SCFR Neutral Hadron Iso; ; Events", 105, 0, 35);
+	histMan_->addH1D_BJetBinned("Photon_SCPhIso", "SCFR Photon Iso; ; Events", 500, 0, 130);
+	histMan_->addH1D_BJetBinned("Photon_RandConeChIso", "Random Cone Iso (Charged); ; Events", 100, 0, 20);
+	histMan_->addH1D_BJetBinned("Photon_RandConeNuIso", "Random Cone Iso (Neutral); ; Events", 100, 0, 20);
+	histMan_->addH1D_BJetBinned("Photon_RandConePhIso", "Random Cone Iso (Photon); ; Events", 100, 0, 20);
+	histMan_->addH1D_BJetBinned("Photon_RandConeChIso_barrel", "Random Cone Iso (Charged); ; Events", 100, 0, 20);
+	histMan_->addH1D_BJetBinned("Photon_RandConeNuIso_barrel", "Random Cone Iso (Neutral); ; Events", 100, 0, 20);
+	histMan_->addH1D_BJetBinned("Photon_RandConePhIso_barrel", "Random Cone Iso (Photon); ; Events", 100, 0, 20);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCChIso_barrel", "SCFR Ch. Had.Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCNuIso_barrel", "SCFR Nu. Had.Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCPhIso_barrel", "SCFR Photon Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCChIso_endcap", "SCFR Ch. Had.Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCNuIso_endcap", "SCFR Nu. Had.Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCPhIso_endcap", "SCFR Photon Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCChIso", "SCFR Ch. Had.Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCNuIso", "SCFR Nu. Had.Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCPhIso", "SCFR Photon Iso. (#rho-corr)", 600, -1100, 100);
 
 		
 	histMan_->setCurrentHistogramFolder(histogramFolder_+"/ttlepSignalPhotons");
@@ -445,6 +606,30 @@ void SignalPhotonAnalyser::createHistograms() {
 	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFChargedHadronIso_endcap", "Photon PFChargedHadronIso; ; Events", 500, -20, 100);
 	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFNeutralHadronIso_endcap", "Photon PFNeutralHadronIso; ; Events", 500, -20, 50);
 	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFPhotonIso_endcap", "Photon PFPhotonIso; ; Events", 500, -20, 130);
+	histMan_->addH1D_BJetBinned("Photon_SCChIso_barrel", "SCFR Charged Hadron Iso (barrel); ; Events", 110, 0, 110);
+	histMan_->addH1D_BJetBinned("Photon_SCNuIso_barrel", "SCFR Neutral Hadron Iso (barrel); ; Events", 105, 0, 35);
+	histMan_->addH1D_BJetBinned("Photon_SCPhIso_barrel", "SCFR Photon Iso (barrel); ; Events", 500, 0, 130);
+	histMan_->addH1D_BJetBinned("Photon_SCChIso_endcap", "SCFR Charged Hadron Iso (endcap); ; Events", 110, 0, 110);
+	histMan_->addH1D_BJetBinned("Photon_SCNuIso_endcap", "SCFR Neutral Hadron Iso (endcap); ; Events", 105, 0, 35);
+	histMan_->addH1D_BJetBinned("Photon_SCPhIso_endcap", "SCFR Photon Iso (endcap); ; Events", 500, 0, 130);
+	histMan_->addH1D_BJetBinned("Photon_SCChIso", "SCFR Charged Hadron Iso; ; Events", 110, 0, 110);
+	histMan_->addH1D_BJetBinned("Photon_SCNuIso", "SCFR Neutral Hadron Iso; ; Events", 105, 0, 35);
+	histMan_->addH1D_BJetBinned("Photon_SCPhIso", "SCFR Photon Iso; ; Events", 500, 0, 130);
+	histMan_->addH1D_BJetBinned("Photon_RandConeChIso", "Random Cone Iso (Charged); ; Events", 100, 0, 20);
+	histMan_->addH1D_BJetBinned("Photon_RandConeNuIso", "Random Cone Iso (Neutral); ; Events", 100, 0, 20);
+	histMan_->addH1D_BJetBinned("Photon_RandConePhIso", "Random Cone Iso (Photon); ; Events", 100, 0, 20);
+	histMan_->addH1D_BJetBinned("Photon_RandConeChIso_barrel", "Random Cone Iso (Charged); ; Events", 100, 0, 20);
+	histMan_->addH1D_BJetBinned("Photon_RandConeNuIso_barrel", "Random Cone Iso (Neutral); ; Events", 100, 0, 20);
+	histMan_->addH1D_BJetBinned("Photon_RandConePhIso_barrel", "Random Cone Iso (Photon); ; Events", 100, 0, 20);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCChIso_barrel", "SCFR Ch. Had.Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCNuIso_barrel", "SCFR Nu. Had.Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCPhIso_barrel", "SCFR Photon Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCChIso_endcap", "SCFR Ch. Had.Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCNuIso_endcap", "SCFR Nu. Had.Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCPhIso_endcap", "SCFR Photon Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCChIso", "SCFR Ch. Had.Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCNuIso", "SCFR Nu. Had.Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCPhIso", "SCFR Photon Iso. (#rho-corr)", 600, -1100, 100);
 	
 		
 	histMan_->setCurrentHistogramFolder(histogramFolder_+"/ttfakeSignalPhotons");
@@ -490,6 +675,30 @@ void SignalPhotonAnalyser::createHistograms() {
 	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFChargedHadronIso_endcap", "Photon PFChargedHadronIso; ; Events", 500, -20, 100);
 	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFNeutralHadronIso_endcap", "Photon PFNeutralHadronIso; ; Events", 500, -20, 50);
 	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFPhotonIso_endcap", "Photon PFPhotonIso; ; Events", 500, -20, 130);
+	histMan_->addH1D_BJetBinned("Photon_SCChIso_barrel", "SCFR Charged Hadron Iso (barrel); ; Events", 110, 0, 110);
+	histMan_->addH1D_BJetBinned("Photon_SCNuIso_barrel", "SCFR Neutral Hadron Iso (barrel); ; Events", 105, 0, 35);
+	histMan_->addH1D_BJetBinned("Photon_SCPhIso_barrel", "SCFR Photon Iso (barrel); ; Events", 500, 0, 130);
+	histMan_->addH1D_BJetBinned("Photon_SCChIso_endcap", "SCFR Charged Hadron Iso (endcap); ; Events", 110, 0, 110);
+	histMan_->addH1D_BJetBinned("Photon_SCNuIso_endcap", "SCFR Neutral Hadron Iso (endcap); ; Events", 105, 0, 35);
+	histMan_->addH1D_BJetBinned("Photon_SCPhIso_endcap", "SCFR Photon Iso (endcap); ; Events", 500, 0, 130);
+	histMan_->addH1D_BJetBinned("Photon_SCChIso", "SCFR Charged Hadron Iso; ; Events", 110, 0, 110);
+	histMan_->addH1D_BJetBinned("Photon_SCNuIso", "SCFR Neutral Hadron Iso; ; Events", 105, 0, 35);
+	histMan_->addH1D_BJetBinned("Photon_SCPhIso", "SCFR Photon Iso; ; Events", 500, 0, 130);
+	histMan_->addH1D_BJetBinned("Photon_RandConeChIso", "Random Cone Iso (Charged); ; Events", 100, 0, 20);
+	histMan_->addH1D_BJetBinned("Photon_RandConeNuIso", "Random Cone Iso (Neutral); ; Events", 100, 0, 20);
+	histMan_->addH1D_BJetBinned("Photon_RandConePhIso", "Random Cone Iso (Photon); ; Events", 100, 0, 20);
+	histMan_->addH1D_BJetBinned("Photon_RandConeChIso_barrel", "Random Cone Iso (Charged); ; Events", 100, 0, 20);
+	histMan_->addH1D_BJetBinned("Photon_RandConeNuIso_barrel", "Random Cone Iso (Neutral); ; Events", 100, 0, 20);
+	histMan_->addH1D_BJetBinned("Photon_RandConePhIso_barrel", "Random Cone Iso (Photon); ; Events", 100, 0, 20);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCChIso_barrel", "SCFR Ch. Had.Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCNuIso_barrel", "SCFR Nu. Had.Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCPhIso_barrel", "SCFR Photon Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCChIso_endcap", "SCFR Ch. Had.Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCNuIso_endcap", "SCFR Nu. Had.Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCPhIso_endcap", "SCFR Photon Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCChIso", "SCFR Ch. Had.Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCNuIso", "SCFR Nu. Had.Iso. (#rho-corr)", 600, -1100, 100);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCPhIso", "SCFR Photon Iso. (#rho-corr)", 600, -1100, 100);
 	
 
 }

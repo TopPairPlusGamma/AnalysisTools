@@ -42,6 +42,12 @@ private:
 	VariableReader<MultiDoublePointer> PFChargedHadronIsoReader;
 	VariableReader<MultiDoublePointer> PFNeutralHadronIsoReader;
 	VariableReader<MultiDoublePointer> PFPhotonIsoReader;
+	VariableReader<MultiDoublePointer> phoSCChIsoReader;
+	VariableReader<MultiDoublePointer> phoSCNuIsoReader;
+	VariableReader<MultiDoublePointer> phoSCPhIsoReader;
+	VariableReader<MultiDoublePointer> phoRandConeChIsoReader;
+	VariableReader<MultiDoublePointer> phoRandConeNuIsoReader;
+	VariableReader<MultiDoublePointer> phoRandConePhIsoReader;
 	
 	PhotonAlgorithm::value algorithm;
 	

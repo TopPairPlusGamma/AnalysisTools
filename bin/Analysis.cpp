@@ -99,7 +99,7 @@ void Analysis::initiateEvent() {
  	   double topPtweight = 1.;
   	   topPtweight = weights->reweightTopPt(currentEvent);
 
- 	   weight *= topPtweight;
+ 	   weight *= topPtweight; //topptreweight/number of events and then divide by this to correct for top pt reweight
  	}
 
 

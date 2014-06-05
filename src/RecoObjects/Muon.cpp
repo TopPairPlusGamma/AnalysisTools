@@ -145,20 +145,63 @@ double Muon::normChi2() const {
 }
 
 //https://indico.cern.ch/getFile.py/access?contribId=1&resId=2&materialId=slides&confId=257630  ID and Iso efficiencies.
+//double Muon::getEfficiencyCorrection() const {  //no idea what the second number in the correction is - need to find out/
+//	double correction(1.);
+//	double muEta(eta());
+//
+//	if(abs(muEta)<0.9)
+//		correction = 0.9984*0.9990;
+//	else if(abs(muEta)>=0.9 && abs(muEta)<1.2)
+//		correction = 0.9990*1.0011;
+//	else if(abs(muEta)>=1.2 && abs(muEta)<2.1)
+//		correction = 0.9986*1.0013;
+//	else if(abs(muEta)>=2.1 && abs(muEta)<2.4)
+//		correction = 1.0000*1.0242;
+//
+//	return correction;
+//}
+
 double Muon::getEfficiencyCorrection() const {
-	double correction(1.);
-	double muEta(eta());
+        double correction(1.);
+        double muEta(eta());
+	
+	if(Globals::MuonIDSFUp == true){
 
-	if(abs(muEta)<0.9)
-		correction = 0.9984*0.9990;
-	else if(abs(muEta)>=0.9 && abs(muEta)<1.2)
-		correction = 0.9990*1.0011;
-	else if(abs(muEta)>=1.2 && abs(muEta)<2.1)
-		correction = 0.9986*1.0013;
-	else if(abs(muEta)>=2.1 && abs(muEta)<2.4)
-		correction = 1.0000*1.0242;
+       		if(abs(muEta)<0.9)
+               		correction = 0.9986; 
+       		else if(abs(muEta)>=0.9 && abs(muEta)<1.2)
+               		correction = 0.9992;
+       		else if(abs(muEta)>=1.2 && abs(muEta)<2.1)
+               		correction = 0.9987;
+       		else if(abs(muEta)>=2.1 && abs(muEta)<2.4)
+               		correction = 1.0003;
+		
+	} else if(Globals::MuonIDSFDown == true){
+	
+             if(abs(muEta)<0.9)
+                     correction = 0.9982; 
+             else if(abs(muEta)>=0.9 && abs(muEta)<1.2)
+                     correction = 0.9988;
+             else if(abs(muEta)>=1.2 && abs(muEta)<2.1)
+                     correction = 0.9985;
+             else if(abs(muEta)>=2.1 && abs(muEta)<2.4)
+                     correction = 0.9997;
+		     
+	} else {
 
+        	if(abs(muEta)<0.9)
+			correction = 0.9984;
+		else if(abs(muEta)>=0.9 && abs(muEta)<1.2)
+                	correction = 0.9990;
+       		else if(abs(muEta)>=1.2 && abs(muEta)<2.1)
+                	correction = 0.9986;
+        	else if(abs(muEta)>=2.1 && abs(muEta)<2.4)
+                	correction = 1.0000;
+
+	}
+	
 	return correction;
+
 }
 
 double Muon::getdiMuonTriggerSF() const {
@@ -178,4 +221,3 @@ double Muon::getdiLeptonTriggerSF() const {
 }
 
 }
-
